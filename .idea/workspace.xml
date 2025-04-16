@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6aabb196-6a19-4e1a-82ba-ee2f61284f22" name="Changes" comment="Initial Push">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/Careflow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/manager/AuthManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/manager/DatabaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/patient/activeMedicationCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/patient/appointmentCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/patient/conditionsCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/patient/vitalsCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/states/emptyAppointmentCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/components/states/emptyVitalCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/DashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/VitalsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientAppointmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientContainerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientHomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AppointmentCardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/MedicationCardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsCardsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AppointmentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/DoctorDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/MedicationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PatientDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/VitalsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Appointment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Doctor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Medication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Patient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Vitals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/util/DateHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/database.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/dashboardPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/loadingState.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/loginPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/loginPageNew.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientAppointmentPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientContainer.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientHomePage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patientLoginPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/registerPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/combinationMarkDark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/combinationMarkDark.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/combinationMarkLight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/combinationMarkLight.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/desktopIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/desktopIcon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/iconMarkDark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/iconMarkDark.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/iconMarkLight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/images/logo/iconMarkLight.svg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="careflow" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="careflow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="careflow" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Nesqyk&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Nesqyk/careflow.git&quot;,
+    &quot;accountId&quot;: &quot;52c18f64-0b52-489d-a09a-0633d6123adf&quot;
+  }
+}</component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Users\Tyty\php-8.2.5\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2vHl39OBLs099qzZzzEIVnppNHs" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.careflow [:edu.careflow.Careflow.main()].executor": "Run",
+    "Gradle.careflow [:edu.careflow.HelloApplication.main()].executor": "Run",
+    "Gradle.careflow [:edu.careflow.emr.application.Careflow.main()].executor": "Run",
+    "Gradle.careflow [run].executor": "Run",
+    "Gradle.careflow.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Tyty/Downloads/AnimateFX",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor.code.editing",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "sqlite"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow\fxml\patient" />
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components\patient" />
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components\states" />
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow\fxml\patient" />
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow" />
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\emr" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.careflow" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="careflow" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="careflow" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <configuration name="careflow [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.careflow [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6aabb196-6a19-4e1a-82ba-ee2f61284f22" name="Changes" comment="" />
+      <created>1743809682387</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743809682387</updated>
+      <workItem from="1743809683587" duration="366000" />
+      <workItem from="1743810075919" duration="199000" />
+      <workItem from="1743810284500" duration="5554000" />
+      <workItem from="1743815916717" duration="13218000" />
+      <workItem from="1743838626981" duration="10308000" />
+      <workItem from="1743984879146" duration="6002000" />
+      <workItem from="1744094427306" duration="245000" />
+      <workItem from="1744094687112" duration="23000" />
+      <workItem from="1744094722228" duration="606000" />
+      <workItem from="1744095429872" duration="7425000" />
+      <workItem from="1744112402916" duration="6906000" />
+      <workItem from="1744179168493" duration="215000" />
+      <workItem from="1744269748295" duration="3942000" />
+      <workItem from="1744284468089" duration="567000" />
+      <workItem from="1744381877268" duration="2865000" />
+      <workItem from="1744413088125" duration="35014000" />
+      <workItem from="1744526990536" duration="3148000" />
+      <workItem from="1744536206203" duration="8180000" />
+      <workItem from="1744550577685" duration="1561000" />
+      <workItem from="1744609261912" duration="412000" />
+      <workItem from="1744612645882" duration="8877000" />
+      <workItem from="1744641130924" duration="3730000" />
+      <workItem from="1744668184730" duration="109000" />
+      <workItem from="1744668731802" duration="3680000" />
+      <workItem from="1744684162358" duration="54101000" />
+      <workItem from="1744807520468" duration="2174000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Push" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

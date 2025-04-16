@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="patientContainerHome" prefHeight="767.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PatientHomeController">
+   <children>
+      <VBox fx:id="vitalsCard" prefHeight="178.0" prefWidth="646.0" spacing="32.0" style="-fx-background-color: FBFBFE;" styleClass="card-property" stylesheets="@../../css/styles.css">
+         <children>
+            <Label alignment="TOP_RIGHT" prefHeight="18.0" prefWidth="203.0" styleClass="border-left-blue" text="Vitals and Biometrics" wrapText="true">
+               <font>
+                  <Font name="☞Gilroy-Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="12.0" left="32.0" right="32.0" top="32.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox prefHeight="703.0" prefWidth="752.0">
+         <children>
+            <VBox prefHeight="494.0" prefWidth="342.0">
+               <children>
+                  <VBox fx:id="appointmentContainer" prefHeight="607.0" prefWidth="334.0" spacing="32.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="63.0" prefWidth="258.0" spacing="12.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="21.0" prefWidth="238.0" styleClass="border-left-blue" text="Upcoming Appointments" wrapText="true">
+                                 <font>
+                                    <Font name="☞Gilroy-Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="431.0" prefWidth="352.0" spacing="16.0">
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
+               <children>
+                  <VBox fx:id="conditionsContainer" prefHeight="311.0" prefWidth="350.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+                     <children>
+                        <VBox prefHeight="63.0" prefWidth="258.0" spacing="12.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="18.0" prefWidth="126.0" styleClass="border-left-blue" text="Conditions" wrapText="true">
+                                 <font>
+                                    <Font name="☞Gilroy-Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="32.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="medicationContainer" prefHeight="313.0" prefWidth="350.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+                     <children>
+                        <VBox prefHeight="63.0" prefWidth="258.0" spacing="12.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="13.0" prefWidth="183.0" styleClass="border-left-blue" text="Active Medication" wrapText="true">
+                                 <font>
+                                    <Font name="☞Gilroy-Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="32.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

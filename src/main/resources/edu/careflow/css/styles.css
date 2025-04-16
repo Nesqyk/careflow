@@ -1,0 +1,196 @@
+.button-dark {
+    -fx-background-color: #0762F2;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+
+    /* Smoother animation */
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -fx-cursor: hand;
+}
+
+/* Hover State */
+.button-dark:hover {
+    -fx-background-color: #054ab6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 7, 0, 0, 2);
+}
+
+/* Pressed State */
+.button-dark:pressed {
+    -fx-background-color: #04388c;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);
+    -fx-translate-y: 1px;
+}
+
+/* Disabled State */
+.button-dark:disabled {
+    -fx-background-color: #a0c4ff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+/*Error Border*/
+.error-border {
+    -fx-border-color: red;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 5;
+}
+
+/* Nav bar component */
+
+/* General Navigation Button */
+.nav-button {
+    -fx-text-fill: #828282;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button:hover {
+    -fx-text-fill: #0762F2;
+    -fx-background-color: rgba(7, 98, 242, 0.1);
+}
+
+.nav-button:pressed {
+    -fx-text-fill: #054ab6;
+    -fx-background-color: rgba(5, 74, 182, 0.2);
+}
+
+
+/* Disabled State */
+.nav-button:disabled {
+    -fx-text-fill: #a0c4ff;
+    -fx-background-color: transparent;
+}
+
+/* Navigation Components */
+.nav-button-active {
+    -fx-text-fill: #0762F2;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+.nav-button-inactive {
+    -fx-text-fill: #828282;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -fx-alignment: left;
+}
+
+.label-property {
+    -fx-background-color: #e3effb;
+    -fx-background-radius: 16px;
+}
+
+
+/* Vital Card Border*/
+.border-left-blue {
+    -fx-border-color: #0762F2;
+    -fx-border-width: 0 0 0 5;
+}
+
+.card-property {
+    -fx-background-color: #FBFBFE;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #828282;
+    -fx-border-width: 0.3px;
+}
+/*this is way too much for a scroll pane's design :>*/
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+   -fx-background-color: #f4f4f4;
+   -fx-border-color: transparent;
+   -fx-background-radius: 0;
+   -fx-border-radius: 0;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+   -fx-background-color: #0762F2;
+   -fx-background-radius: 5;
+}
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+   -fx-background-color: transparent;
+   -fx-padding: 0;
+}
+
+.scroll-bar:horizontal .increment-arrow,
+.scroll-bar:horizontal .decrement-arrow,
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+   -fx-background-color: #0762F2;
+}
+
+.scroll-bar:horizontal .increment-arrow:hover,
+.scroll-bar:horizontal .decrement-arrow:hover,
+.scroll-bar:vertical .increment-arrow:hover,
+.scroll-bar:vertical .decrement-arrow:hover {
+   -fx-background-color: #054ab6;
+}
+
+/* Custom Checkbox */
+.check-box {
+    -fx-text-fill: #828282;
+    -fx-font-size: 18px;
+    -fx-cursor: hand;
+}
+
+.check-box .box {
+    -fx-background-color: transparent;
+    -fx-border-color: #828282;
+    -fx-border-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-padding: 2px;
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.check-box:selected .box {
+    -fx-background-color: #0762F2;
+    -fx-border-color: #0762F2;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:hover .box {
+    -fx-border-color: #0762F2;
+}
+
+.check-box:pressed .box {
+    -fx-border-color: #054ab6;
+}
+
+.check-box:disabled .box {
+    -fx-border-color: #a0c4ff;
+}
+
+.check-box:disabled:selected .box {
+    -fx-background-color: #a0c4ff;
+    -fx-border-color: #a0c4ff;
+}
+
+
+/* Patient Login*/
+.patient-tag-hero {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+    -fx-padding: 4px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Gilroy-Regular";
+}

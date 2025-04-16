@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="79.0" fitWidth="73.0" layoutX="480.0" layoutY="322.0">
+         <image>
+            <Image url="@../images/gif/loadingState.gif" />
+         </image>
+      </ImageView>
+      <Label layoutX="347.0" layoutY="462.0" prefHeight="88.0" prefWidth="382.0" text="Loading Health Profile..." wrapText="true">
+         <font>
+            <Font name="☞Gilroy-Regular" size="32.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

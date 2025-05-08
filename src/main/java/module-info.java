@@ -1,14 +1,20 @@
 module edu.careflow {
     // Required modules
-    requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires java.logging;
+    requires com.dlsc.gemsfx;
+    requires org.controlsfx.controls;
+    requires org.kordamp.ikonli.javafx;
+    requires opencv;
+
 
     // Exports packages from the correct paths
 //    exports edu.careflow.application;
 //    exports edu.careflow.application.config;
 //    exports edu.careflow.presentation;
+
+    exports  edu.careflow.presentation.controllers.doctor;
+    exports  edu.careflow.presentation.controllers.doctor.cards;
     exports edu.careflow.manager;
     exports edu.careflow.repository.entities;
     exports edu.careflow.repository.dao;
@@ -31,7 +37,7 @@ module edu.careflow {
 //    exports edu.careflow.repository.entities;
 //    exports edu.careflow.repository.mappers;
 //    exports edu.careflow.repository.cache;
-    exports edu.careflow.util;
+    exports edu.careflow.utils;
 //    exports edu.careflow.util.logging;
 //    exports edu.careflow.util.validation;
 //    exports edu.careflow.util.exception;
@@ -39,6 +45,8 @@ module edu.careflow {
     // Opens packages to allow reflective access for JavaFX
     opens edu.careflow.presentation.controllers to javafx.fxml;
     opens edu.careflow.presentation.controllers.patient.cards to javafx.fxml;
+    opens edu.careflow.presentation.controllers.doctor;
+    opens edu.careflow.presentation.controllers.doctor.cards;
     exports edu.careflow.presentation.controllers.patient;
     opens edu.careflow.presentation.controllers.patient to javafx.fxml;
 //    opens edu.careflow.presentation.components.states to javafx.fxml;

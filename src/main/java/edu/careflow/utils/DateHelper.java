@@ -1,4 +1,4 @@
-package edu.careflow.util;
+package edu.careflow.utils;
 
 import java.time.LocalDate;
 import java.time.Period;

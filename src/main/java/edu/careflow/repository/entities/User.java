@@ -5,7 +5,7 @@ import java.sql.Time;
 public class User {
 
     private int id;
-    private int user_id; // 新增 user_id 字段
+    private int user_id; //
     private String password;
     private String username; // 这里存储的是 username
     private int roleId;

@@ -1,7 +1,9 @@
 package edu.careflow.presentation.controllers.patient;
 
+import com.dlsc.gemsfx.CalendarPicker;
 import edu.careflow.manager.AuthManager;
 import edu.careflow.repository.dao.PatientDAO;
+import edu.careflow.repository.entities.Patient;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -10,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -18,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 
 public class PatientLoginController {
@@ -26,10 +29,11 @@ public class PatientLoginController {
     private VBox dateContainerPatient;
 
     @FXML
-    private DatePicker dateOfBirthInput;
+    private CalendarPicker dateOfBirthInput;
 
     @FXML
     private VBox idContainerPatient;
+
 
     @FXML
     private VBox loginPatientContainer;
@@ -38,10 +42,41 @@ public class PatientLoginController {
     private TextField patientIdTextInput;
 
 
+    public void initialize() {
+        dateOfBirthInput.setMinHeight(42);
+        dateOfBirthInput.setStyle("-fx-font-size: 16px;");
+
+    }
+
     public AuthManager authManager = new AuthManager();
     public PatientDAO patientDAO = new PatientDAO();
 
     private boolean errorDisplayed = false;
+
+    @FXML
+    public void navigateToLoginPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/loginPageNew.fxml"));
+
+            URL resource = getClass().getResource("/edu/careflow/fxml/loginPageNew.fxml");
+            if (resource == null) {
+                throw new IOException("FXML file not found");
+            }
+
+            Parent root = loader.load();
+
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.setTitle("CareFlow | User Login");
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     protected void onClickPatientLoginButton(ActionEvent event) {
@@ -66,12 +101,11 @@ public class PatientLoginController {
                 int patientIdInt = Integer.parseInt(patientId);
                 System.out.println(patientIdInt);
 
+                System.out.println(dateOfBirth);
                 boolean test = patientDAO.validatePatient(patientIdInt, dateOfBirth);
                 System.out.print(test);
                 if (patientDAO.validatePatient(patientIdInt, dateOfBirth)) {
 
-
-                    // Load the loading state scene
                     FXMLLoader loadingLoader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/loadingState.fxml"));
                     Parent loadingRoot = loadingLoader.load();
 
@@ -117,7 +151,8 @@ public class PatientLoginController {
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Patient Dashboard");
+                Patient patient = patientDAO.getPatientById(patientIdInt);
+                stage.setTitle("Patient Dashboard | " + patient.getPatientId() + " | " + patient.getFirstName() + " " + patient.getLastName());
 
 
                 fadeTransition.play();

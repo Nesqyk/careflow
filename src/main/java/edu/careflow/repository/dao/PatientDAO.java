@@ -2,7 +2,12 @@ package edu.careflow.repository.dao;
 
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Patient;
+import javafx.scene.image.Image;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,24 +39,44 @@ public class PatientDAO {
         return false;
     }
 
-    /** Atay tura diay sayop piste
-     * Validate patient login using patient ID and date of birth
-     * @param patientId The patient ID to validate
-     * @param dateOfBirth The date of birth to validate
-     * @return true if validation is successful, false otherwise
+    /**
+     * Insert patient avatar
+     * @param patientId  The patient ID to load the avatar for
+     * @param imageFile  The path of image to load for
+     * @throws IOException If an I/O error occurs
      * @throws SQLException If a database access error occurs
      */
-//    public boolean validatePatientLogin(int patientId, LocalDate dateOfBirth) throws SQLException {
-//        String sql = "SELECT COUNT(*) FROM patients WHERE patient_id = ? AND date_of_birth = ?";
-//        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
-//            pstmt.setInt(1, patientId);
-//            pstmt.setString(2, dateOfBirth.toString());
-//
-//            try (ResultSet rs = pstmt.executeQuery()) {
-//                return rs.next() && rs.getInt(1) > 0;
-//            }
-//        }
-//    }
+    public void insertAvatar(int patientId, File imageFile) throws IOException, SQLException {
+        byte[] imageData = Files.readAllBytes(imageFile.toPath());
+        String sql = "INSERT OR REPLACE INTO patients VALUES (?, ?, ?)";
+        try (PreparedStatement pstmt =  DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, patientId);
+            pstmt.setString(2, imageFile.getName());
+            pstmt.setBytes(3, imageData);
+            pstmt.executeUpdate();
+        }
+    }
+
+    /**
+     * Load patient avatar
+     * @param patientId The patient ID to load the avatar for
+     * @return Patient's Image Avatar
+     * @throws SQLException  If a database access error occurs
+     */
+    public Image loadAvatar(int patientId) throws SQLException {
+
+        String sql = "SELECT image_avatar INTO patients WHERE patient_id = ?";
+
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, patientId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Image(new ByteArrayInputStream(rs.getBytes("image_data")));
+            }
+        }
+        return  null;
+    }
+
 
     /**
      * Get a patient by ID
@@ -212,4 +237,39 @@ public class PatientDAO {
         }
         return false;
     }
+
+
+//    /**
+//     * Add a new prescription
+//     * @param patientId The ID of the patient
+//     * @param doctorId The ID of the doctor
+//     * @param issueDate The issue date of the prescription
+//     * @param validUntil The validity date of the prescription
+//     * @return The generated prescription ID
+//     * @throws SQLException If a database access error occurs
+//     */
+//    public int addPrescription(int patientId, int doctorId, LocalDate issueDate, LocalDate validUntil) throws SQLException {
+//        String sql = "INSERT INTO prescriptions (patient_id, doctor_id, issue_date, valid_until) VALUES (?, ?, ?, ?)";
+//        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            pstmt.setInt(1, patientId);
+//            pstmt.setInt(2, doctorId);
+//            pstmt.setDate(3, Date.valueOf(issueDate));
+//            pstmt.setDate(4, Date.valueOf(validUntil));
+//
+//            int affectedRows = pstmt.executeUpdate();
+//            if (affectedRows == 0) {
+//                throw new SQLException("Creating prescription failed, no rows affected.");
+//            }
+//
+//            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+//                if (generatedKeys.next()) {
+//                    return generatedKeys.getInt(1);
+//                }
+//                else {
+//                    throw new SQLException("Creating prescription failed, no ID obtained.");
+//                }
+//            }
+//        }
+//    }
+
 }

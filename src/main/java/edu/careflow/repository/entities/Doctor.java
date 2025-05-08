@@ -2,14 +2,14 @@ package edu.careflow.repository.entities;
 
 public class Doctor {
 
-    private final String doctorId;
+    private final int doctorId;
     private final String firstName;
     private final String lastName;
     private final String specialization;
     private final String licenseNumber;
     private final String contactNumber;
 
-    public Doctor(String doctorId, String firstName, String lastName, String specialization, String licenseNumber, String contactNumber) {
+    public Doctor(int doctorId, String firstName, String lastName, String specialization, String licenseNumber, String contactNumber) {
         this.doctorId = doctorId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,7 +18,7 @@ public class Doctor {
         this.contactNumber = contactNumber;
     }
 
-    public String getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 

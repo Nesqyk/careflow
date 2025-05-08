@@ -6,26 +6,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="100.0" prefWidth="280.0" spacing="12.0" style="-fx-border-width: 0 0 0.5 0; -fx-border-color: #828282;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AppointmentCardController">
+<HBox prefHeight="100.0" prefWidth="280.0" spacing="12.0" style="-fx-border-width: 0 0 0.2 0; -fx-border-color: #828282;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AppointmentCardController">
    <children>
-      <VBox prefHeight="100.0" prefWidth="166.0">
+      <VBox prefHeight="76.0" prefWidth="205.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="155.0">
                <children>
-                  <Label text="Date &amp; Time" textFill="#828282" />
-                  <Label fx:id="dateAppointmentPatient" prefHeight="33.0" prefWidth="185.0" text="4/12/2025 @ 10 A.M">
+                  <Label text="Date &amp; Time" textFill="#828282">
                      <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                        <Font name="☞Gilroy-SemiBold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dateAppointmentPatient" prefHeight="16.0" prefWidth="212.0" text="4/12/2025 @ 10 A.M" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Doctor" textFill="#828282" />
-                  <Label fx:id="drAppointmentPatient" text="Dr. Santiago Reyes">
+                  <Label text="Doctor" textFill="#828282">
                      <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                        <Font name="☞Gilroy-SemiBold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="drAppointmentPatient" prefHeight="23.0" prefWidth="155.0" text="Dr. Santiago Reyes">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -36,20 +43,26 @@
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Clinic Room" textFill="#828282" />
-                  <Label fx:id="roomAppointmentPatient" text="Room 1">
+                  <Label text="Clinic Room" textFill="#828282">
                      <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                        <Font name="☞Gilroy-SemiBold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="roomAppointmentPatient" prefHeight="46.0" prefWidth="46.0" text="Room 1">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Status" textFill="#828282" />
-                  <Label fx:id="statusAppointmentPatient" text="Confirmed">
+                  <Label text="Status" textFill="#828282">
                      <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                        <Font name="☞Gilroy-SemiBold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="statusAppointmentPatient" prefHeight="53.0" prefWidth="69.0" text="Confirmed">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
                      </font>
                   </Label>
                </children>

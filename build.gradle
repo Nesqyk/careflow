@@ -11,6 +11,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
   mavenCentral()
+  maven { url 'https://sandec.jfrog.io/artifactory/repo' }
 }
 
 ext {
@@ -33,7 +34,7 @@ application {
 
 javafx {
   version = '21'
-  modules = ['javafx.controls', 'javafx.fxml']
+  modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
 }
 
 dependencies {
@@ -46,6 +47,11 @@ dependencies {
 
   // SQLite JDBC
   implementation("org.xerial:sqlite-jdbc:${sqliteVersion}")
+  implementation ('com.dlsc.gemsfx:gemsfx:2.103.0')
+  implementation ('org.openpnp:opencv:4.7.0-0')
+  implementation ('org.kordamp.ikonli:ikonli-javafx:12.3.1')
+  implementation ('org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1')
+  implementation ('org.controlsfx:controlsfx:11.2.0')
 }
 
 test {

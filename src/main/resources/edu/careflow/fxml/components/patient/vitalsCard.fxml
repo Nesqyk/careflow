@@ -5,77 +5,142 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="66.0" prefWidth="670.0" spacing="32.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.VitalsCardsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.VitalsCardsController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
+      <HBox alignment="TOP_CENTER" prefHeight="93.0" prefWidth="600.0" spacing="62.0">
          <children>
-            <Label text="BP">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="bpPatientLabel" text="Label">
-               <font>
-                  <Font name="☞Gilroy-Regular" size="18.0" />
-               </font>
-            </Label>
+            <VBox spacing="12.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="BP" />
+                        <Label text="mmHg" textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="bpPatientLabel" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Heart Rate" />
+                        <Label text="beats/min" textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="hrPatientLabel" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox spacing="12.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Tempearture" />
+                        <Label text="deg c" textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="tempPatientLabel" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Oxygen Saturation" />
+                        <Label text="\%" textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="oxygenLevelPatient" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Height" />
+                        <Label text="beats/min" textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="heightPatientLabel" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="BMI" />
+                        <Label textFill="#848484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <Label fx:id="bmiPatientLabel" text="Label">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="Weight" />
+                  <Label text="mmHg" textFill="#848484">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                     <graphic>
+                        <Label fx:id="weightPatientLabel" text="Label">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="18.0" />
+                           </font>
+                        </Label>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
-         <children>
-            <Label text="Heart Rate">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="hrPatientLabel" text="Label">
-               <font>
-                  <Font name="☞Gilroy-Regular" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="66.0" prefWidth="100.0" spacing="6.0">
-         <children>
-            <Label text="Tempearture">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="tempPatientLabel" text="Label">
-               <font>
-                  <Font name="☞Gilroy-Regular" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
-         <children>
-            <Label text="Weight">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="weightPatientLabel" text="Label">
-               <font>
-                  <Font name="☞Gilroy-Regular" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
-         <children>
-            <Label text="BMI">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="bmiPatientLabel" text="Label">
-               <font>
-                  <Font name="☞Gilroy-Regular" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
+      </HBox>
    </children>
-</HBox>
+</VBox>

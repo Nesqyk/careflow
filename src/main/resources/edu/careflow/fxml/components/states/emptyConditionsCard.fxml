@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="appointmentEmptyState" prefHeight="297.0" prefWidth="280.0" spacing="12.0" style="-fx-border-width: 0 0 0.5 0; -fx-border-color: #828282;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="273.0" prefWidth="344.0" style="-fx-alignment: center;">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="200.0">
+               <image>
+                  <Image url="@../../../../../../resources/edu/careflow/images/illustrations/emptyStateConditions.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-alignment: center;">
+               <children>
+                  <Label text="No medical records yet." textFill="#828282">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Records will be available after your consultation." textFill="#828282" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</HBox>

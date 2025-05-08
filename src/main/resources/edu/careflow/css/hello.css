@@ -1,0 +1,118 @@
+/* Root styles */
+.root-container {
+    -fx-background-color: #F4F7FB;
+}
+
+/* Sidebar */
+.sidebar-container {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 2, 0);
+    -fx-min-width: 240px;
+    -fx-max-width: 240px;
+    -fx-pref-width: 240px;
+}
+
+/* Profile section */
+.profile-section {
+    -fx-background-color: #F8F9FA;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+}
+
+.profile-name {
+    -fx-font-family: "Gilroy-SemiBold";
+    -fx-font-size: 14px;
+}
+
+.profile-email {
+    -fx-font-family: "Gilroy-Regular";
+    -fx-font-size: 12px;
+    -fx-text-fill: #6C757D;
+}
+
+/* Navigation */
+.nav-scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 8 0;
+}
+
+.nav-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.nav-separator {
+    -fx-padding: 16 0;
+    -fx-opacity: 0.6;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #495057;
+    -fx-font-family: "Gilroy-Medium";
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+    -fx-padding: 12 16;
+    -fx-background-radius: 8;
+    -fx-spacing: 12;
+    -fx-min-width: 200px;
+    -fx-max-width: infinity;
+}
+
+.nav-button:hover {
+    -fx-background-color: #F8F9FA;
+    -fx-text-fill: #0D6EFD;
+}
+
+.nav-button-active {
+    -fx-background-color: #E9ECEF;
+    -fx-text-fill: #0D6EFD;
+}
+
+.nav-button .ikonli-font-icon {
+    -fx-icon-size: 18;
+    -fx-icon-color: #6C757D;
+}
+
+.nav-button:hover .ikonli-font-icon,
+.nav-button-active .ikonli-font-icon {
+    -fx-icon-color: #0D6EFD;
+}
+
+.nav-button-danger {
+    -fx-text-fill: #DC3545;
+}
+
+.nav-button-danger .ikonli-font-icon {
+    -fx-icon-color: #DC3545;
+}
+
+/* Content area */
+.content-scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 24;
+}
+
+.content-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.content-container {
+    -fx-spacing: 24;
+    -fx-padding: 24;
+}
+
+/* CTA Button */
+.cta-button {
+    -fx-background-color: #0D6EFD;
+    -fx-text-fill: white;
+    -fx-font-family: "Gilroy-SemiBold";
+    -fx-font-size: 13px;
+    -fx-padding: 12 24;
+    -fx-background-radius: 8;
+    -fx-min-width: 200px;
+    -fx-max-width: infinity;
+}
+
+.cta-button:hover {
+    -fx-background-color: #0B5ED7;
+}

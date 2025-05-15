@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="details-card" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.PatientCardDetails">
+   <children>
+      <HBox spacing="24.0">
+         <children>
+
+            <VBox alignment="CENTER" spacing="8.0">
+               <children>
+                  <ImageView fx:id="patientAvatar" fitHeight="153.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="patient-avatar">
+                     <VBox.margin>
+                        <Insets left="16.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox fx:id="detailsAppointment" spacing="24.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="section-header" text="Patient Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  
+                  <VBox spacing="16.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" styleClass="details-row">
+                           <children>
+                              <Label styleClass="detail-label" text="Gender">
+                                 <font>
+                                    <Font name="☞Gilroy-Medium" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientGender" styleClass="detail-value" text="Patient Details">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" styleClass="details-row">
+                           <children>
+                              <Label styleClass="detail-label" text="Contact Number">
+                                 <font>
+                                    <Font name="☞Gilroy-Medium" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientNumber" styleClass="detail-value" text="Patient Details">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" styleClass="details-row">
+                           <children>
+                              <Label styleClass="detail-label" text="Email">
+                                 <font>
+                                    <Font name="☞Gilroy-Medium" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientEmail" styleClass="detail-value" text="Patient Details">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" styleClass="details-row">
+                           <children>
+                              <Label styleClass="detail-label" text="Address">
+                                 <font>
+                                    <Font name="☞Gilroy-Medium" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientAddress" styleClass="detail-value" text="Patient Details">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+   </padding>
+</VBox>

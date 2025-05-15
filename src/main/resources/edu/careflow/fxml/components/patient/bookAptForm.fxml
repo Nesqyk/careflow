@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.CalendarPicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fx:id="scrollPaneBook" hbarPolicy="NEVER" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.BookAptForm">
+   <content>
+      <VBox prefHeight="1170.0" prefWidth="496.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="198.0" styleClass="section-header" text="Book Appointment">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeBtn" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Service Details Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Service Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Type of Service">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="typeServiceCombo" maxWidth="Infinity" prefHeight="32.0" promptText="Select service type" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Select Doctor">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="doctorCombo" maxWidth="Infinity" prefHeight="32.0" promptText="Choose a doctor" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Appointment Details Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Appointment Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Date">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <CalendarPicker fx:id="pickDate" maxWidth="Infinity" prefHeight="32.0" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Time">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="pickTimeCombo" maxWidth="Infinity" prefHeight="32.0" promptText="Select time slot" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Insurance Number">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="insuranceField" promptText="e.g 123123-1231505" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Preferences Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="3. Preferences">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Booking Type">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <VBox spacing="8.0">
+                           <RadioButton text="Online">
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="bookTypeRadio" />
+                              </toggleGroup>
+                           </RadioButton>
+                           <RadioButton text="In-Person" toggleGroup="$bookTypeRadio" />
+                        </VBox>
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Preferred Contact Method" />
+                        <VBox spacing="8.0">
+                           <RadioButton text="Email">
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="prefferedContactRadio" />
+                              </toggleGroup>
+                           </RadioButton>
+                           <RadioButton text="Phone" toggleGroup="$prefferedContactRadio" />
+                           <RadioButton text="SMS" toggleGroup="$prefferedContactRadio" />
+                        </VBox>
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Notes Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="4. Additional Notes">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="noteField" prefHeight="80.0" promptText="Add any additional information or special requests" />
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="40.0" prefWidth="292.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="bookBtn" prefHeight="40.0" prefWidth="270.0" styleClass="cta-button" text="Book" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox minWidth="-Infinity" prefHeight="725.0" prefWidth="729.0" spacing="32.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.VitalsBioController">
+   <children>
+      <VBox prefHeight="494.0" prefWidth="342.0">
+         <children>
+            <VBox fx:id="vitalsHistoryContainer" prefHeight="346.0" prefWidth="687.0" spacing="16.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="243.0" styleClass="border-left-blue" text="Vitals History" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                        <HBox prefHeight="35.0" prefWidth="334.0" spacing="12.0">
+                           <children>
+                              <HBox fx:id="buttonsAptFilterVital" alignment="CENTER" minHeight="-Infinity" prefHeight="35.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.2; -fx-border-radius: 6px;">
+                                 <children>
+                                    <Button fx:id="newVitalBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="New" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="☞Gilroy-Regular" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="oldVitalBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="74.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Old" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="☞Gilroy-Regular" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="69.0" spacing="6.0">
+                                 <children>
+                                    <Button fx:id="tableViewBtnVitals" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="28.0" styleClass="view-button" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Poppins Regular" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontIcon iconLiteral="fas-table" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" text="" wrappingWidth="18.266597747802734">
+                                             <font>
+                                                <Font name="☞Gilroy-Regular" size="64.0" />
+                                             </font>
+                                          </FontIcon>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="vitalChartBtnVital" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="view-button">
+                                       <font>
+                                          <Font name="Poppins Regular" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontIcon iconLiteral="fas-chart-line" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" wrappingWidth="17.066585540771484">
+                                             <font>
+                                                <Font name="☞Gilroy-Regular" size="64.0" />
+                                             </font>
+                                          </FontIcon>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="70.0" prefWidth="666.0" spacing="12.0">
+                     <children>
+      
+                        <HBox fx:id="headerVitals" alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="666.0" spacing="12.0" style="-fx-background-color: #f5f9ff; -fx-border-color: #d1e3f8; -fx-border-width: 0 0 1 0;">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Date and Time">
+                                       <font>
+                                          <Font name="☞Gilroy-Regular" size="1.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Blood Pressure">
+                                       <font>
+                                          <Font size="52.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Heart Rate" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Temperature" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Oxygen Level" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="vitalsContainerMain" prefHeight="239.0" prefWidth="720.0" spacing="4.0" />
+
+                  <!-- Vitals Pagination -->
+                  <Pagination fx:id="vitalsPagination" prefHeight="50.0" styleClass="pagination-control" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="494.0" prefWidth="342.0">
+         <children>
+            <VBox fx:id="biometricsHistoryContainer" prefHeight="653.0" prefWidth="752.0" spacing="16.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="699.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="148.0" styleClass="border-left-blue" text="Biometrics History" wrapText="true">
+                                 <font>
+                                    <Font name="☞Gilroy-Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="35.0" prefWidth="285.0" />
+                              <HBox fx:id="buttonsAptFilterBio" alignment="CENTER" minHeight="-Infinity" prefHeight="35.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.2; -fx-border-radius: 6px;">
+                                 <children>
+                                    <Button fx:id="newBioBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="New" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="☞Gilroy-Regular" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="oldBioBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="74.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Old" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="☞Gilroy-Regular" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="69.0" spacing="6.0">
+                                 <children>
+                                    <Button fx:id="bioTableView" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="28.0" styleClass="view-button" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Poppins Regular" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontIcon iconLiteral="fas-table" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" text="" wrappingWidth="18.266597747802734">
+                                             <font>
+                                                <Font name="☞Gilroy-Regular" size="64.0" />
+                                             </font>
+                                          </FontIcon>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="bioChartBtn" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="view-button">
+                                       <font>
+                                          <Font name="Poppins Regular" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontIcon iconLiteral="fas-chart-line" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" wrappingWidth="17.066585540771484">
+                                             <font>
+                                                <Font name="☞Gilroy-Regular" size="64.0" />
+                                             </font>
+                                          </FontIcon>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="headerBiometrics" alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="570.0" spacing="12.0" style="-fx-background-color: #f5f9ff; -fx-border-color: #d1e3f8; -fx-border-width: 0 0 1 0;">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                           <children>
+                              <Label style="-fx-font-size: 12; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Date" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                           <children>
+                              <Label style="-fx-font-size: 12; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Weight (kg)" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                           <children>
+                              <Label style="-fx-font-size: 12; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Height (cm)" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                           <children>
+                              <Label style="-fx-font-size: 12; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="BMI" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="biometricsContainerMain" prefHeight="268.0" prefWidth="666.0" />
+
+                  <!-- Biometrics Pagination -->
+                  <Pagination fx:id="biometricsPagination" prefHeight="50.0" styleClass="pagination-control" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

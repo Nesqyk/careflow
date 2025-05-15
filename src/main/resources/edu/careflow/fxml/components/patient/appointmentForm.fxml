@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.AppointmentForm">
+   <content>
+      <VBox prefWidth="600.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="200.0" styleClass="section-header" text="Edit Appointment">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeButton" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Appointment Info Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Appointment Info">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="subtitle-label" text="Edit the appointment details below">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Patient" styleClass="field-label" />
+                        <ComboBox fx:id="patientComboBox" promptText="Select patient" maxWidth="Infinity" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Doctor" styleClass="field-label" />
+                        <ComboBox fx:id="doctorComboBox" promptText="Select doctor" maxWidth="Infinity" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Nurse" styleClass="field-label" />
+                        <ComboBox fx:id="nurseComboBox" promptText="Select nurse" maxWidth="Infinity" />
+                     </VBox>
+                  </HBox>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Date" styleClass="field-label" />
+                        <DatePicker fx:id="datePicker" promptText="Select date" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Time" styleClass="field-label" />
+                        <TextField fx:id="timeField" promptText="Enter time (e.g. 14:30)" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Room" styleClass="field-label" />
+                        <TextField fx:id="roomField" promptText="Enter room" />
+                     </VBox>
+                  </HBox>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Status" styleClass="field-label" />
+                        <ComboBox fx:id="statusComboBox" promptText="Select status" maxWidth="Infinity" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Service Type" styleClass="field-label" />
+                        <ComboBox fx:id="serviceTypeComboBox" promptText="Select service type" maxWidth="Infinity" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Appointment Type" styleClass="field-label" />
+                        <ComboBox fx:id="appointmentTypeComboBox" promptText="Select type" maxWidth="Infinity" />
+                     </VBox>
+                  </HBox>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Meeting Link" styleClass="field-label" />
+                        <TextField fx:id="meetingLinkField" promptText="Enter meeting link (if online)" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Booked By" styleClass="field-label" />
+                        <TextField fx:id="bookedByField" promptText="Enter who booked" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Preferred Contact" styleClass="field-label" />
+                        <TextField fx:id="preferredContactField" promptText="Enter preferred contact" />
+                     </VBox>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Notes Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Additional Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Symptoms" styleClass="field-label" />
+                        <TextArea fx:id="symptomsArea" promptText="Enter symptoms" wrapText="true" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Diagnosis" styleClass="field-label" />
+                        <TextArea fx:id="diagnosisArea" promptText="Enter diagnosis" wrapText="true" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Notes" styleClass="field-label" />
+                        <TextArea fx:id="notesArea" promptText="Enter notes" wrapText="true" />
+                     </VBox>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="40.0" prefWidth="200.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="saveBtn" prefHeight="40.0" prefWidth="200.0" styleClass="cta-button" text="Save" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane> 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="vitalsCardContainer" alignment="CENTER_LEFT" prefWidth="725.0" spacing="12.0" styleClass="vital-card-long" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.VitalCardLongController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="dateVitalsLabel" text="Jan 1, 2023" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="bpLabel" text="120/80">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+                  <Label styleClass="vital-unit" text="mmHg">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="hrLabel" text="75" />
+                  <Label styleClass="vital-unit" text="bpm" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="tempLabel" text="98.6">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+                  <Label styleClass="vital-unit" text="°F" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="o2Label" text="98">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+                  <Label styleClass="vital-unit" text="\%" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="16.0" right="16.0" top="10.0" />
+   </padding>
+</HBox>

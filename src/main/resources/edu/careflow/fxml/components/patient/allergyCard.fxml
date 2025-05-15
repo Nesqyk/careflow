@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="172.0" prefWidth="302.0" spacing="12.0" styleClass="card-property" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AllergyCardController">
+   <children>
+      <VBox alignment="CENTER" prefWidth="166.0" spacing="8.0">
+         <children>
+            <VBox spacing="4.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconColor="#0762f2" iconLiteral="fas-allergies" iconSize="14" />
+                        <Label text="Allergen" textFill="#828282">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="allergenNameLabel" prefHeight="33.0" prefWidth="185.0" styleClass="text-bold" text="Allergen Name">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox spacing="4.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconColor="#0762f2" iconLiteral="fas-comment" iconSize="14" />
+                        <Label text="Comment" textFill="#828282">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="commentLabel" prefWidth="166.0" styleClass="text-regular" text="Comment" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefWidth="100.0" spacing="8.0">
+         <children>
+            <VBox alignment="TOP_RIGHT" prefHeight="53.0" prefWidth="90.0" spacing="4.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <FontIcon iconColor="#0762f2" iconLiteral="fas-exclamation-triangle" iconSize="14" />
+                        <Label text="Severity" textFill="#828282">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="severityNameLabel" styleClass="text-bold" text="Confirmed">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefWidth="88.0">
+               <children>
+                  <Button fx:id="editButton" disable="true" mnemonicParsing="false" prefHeight="39.0" prefWidth="54.0" styleClass="nav-button">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-ellipsis-v" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+   </padding>
+</HBox>

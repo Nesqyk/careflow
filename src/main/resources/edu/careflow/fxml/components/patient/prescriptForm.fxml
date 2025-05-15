@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.PrescriptionForm">
+   <content>
+      <VBox prefWidth="600.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="200.0" styleClass="section-header" text="Add Prescription">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeButton" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Prescription Info Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Prescription Info">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="subtitle-label" text="Patient and doctor are set automatically from context">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Patient" styleClass="field-label" />
+                        <Label fx:id="patientNameLabel" styleClass="readonly-label" text="Patient Name" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Doctor" styleClass="field-label" />
+                        <Label fx:id="doctorNameLabel" styleClass="readonly-label" text="Doctor Name" />
+                     </VBox>
+                  </HBox>
+                  <HBox spacing="16.0">
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Issue Date" styleClass="field-label" />
+                        <DatePicker fx:id="issueDatePicker" promptText="Select issue date" />
+                     </VBox>
+                     <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Valid Until" styleClass="field-label" />
+                        <DatePicker fx:id="validUntilPicker" promptText="Select valid until date" />
+                     </VBox>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Medication Details Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Medication Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="subtitle-label" text="Add one or more medications for this prescription">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="medicationsTable" prefHeight="180.0">
+                     <columns>
+                        <TableColumn fx:id="medicationNameCol" text="Medication Name" prefWidth="150.0" />
+                        <TableColumn fx:id="dosageCol" text="Dosage" prefWidth="80.0" />
+                        <TableColumn fx:id="frequencyCol" text="Frequency" prefWidth="100.0" />
+                        <TableColumn fx:id="instructionsCol" text="Instructions" prefWidth="200.0" />
+                        <TableColumn fx:id="removeCol" text="" prefWidth="40.0" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="addMedicationBtn" text="Add Medication" styleClass="cta-button" maxWidth="160.0" />
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="40.0" prefWidth="200.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="saveBtn" prefHeight="40.0" prefWidth="200.0" styleClass="cta-button" text="Save" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

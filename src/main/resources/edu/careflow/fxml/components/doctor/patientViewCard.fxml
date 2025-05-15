@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="patientListenerContainer" alignment="CENTER_LEFT" prefWidth="700.0" spacing="20.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #E0E0E0; -fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="12.0" left="16.0" right="16.0" top="12.0" />
+   </padding>
+   <children>
+      <!-- Patient Avatar -->
+      <AvatarView fx:id="patientAvatar" avatarShape="ROUND" size="48.0" />
+
+      <!-- Patient Name and Age -->
+      <VBox alignment="CENTER_LEFT" spacing="4.0">
+         <Label fx:id="patientName" style="-fx-font-size: 16px; -fx-font-family: 'Gilroy-Bold'; -fx-text-fill: #333333;" text="Patient Name" />
+         <Label fx:id="patientAge" style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-Regular'; -fx-text-fill: #828282;" text="Age: 30" />
+      </VBox>
+
+      <!-- Spacer -->
+      <Region prefWidth="20.0" />
+
+      <!-- Patient Details -->
+      <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="268.0" spacing="6.0">
+         <Label fx:id="patientDateofBirth" style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-Regular'; -fx-text-fill: #828282;" text="Date of Birth: 01/01/1990" />
+         <Label fx:id="patientEmail" style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-Regular'; -fx-text-fill: #828282;" text="Email: example@mail.com" />
+         <Label fx:id="patientDateCreated" style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-Regular'; -fx-text-fill: #828282;" text="Created: 01/01/2023" />
+      </VBox>
+   </children>
+</HBox>

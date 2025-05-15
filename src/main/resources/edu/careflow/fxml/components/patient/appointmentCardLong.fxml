@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="vitalsCardContainer" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="vital-card-long" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AppointmentCardLongController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label fx:id="dateAppointment" text="Jan 1, 2023" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label fx:id="doctorAppointment" text="120/80">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label fx:id="roomAppointment" text="75">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label fx:id="statusAppointment" text="98.6">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="16.0" right="16.0" top="10.0" />
+   </padding>
+</HBox>

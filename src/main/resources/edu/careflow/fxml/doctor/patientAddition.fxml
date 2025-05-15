@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.CalendarPicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane hbarPolicy="NEVER" prefHeight="768.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox fx:id="appointmentsTable" prefHeight="1114.0" prefWidth="591.0" style="-fx-background-color: FBFBFE;" styleClass="card-property" stylesheets="@../../css/styles.css">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="505.0">
+               <children>
+                  <Label alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="135.0" styleClass="border-left-blue" text="Add Patient" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="44.0">
+                     <children>
+                        <Region minWidth="0.0" prefHeight="32.0" prefWidth="137.0" />
+                        <Button fx:id="addPatientBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="138.0" styleClass="cta-button" stylesheets="@../../css/styles.css" text="Add Patient" textAlignment="CENTER">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="16.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="40.0" prefWidth="12.0" />
+                        <Button fx:id="cancelBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="126.0" styleClass="border-button" text="Cancel" textAlignment="CENTER">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="1018.0" prefWidth="695.0">
+               <children>
+                  <VBox prefHeight="630.0" prefWidth="645.0" spacing="32.0">
+                     <children>
+                        <Label text="1.  Basic Info">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="16.0" />
+                           </VBox.margin>
+                        </Label>
+                        <VBox prefHeight="560.0" prefWidth="559.0" spacing="18.0" style="-fx-background-color: transparent;">
+                           <children>
+                              <VBox prefHeight="560.0" prefWidth="554.0" spacing="12.0" style="-fx-background-color: rgba(160, 196, 255, 0.2);;" styleClass="-">
+                                 <children>
+                                    <VBox prefHeight="92.0" prefWidth="624.0" spacing="12.0">
+                                       <children>
+                                          <Label text="Full Name">
+                                             <font>
+                                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox prefHeight="73.0" prefWidth="624.0">
+                                             <children>
+                                                <VBox id="usernameContainer" fx:id="idContainerPatient" prefHeight="78.0" prefWidth="230.0" spacing="13.0">
+                                                   <children>
+                                                      <Label text="First Name">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="4.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextField id="usernameTextInput" fx:id="firstNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="232.0" promptText="e.g Juan" stylesheets="@../../css/styles.css">
+                                                         <opaqueInsets>
+                                                            <Insets bottom="20.0" />
+                                                         </opaqueInsets>
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <Region prefHeight="80.0" prefWidth="34.0" />
+                                                <VBox id="usernameContainer" fx:id="idContainerPatient1" prefHeight="100.0" prefWidth="230.0" spacing="13.0">
+                                                   <children>
+                                                      <Label text="Last Name">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="4.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextField id="usernameTextInput" fx:id="lastNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="232.0" promptText="e.g Dela Cruz" stylesheets="@../../css/styles.css">
+                                                         <opaqueInsets>
+                                                            <Insets bottom="20.0" />
+                                                         </opaqueInsets>
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox id="usernameContainer" fx:id="idContainerPatient2" prefHeight="62.0" prefWidth="230.0" spacing="13.0">
+                                             <children>
+                                                <Region prefHeight="200.0" prefWidth="200.0" />
+                                                <Label text="Middle Initial">
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="4.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField id="usernameTextInput" fx:id="middleInitialField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="232.0" promptText="eg. D" stylesheets="@../../css/styles.css">
+                                                   <opaqueInsets>
+                                                      <Insets bottom="20.0" />
+                                                   </opaqueInsets>
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="192.0" prefWidth="624.0" spacing="12.0">
+                                       <children>
+                                          <Label text="Sex">
+                                             <font>
+                                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Region prefHeight="32.0" prefWidth="624.0" />
+                                                <Label text="Sex">
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox prefHeight="200.0" prefWidth="528.0" spacing="6.0">
+                                                   <children>
+                                                      <Region prefHeight="12.0" prefWidth="590.0" />
+                                                      <RadioButton mnemonicParsing="false" text="Male">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="16.0" />
+                                                         </font>
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="patientSexualityRadios" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton mnemonicParsing="false" text="Female" toggleGroup="$patientSexualityRadios">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="16.0" />
+                                                         </font>
+                                                      </RadioButton>
+                                                      <RadioButton mnemonicParsing="false" text="Other" toggleGroup="$patientSexualityRadios">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="16.0" />
+                                                         </font>
+                                                      </RadioButton>
+                                                      <RadioButton mnemonicParsing="false" text="Unknown" toggleGroup="$patientSexualityRadios">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="16.0" />
+                                                         </font>
+                                                      </RadioButton>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefWidth="624.0" spacing="12.0">
+                                       <children>
+                                          <Label text="Birth">
+                                             <font>
+                                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="74.0" prefWidth="624.0">
+                                             <children>
+                                                <Label text="Date of Birth">
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox prefHeight="64.0" prefWidth="624.0" spacing="6.0">
+                                                   <children>
+                                                      <Region prefHeight="12.0" prefWidth="590.0" />
+                                                      <CalendarPicker fx:id="dateOfBirthField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="232.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <Label prefWidth="214.0" text="2. Contact Details">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox maxWidth="-Infinity" prefHeight="350.0" spacing="18.0" style="-fx-background-color: transparent;">
+                           <children>
+                              <VBox prefHeight="350.0" prefWidth="554.0" spacing="12.0" style="-fx-background-color: rgba(160, 196, 255, 0.2);;" styleClass="-">
+                                 <children>
+                                    <VBox prefHeight="92.0" prefWidth="624.0" spacing="12.0">
+                                       <children>
+                                          <Label text="Address">
+                                             <font>
+                                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox prefHeight="73.0" prefWidth="624.0">
+                                             <children>
+                                                <VBox id="usernameContainer" fx:id="idContainerPatient1" prefHeight="78.0" prefWidth="651.0" spacing="13.0">
+                                                   <children>
+                                                      <Label text="Address">
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="4.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextField id="usernameTextInput" fx:id="addressPatientField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="525.0" promptText="e.g Juan" stylesheets="@../../css/styles.css">
+                                                         <opaqueInsets>
+                                                            <Insets bottom="20.0" />
+                                                         </opaqueInsets>
+                                                         <font>
+                                                            <Font name="☞Gilroy-Regular" size="12.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <Region prefHeight="80.0" prefWidth="34.0" />
+                                             </children>
+                                          </HBox>
+                                          <VBox id="usernameContainer" fx:id="idContainerPatient21" prefHeight="62.0" prefWidth="624.0" spacing="13.0">
+                                             <children>
+                                                <Region prefHeight="200.0" prefWidth="200.0" />
+                                                <Label text="Contact Number">
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="4.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField id="usernameTextInput" fx:id="contactField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="232.0" promptText="eg. 09123-143-88" stylesheets="@../../css/styles.css">
+                                                   <opaqueInsets>
+                                                      <Insets bottom="20.0" />
+                                                   </opaqueInsets>
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox id="usernameContainer" fx:id="idContainerPatient211" prefHeight="62.0" prefWidth="624.0" spacing="13.0">
+                                             <children>
+                                                <Region prefHeight="200.0" prefWidth="200.0" />
+                                                <Label text="Email Address">
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="12.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="4.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField id="usernameTextInput" fx:id="contactField1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="232.0" promptText="e.g juan.delacruz@gmail.com" stylesheets="@../../css/styles.css">
+                                                   <opaqueInsets>
+                                                      <Insets bottom="20.0" />
+                                                   </opaqueInsets>
+                                                   <font>
+                                                      <Font name="☞Gilroy-Regular" size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets top="32.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

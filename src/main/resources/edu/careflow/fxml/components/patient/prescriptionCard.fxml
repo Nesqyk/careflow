@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="140.0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.PrescriptionCardController">
+   <children>
+      <VBox spacing="16.0" HBox.hgrow="ALWAYS">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="card-label" text="Start Date" textFill="#828282" />
+                  <Label fx:id="conditionNamePatient" styleClass="card-title" text="Date">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox spacing="8.0">
+               <children>
+                  <Label styleClass="card-section" text="Details" textFill="#828282" />
+                  <HBox spacing="24.0">
+                     <children>
+                        <VBox spacing="8.0">
+                           <children>
+                              <Label fx:id="prescriptionNameLabel" styleClass="card-value" text="Prescription Name">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dosageLabel" styleClass="card-value" text="Dosage">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox spacing="8.0">
+                           <children>
+                              <Label fx:id="frequencyLabel" styleClass="card-value" text="Frequency">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="noteLabel" styleClass="card-value" text="Notes">
+                                 <font>
+                                    <Font name="☞Gilroy-SemiBold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Button fx:id="editPrescriptionBtn" mnemonicParsing="false" styleClass="view-button" visible="false">
+         <graphic>
+            <FontIcon iconLiteral="fas-ellipsis-v" iconSize="16" />
+         </graphic>
+         <HBox.margin>
+            <Insets left="8.0" />
+         </HBox.margin>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+</HBox>

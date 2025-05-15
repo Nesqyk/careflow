@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane hbarPolicy="NEVER" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.AddUserForm">
+   <content>
+      <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="134.0" styleClass="section-header" text="Add User">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeBtn" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Demographics Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Demographics">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Username">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="usernameField" promptText="e.g doctor_mc_stuffin" />
+                     </VBox>
+
+                     <VBox spacing="8.0">
+                        <Label text="Full Name">
+                           <font>
+                              <Font name="Poppins Medium" size="12.0" />
+                           </font></Label>
+                        <Label styleClass="sub-label" text="First Name">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="firstNameField" promptText="e.g Juan" />
+                     </VBox>
+
+                     <VBox spacing="8.0">
+                        <Label styleClass="sub-label" text="Last Name">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="lastNameField" promptText="e.g Tabornal" />
+                     </VBox>
+
+                     <VBox spacing="8.0">
+                        <Label styleClass="sub-label" text="Middle Initial (optional)">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="middleInitialField" promptText="e.g M" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Authentication Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Authentication">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Password">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <VBox fx:id="passwordContainer" />
+                     </VBox>
+
+                     <VBox spacing="8.0">
+                        <Label text="Confirm Password">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <VBox fx:id="passwordConfirmField" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Role Selection Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="3. Role Assignment">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Select Role">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <VBox spacing="8.0">
+                           <RadioButton mnemonicParsing="false" text="Doctor">
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="roleRadio" />
+                              </toggleGroup>
+                              <font>
+                                 <Font name="Poppins Regular" size="12.0" />
+                              </font>
+                           </RadioButton>
+                           <RadioButton mnemonicParsing="false" text="Nurse" toggleGroup="$roleRadio" />
+                           <RadioButton mnemonicParsing="false" text="Admin / Receptionist" toggleGroup="$roleRadio" />
+                        </VBox>
+                     </VBox>
+
+                     <VBox spacing="8.0">
+                        <Label text="Role Details">
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font></Label>
+                        <VBox fx:id="roleDetailsContainer" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="28.0" prefWidth="200.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="addUserBtn" prefHeight="28.0" prefWidth="200.0" styleClass="cta-button" text="Add User" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

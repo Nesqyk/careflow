@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="patientContainerHome" prefHeight="767.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PatientAllergyController">
+   <children>
+      <VBox prefHeight="713.0" prefWidth="688.0" style="-fx-background-color: FBFBFE;" styleClass="card-property" stylesheets="@../../css/styles.css">
+         <children>
+            <HBox prefHeight="39.0" prefWidth="656.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="684.0">
+                     <children>
+                        <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="134.0" styleClass="border-left-blue" text="Allergies" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Region prefHeight="16.0" prefWidth="200.0" />
+            <VBox prefHeight="74.0" prefWidth="656.0" spacing="12.0">
+               <children>
+                  <Label text="Sort via:">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="buttonsAptFilter" prefHeight="40.0" prefWidth="656.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.2;">
+                     <children>
+                        <Button fx:id="sortNameBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="252.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Name" textAlignment="CENTER">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="sortServerityBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Severity" textAlignment="CENTER">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="sortReactionBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="278.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Reaction" textAlignment="CENTER">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Region fx:id="mainAllergyContainer" prefHeight="526.0" prefWidth="656.0" />
+            <VBox fx:id="mainAllergyContainer" alignment="CENTER_LEFT" prefWidth="656.0" />
+            <VBox prefHeight="42.0" prefWidth="656.0">
+               <children>
+                  <HBox fx:id="paginationContainer" alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="656.0">
+                     <children>
+                        <HBox prefHeight="34.0" prefWidth="88.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.2;">
+                           <children>
+                              <Button fx:id="appointmentLeft" alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="48.0" styleClass="nav-button">
+                                 <graphic>
+                                    <FontIcon iconLiteral="fas-angle-left" textAlignment="CENTER" wrappingWidth="13.199981689453125" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="appointmentRight" alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="53.0" styleClass="nav-button">
+                                 <graphic>
+                                    <FontIcon iconLiteral="fas-angle-right" iconSize="12" textAlignment="CENTER" wrappingWidth="11.600007057189941" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="26.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="12.0" left="32.0" right="32.0" top="32.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

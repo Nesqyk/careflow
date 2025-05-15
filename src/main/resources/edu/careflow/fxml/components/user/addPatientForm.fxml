@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.CalendarPicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fx:id="scrollPaneForm" hbarPolicy="NEVER" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.AddPatientForm">
+   <content>
+      <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label fx:id="patientHeaderLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="139.0" styleClass="section-header" text="Add Patient" textAlignment="CENTER">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="30.0" prefWidth="203.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeBtn" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Avatar Upload Section -->
+            <VBox alignment="CENTER" spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Profile Picture">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" spacing="8.0">
+                     <VBox fx:id="avatarContainer" alignment="CENTER" prefHeight="120.0" prefWidth="120.0" styleClass="avatar-container">
+                        <children>
+                           <FontIcon fx:id="defaultAvatarIcon" iconLiteral="fas-user" iconSize="48" />
+                        </children>
+                     </VBox>
+                     <Button fx:id="uploadAvatarBtn" styleClass="border-button" text="Upload Photo">
+                        <graphic>
+                           <FontIcon iconLiteral="fas-upload" iconSize="16" />
+                        </graphic>
+                     </Button>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Basic Info Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Basic Information">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <!-- Name Fields -->
+                  <VBox spacing="16.0">
+                     <children>
+                        <VBox spacing="8.0">
+                           <Label text="First Name" />
+                           <TextField fx:id="firstNameField" promptText="e.g Juan" />
+                        </VBox>
+                        <VBox spacing="8.0">
+                           <Label text="Last Name" />
+                           <TextField fx:id="lastNameField" promptText="e.g Tabornal" />
+                        </VBox>
+                        <VBox spacing="8.0">
+                           <Label text="Middle Initial (optional)" />
+                           <TextField fx:id="middleInitialField" promptText="e.g M" />
+                        </VBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Sex Selection -->
+                  <VBox spacing="8.0">
+                     <Label text="Sex" />
+                     <HBox spacing="24.0">
+                        <RadioButton text="Male">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sexRadio" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton text="Female" toggleGroup="$sexRadio" />
+                        <RadioButton text="Other" toggleGroup="$sexRadio" />
+                        <RadioButton text="Unknown" toggleGroup="$sexRadio" />
+                     </HBox>
+                  </VBox>
+
+                  <!-- Date of Birth -->
+                  <VBox spacing="8.0">
+                     <Label text="Date of Birth" />
+                     <CalendarPicker fx:id="dateOfBirthField" />
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Contact Details Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Contact Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Address" />
+                        <TextField fx:id="addressField" promptText="56 Oak Ave, #12, Boston, MA 02115" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Contact Number" />
+                        <TextField fx:id="patientNumberField" promptText="eg. 09123-143-88" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Email Address" />
+                        <TextField fx:id="emailAddressField" promptText="e.g juan.delacruz@gmail.com" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Emergency Contact Section -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="3. Emergency Contact">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Full Name" />
+                        <TextField fx:id="emergencyNameField" promptText="e.g Juana Dela Cruz" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Contact Number" />
+                        <TextField fx:id="emergencyContactField" promptText="eg. 09123-143-88" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Relationship" />
+                        <CheckComboBox fx:id="emergencyBoxField" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="28.0" prefWidth="315.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="addPatientBtn" prefHeight="28.0" prefWidth="328.0" styleClass="cta-button" text="Add Patient" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

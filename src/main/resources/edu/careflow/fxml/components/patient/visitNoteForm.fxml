@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fx:id="scrollPaneVisitNote" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.VisitNoteForm">
+   <content>
+      <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER_LEFT" prefHeight="22.0" styleClass="section-header" text="Visit Note">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeButton" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-arrow-alt-circle-right" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Visit Date -->
+            <VBox spacing="8.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Date">
+                     <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>
+                  </Label>
+                  <Label styleClass="card-label" text="Visit date" />
+                  <DatePicker fx:id="visitDatePicker" promptText="Select visit date" />
+                  <Label fx:id="diagnosisInfoLabel" styleClass="card-label" text="No diagnosis selected — Enter a diagnosis below" />
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+
+            <!-- Primary Diagnosis -->
+            <VBox spacing="8.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Primary diagnosis">
+                     <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>
+                  </Label>
+                  <Label styleClass="card-label" text="Search for a primary diagnosis" />
+                  <ComboBox fx:id="primaryDiagnosisCombo" editable="true" promptText="Choose a primary diagnosis" />
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+
+            <!-- Secondary Diagnosis -->
+            <VBox spacing="8.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Secondary diagnosis">
+                     <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>
+                  </Label>
+                  <Label styleClass="card-label" text="Search for a secondary diagnosis" />
+                  <ComboBox fx:id="secondaryDiagnosisCombo" editable="true" promptText="Choose a secondary diagnosis" />
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+
+            <!-- Note -->
+            <VBox spacing="8.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Note">
+                     <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>
+                  </Label>
+                  <Label styleClass="card-label" text="Write your notes" />
+                  <TextArea fx:id="noteField" prefHeight="80.0" promptText="Write any notes here" />
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+
+            <!-- Image Upload -->
+            <VBox spacing="8.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="Image">
+                     <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>
+                  </Label>
+                  <Label styleClass="card-label" text="Upload an image or use this device's camera to capture an image" />
+                  <Button fx:id="addImageBtn" minWidth="120.0" styleClass="border-button" text="Add image">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-plus" iconSize="16" />
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER" spacing="16.0">
+               <children>
+                  <Button fx:id="discardBtn" prefHeight="40.0" prefWidth="240.0" styleClass="border-button" text="Discard" />
+                  <Button fx:id="saveCloseBtn" prefHeight="40.0" prefWidth="240.0" styleClass="cta-button" text="Save and close" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

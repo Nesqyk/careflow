@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.PatientCardViewDetailed">
+   <children>
+      <HBox fx:id="patientListenerContainer" alignment="CENTER_LEFT" prefWidth="668.0" style="-fx-border-width: 0 0 0.2 0; -fx-background-color: FFFFFF; -fx-border-color: #828282;">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="171.0" spacing="12.0">
+               <children>
+                  <AvatarView fx:id="patientAvatar" avatarShape="ROUND" size="32.0" />
+                  <Label fx:id="patientName" text="Patient Name">
+                     <font>
+                        <Font name="☞Gilroy-Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="2.0" spacing="6.0">
+               <children>
+                  <Label fx:id="patientAge" prefHeight="15.0" prefWidth="32.0" text="Age" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="51.0" spacing="6.0">
+               <children>
+                  <Label fx:id="patientDateofBirth" text="Date of Birth" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="51.0" prefWidth="81.0" spacing="6.0">
+               <children>
+                  <Label fx:id="patientEmail" text="Email" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="51.0" spacing="6.0">
+               <children>
+                  <Label fx:id="patientDateCreated" text="Date Created" textAlignment="CENTER">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
+               </padding>
+            </VBox>
+            <Region prefHeight="32.0" prefWidth="30.0" />
+            <Button fx:id="viewPatientDetails" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="48.0" styleClass="nav-button" stylesheets="@../../../css/styles.css" textAlignment="CENTER">
+               <font>
+                  <Font name="Poppins Regular" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </padding>
+               <graphic>
+                  <FontIcon fx:id="showDetailsIcon" iconLiteral="fas-angle-down" iconSize="16" selectionEnd="1" textAlignment="CENTER" wrappingWidth="10.800017356872559" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <VBox fx:id="containerDetails" prefWidth="100.0" />
+   </children>
+</VBox>

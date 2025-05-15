@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="92.0" prefWidth="624.0" spacing="12.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Specialization">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="18.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="73.0" prefWidth="624.0">
+         <children>
+            <VBox id="usernameContainer" fx:id="idContainerPatient1" prefHeight="78.0" prefWidth="651.0" spacing="13.0">
+               <children>
+                  <Label text="Specialization">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField id="usernameTextInput" fx:id="specializationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="618.0" promptText="e.g General Medicine " stylesheets="@../../../css/styles.css">
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <Region prefHeight="80.0" prefWidth="34.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="32.0">
+         <children>
+            <VBox id="usernameContainer" fx:id="idContainerPatient21" prefHeight="62.0" prefWidth="624.0" spacing="13.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <Label text="License Number">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField id="usernameTextInput" fx:id="licenseNumberField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="293.0" promptText="e.g 100-1239-199" stylesheets="@../../../css/styles.css">
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox id="usernameContainer" fx:id="idContainerPatient211" prefHeight="62.0" prefWidth="624.0" spacing="13.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <Label text="Contact Number">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField id="usernameTextInput" fx:id="contactNumberField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="293.0" promptText="e.g 0912-123-2222" stylesheets="@../../../css/styles.css">
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

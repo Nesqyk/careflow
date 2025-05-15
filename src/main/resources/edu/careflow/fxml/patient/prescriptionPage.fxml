@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" prefHeight="725.0" prefWidth="752.0" spacing="32.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PrescriptionController">
+   <children>
+      <VBox prefHeight="494.0" prefWidth="342.0">
+         <children>
+            <VBox fx:id="activeMedicationContainer" prefHeight="683.0" prefWidth="328.0" spacing="12.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <VBox prefHeight="35.0" prefWidth="302.0" spacing="12.0">
+                     <children>
+                        <Label alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="167.0" styleClass="border-left-blue" text="Active Medication" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="activeContainerMain" prefHeight="668.0" prefWidth="310.0" />
+                  <Pagination fx:id="activeMedicationPagination" maxPageIndicatorCount="3" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+      <VBox prefHeight="494.0" prefWidth="342.0">
+         <children>
+            <VBox fx:id="passMedicationContainer" prefHeight="686.0" prefWidth="329.0" spacing="12.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <VBox prefHeight="16.0" prefWidth="190.0" spacing="12.0">
+                     <children>
+                        <Label alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="167.0" styleClass="border-left-blue" text="Pass Medication" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="pastContainerMain" prefHeight="708.0" prefWidth="310.0" />
+                  <Pagination fx:id="passMedicationPage" maxPageIndicatorCount="3" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.EnhancedLabel?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="vitalsCard" prefHeight="178.0" prefWidth="646.0" spacing="32.0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="0.0" prefWidth="656.0">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="371.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="203.0" styleClass="border-left-blue" text="Vitals and Biometrics" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" focusTraversable="true" prefHeight="35.0" prefWidth="244.0" spacing="6.0">
+               <children>
+                  <Button fx:id="tableViewBtn" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="34.0" styleClass="nav-button" textAlignment="CENTER">
+                     <font>
+                        <Font name="Poppins Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconLiteral="fas-table" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" text="" wrappingWidth="18.266597747802734">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="64.0" />
+                           </font>
+                        </FontIcon>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="vitalChartBtn" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="nav-button">
+                     <font>
+                        <Font name="Poppins Regular" size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconLiteral="fas-chart-line" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" wrappingWidth="17.066585540771484">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="64.0" />
+                           </font>
+                        </FontIcon>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="vitalChartBtn1" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" styleClass="nav-button" text="Add Vitals" textAlignment="CENTER">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                     <graphic>
+                        <EnhancedLabel prefHeight="17.0" prefWidth="84.0" textAlignment="CENTER" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <VBox fx:id="vitalsCardContainer" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="656.0" />
+      <Hyperlink fx:id="vitalsHistoryBtn" alignment="TOP_LEFT" prefHeight="38.0" prefWidth="99.0" text="View History" textFill="#0762f2">
+         <font>
+            <Font name="☞Gilroy-Regular" size="14.0" />
+         </font>
+      </Hyperlink>
+   </children>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+</VBox>

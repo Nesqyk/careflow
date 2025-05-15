@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.SearchableComboBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fx:id="scrollPaneConditions" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.ConditionsForm">
+   <content>
+      <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="169.0" styleClass="section-header" text="Record Condition">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeButton" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Condition Details Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Condition Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Condition">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="subtitle-label" text="Search possible condition for diagnosis">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <SearchableComboBox fx:id="conditionsCombo" maxWidth="Infinity" prefHeight="32.0" promptText="Search conditions" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Timing Details Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Timing Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Onset Date">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="subtitle-label" text="When was the condition diagnosed">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="onSetDateField" maxWidth="Infinity" prefHeight="32.0" promptText="Select date" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Status Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="3. Current Status">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="8.0">
+                     <Label text="Status">
+                        <font>
+                           <Font name="☞Gilroy-SemiBold" size="14.0" />
+                        </font>
+                     </Label>
+                     <Label styleClass="subtitle-label" text="Select the current status of the condition">
+                        <font>
+                           <Font name="☞Gilroy-Regular" size="12.0" />
+                        </font>
+                     </Label>
+                     <VBox spacing="8.0">
+                        <RadioButton mnemonicParsing="false" selected="true" text="Active">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="statusCondition" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Inactive" toggleGroup="$statusCondition" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="40.0" prefWidth="292.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="saveButton" prefHeight="40.0" prefWidth="270.0" styleClass="cta-button" text="Save" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

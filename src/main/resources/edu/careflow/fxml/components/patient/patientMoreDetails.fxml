@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="106.0" prefWidth="707.0" spacing="8.0" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="12.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0" style="-fx-border-color: black; -fx-border-width: 0 0.2 0 0;">
+               <children>
+                  <Label text="Address">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="addressLabel" text="Address" textFill="#828282" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="74.0" prefWidth="143.0" spacing="6.0" style="-fx-border-color: black; -fx-border-width: 0 0.2 0 0;">
+               <children>
+                  <Label text="Contact Number">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="contactLabel" text="Contact" textFill="#828282">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0">
+               <children>
+                  <Label text="Email">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="emailLabel" text="Address" textFill="#828282">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+</VBox>

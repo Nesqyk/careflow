@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane prefWidth="1024.0" prefHeight="768.0" styleClass="root-container" stylesheets="@../../css/hello.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PatientContainerController">
+    <left>
+        <VBox styleClass="sidebar-container" prefWidth="240">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+            <children>
+                <!-- Profile Section -->
+                <HBox styleClass="profile-section" alignment="CENTER_LEFT" spacing="12">
+                    <children>
+                        <AvatarView fx:id="avatarView" size="48.0" arcSize="16.0" avatarShape="ROUND"/>
+                        <VBox spacing="4">
+                            <Label fx:id="patientName" styleClass="profile-name"/>
+                            <Label fx:id="patientEmail" styleClass="profile-email"/>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <Separator styleClass="nav-separator"/>
+
+                <!-- Navigation -->
+                <ScrollPane fitToWidth="true" styleClass="nav-scroll" VBox.vgrow="ALWAYS">
+                    <VBox spacing="8">
+                        <Button fx:id="homeBtnPatient" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-home"/>
+                            </graphic>
+                            <text>Home</text>
+                        </Button>
+                        <Button fx:id="appointmentBtnPatient" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-calendar-alt"/>
+                            </graphic>
+                            <text>Appointments</text>
+                        </Button>
+                        <Button fx:id="medBtnPatient" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-notes-medical"/>
+                            </graphic>
+                            <text>Medical Records</text>
+                        </Button>
+                        <Button fx:id="allergiesBtn" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-allergies"/>
+                            </graphic>
+                            <text>Allergies</text>
+                        </Button>
+                        <Button fx:id="attachmentBtn" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-paperclip"/>
+                            </graphic>
+                            <text>Attachments</text>
+                        </Button>
+                        <Button fx:id="billBtnPatient" mnemonicParsing="false" styleClass="nav-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-file-invoice-dollar"/>
+                            </graphic>
+                            <text>Billing</text>
+                        </Button>
+                    </VBox>
+                </ScrollPane>
+
+                <!-- Bottom Section -->
+                <VBox styleClass="bottom-section" spacing="16">
+                    <Button fx:id="settingsBtn" mnemonicParsing="false" styleClass="nav-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-cog"/>
+                        </graphic>
+                        <text>Settings</text>
+                    </Button>
+                    <Button fx:id="logoutBtn" mnemonicParsing="false" styleClass="nav-button, nav-button-danger">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-sign-out-alt"/>
+                        </graphic>
+                        <text>Logout</text>
+                    </Button>
+                    <Button fx:id="addUserBtn" styleClass="cta-button" text="Book Appointment"/>
+                    <ImageView fitHeight="32" preserveRatio="true">
+                        <Image url="@../../images/logo/combinationMarkDark.png"/>
+                    </ImageView>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fx:id="pageContainer" fitToWidth="true" styleClass="content-scroll">
+            <VBox fx:id="mainContainer" styleClass="content-container">
+                <!-- Dynamic content loaded here -->
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

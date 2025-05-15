@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fx:id="scrollPaneVisit" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.VisitAptForm">
+   <content>
+      <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="details-card">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="157.0" styleClass="section-header" text="Book Visit Appointment">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="closeButton" styleClass="icon-button">
+                     <graphic>
+                        <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+
+            <!-- Visit Form Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="1. Appointment Details">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox spacing="16.0">
+                     <VBox spacing="8.0">
+                        <Label text="Location" />
+                        <ComboBox fx:id="locationCombo" promptText="Choose a location" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Service" />
+                        <ComboBox fx:id="serviceCombo" promptText="Select service" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Appointment Type" />
+                        <ComboBox fx:id="appointmentTypeCombo" promptText="Choose appointment type" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Recurring Appointment" />
+                        <HBox spacing="8.0" alignment="CENTER_LEFT">
+                           <Label text="Is this a recurring appointment?" />
+                           <ToggleButton fx:id="recurringToggle" text="No" />
+                        </HBox>
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Date &amp; Time" />
+                        <HBox spacing="8.0">
+                           <DatePicker fx:id="datePicker" promptText="Select date" />
+                           <TextField fx:id="timeField" promptText="Time (e.g. 03:52 PM)" prefWidth="100.0" />
+                           <TextField fx:id="durationField" promptText="Duration (minutes)" prefWidth="100.0" />
+                        </HBox>
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Appointment Status" />
+                        <ComboBox fx:id="statusCombo" promptText="Select status" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Provider" />
+                        <ComboBox fx:id="providerCombo" promptText="Select provider" />
+                     </VBox>
+                     <VBox spacing="8.0">
+                        <Label text="Date Appointment Issued" />
+                        <DatePicker fx:id="issuedDatePicker" promptText="Select issued date" />
+                     </VBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Notes Card -->
+            <VBox spacing="16.0" styleClass="details-card">
+               <children>
+                  <Label styleClass="section-header" text="2. Additional Notes">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="noteField" prefHeight="80.0" promptText="Write any additional points here" />
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER_RIGHT" spacing="16.0">
+               <children>
+                  <Button fx:id="cancelBtn" prefHeight="40.0" prefWidth="292.0" styleClass="border-button" text="Cancel" />
+                  <Button fx:id="bookBtn" prefHeight="40.0" prefWidth="270.0" styleClass="cta-button" text="Save" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane> 

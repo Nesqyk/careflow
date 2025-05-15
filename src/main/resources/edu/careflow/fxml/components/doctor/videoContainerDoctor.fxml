@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <bottom>
+        <HBox alignment="CENTER" spacing="32.0" styleClass="details-card" stylesheets="@../../../css/styles.css">
+            <children>
+                <Button fx:id="endCallBtn" prefHeight="64.0" prefWidth="160.0" styleClass="action-button" text="End Visit" />
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+            </padding>
+        </HBox>
+    </bottom>
+   <center>
+        <VBox prefWidth="320.0" spacing="16.0" style="-fx-background-color: FBFBFE;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="TOP_RIGHT">
+                    <Button fx:id="closeBtn" styleClass="icon-button" stylesheets="@../../../css/styles.css">
+                        <graphic>
+                            <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+                        </graphic>
+                    </Button>
+                </HBox>
+                <VBox spacing="8.0" styleClass="details-card" stylesheets="@../../../css/styles.css">
+                    <children>
+                        <Label styleClass="section-header" stylesheets="@../../../css/styles.css" text="Patient Information">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font></Label>
+                        <Label fx:id="patientNameLabel" text="Patient Name">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+                        <Label fx:id="patientIdLabel" text="Patient ID">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font></Label>
+                        <Label fx:id="meetingLinkLabel" styleClass="card-label" text="Meeting Link: https://meet.jit.si/your-room-id" />
+                        <Button fx:id="openInBrowserBtn" styleClass="action-button" text="Join Video Call" />
+                        <Label styleClass="subtitle-label" text="The video call will open in your browser. You can return here to take notes or end the visit." />
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="32.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="448.0" prefWidth="288.0" spacing="32.0" styleClass="details-card" stylesheets="@../../../css/styles.css" VBox.vgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <children>
+                                <Label styleClass="section-header" text="Consultation Notes">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font></Label>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button fx:id="saveNotesBtn" styleClass="action-button" text="Save">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-save" />
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <TextArea fx:id="consultationNotes" prefHeight="401.0" prefWidth="256.0" promptText="Enter consultation notes here..." wrapText="true" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </VBox.margin></TextArea>
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                </VBox>
+                <HBox prefHeight="58.0" prefWidth="288.0" spacing="8.0" stylesheets="@../../../css/styles.css">
+                    <children>
+                        <Button fx:id="addPrescriptionBtn" maxWidth="1.7976931348623157E308" prefHeight="49.0" prefWidth="159.0" styleClass="action-button" text="Prescription" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-prescription" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="addVitalsBtn" maxWidth="1.7976931348623157E308" prefHeight="49.0" prefWidth="104.0" styleClass="action-button" text="Vitals" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-heartbeat" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+            </padding>
+        </VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="imageCard" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" styleClass="card-property" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="preview" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+        <VBox spacing="4.0">
+            <children>
+                <Label fx:id="fileName" text="File Name" wrapText="true">
+                    <font>
+                        <Font name="☞Gilroy-Regular" size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="uploadDate" text="Uploaded on: 01/01/2024" textFill="#757575">
+                    <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </padding>
+        </VBox>
+    </children>
+</VBox>

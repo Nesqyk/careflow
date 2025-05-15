@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -22,26 +23,34 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PatientHomeController {
+
+
+    @FXML
+    private VBox activeMediationContainer;
+
+    @FXML
+    private Pagination activeMedicationPagination;
 
     @FXML
     private VBox appointmentContainer;
 
     @FXML
-    private Button appointmentLeft;
-
-    @FXML
     private VBox appointmentMainContainer;
-
-    @FXML
-    private Button appointmentRight;
 
     @FXML
     private HBox buttonsAptFilter;
 
     @FXML
+    private Button cancelledAptBtn;
+
+    @FXML
     private VBox conditionsContainer;
+
+    @FXML
+    private Pagination conditionsPagination;
 
     @FXML
     private Label latestVitalDate;
@@ -50,25 +59,22 @@ public class PatientHomeController {
     private VBox medicationContainer;
 
     @FXML
-    private HBox paginationContainer;
-
-    @FXML
-    private Button pastButtonApt;
+    private Pagination paginationUpcomingApt;
 
     @FXML
     private VBox patientContainerHome;
+
+    @FXML
+    private Button pendingBtnApt;
+
+    @FXML
+    private Button scheduledAptBtn;
 
     @FXML
     private VBox secondContainer;
 
     @FXML
     private Button tableViewBtn;
-
-    @FXML
-    private Button todayButtonApt;
-
-    @FXML
-    private Button upcomingButtonApt;
 
     @FXML
     private Button vitalChartBtn;
@@ -82,6 +88,7 @@ public class PatientHomeController {
     @FXML
     private Hyperlink vitalsHistoryBtn;
 
+
     private Label pageLabel = new Label();
 
     private final VitalsDAO vitalsDAO = new VitalsDAO();
@@ -92,9 +99,13 @@ public class PatientHomeController {
 
     private int currentPatientId;
     private Vitals latestVitals;
+    private List<Appointment> patientAppointments;
+    private Button currentActiveFilterButton;
+    private static final int CARDS_PER_PAGE = 4;
 
-    private int currentPage = 1;
-    private int cardsPerPage = 6;
+
+
+
 
     @FXML
     private void initialize() {
@@ -104,24 +115,115 @@ public class PatientHomeController {
         tableViewBtn.getStyleClass().addAll("view-button", "active");
         vitalChartBtn.getStyleClass().add("view-button");
 
-        appointmentLeft.setOnAction(e -> goToPreviousPage());
-        appointmentRight.setOnAction(e -> goToNextPage());
-
-        // Add the page label to the pagination container
-        pageLabel.getStyleClass().add("page-label");
-        paginationContainer.getChildren().add(pageLabel);
-
         appointmentContainer.prefHeightProperty().bind(secondContainer.heightProperty());
 
+        // Setup filter buttons
+        setupFilterButtons();
+    }
+
+    private void setupFilterButtons() {
+        scheduledAptBtn.setOnAction(e -> handleFilterAppointments(scheduledAptBtn, "Scheduled"));
+        pendingBtnApt.setOnAction(e -> handleFilterAppointments(pendingBtnApt, "Pending"));
+        cancelledAptBtn.setOnAction(e -> handleFilterAppointments(cancelledAptBtn, "Cancelled"));
+    }
+
+    public void initializeData(int patientId) {
+        this.currentPatientId = patientId;
         try {
-            List<Appointment> appointments = appointmentDAO.getAppointmentsByPatientId(currentPatientId);
-            int totalPages = (int) Math.ceil((double) appointments.size() / cardsPerPage);
-            updatePaginationButtons(totalPages);
+            patientAppointments = appointmentDAO.getAppointmentsByPatientId(patientId);
+            latestVitals = vitalsDAO.getLatestVitals(patientId);
+            handleFilterAppointments(pendingBtnApt, "Pending"); // Set initial filter
+            loadVitalsCard(patientId, latestVitals);
+            loadConditionsCard(patientId);
+            loadActiveMedicationsCard(patientId);
         } catch (SQLException e) {
+            handleDatabaseError(e);
+        }
+    }
+
+    private void handleFilterAppointments(Button clickedButton, String status) {
+        updateFilterButtonStyle(clickedButton);
+
+        List<Appointment> filteredAppointments = patientAppointments.stream()
+                .filter(apt -> apt.getStatus().equalsIgnoreCase(status))
+                .collect(Collectors.toList());
+
+        setupPagination(filteredAppointments);
+    }
+
+    private void updateFilterButtonStyle(Button clickedButton) {
+        if (currentActiveFilterButton != null) {
+            currentActiveFilterButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #757575;");
+        }
+        clickedButton.setStyle("-fx-background-color: #0078D4; -fx-text-fill: white;");
+        currentActiveFilterButton = clickedButton;
+    }
+
+    private void setupPagination(List<Appointment> appointments) {
+        if (appointments == null || appointments.isEmpty()) {
+            showEmptyState();
+            return;
+        }
+
+        int totalPages = (int) Math.ceil((double) appointments.size() / CARDS_PER_PAGE);
+        paginationUpcomingApt.setPageCount(totalPages);
+        paginationUpcomingApt.setCurrentPageIndex(0);
+
+        VBox initialPage = createPage(0, appointments);
+        appointmentMainContainer.getChildren().clear();
+        appointmentMainContainer.getChildren().add(initialPage);
+
+        paginationUpcomingApt.setPageFactory(pageIndex -> {
+            VBox page = createPage(pageIndex, appointments);
+            appointmentMainContainer.getChildren().clear();
+            appointmentMainContainer.getChildren().add(page);
+            return new VBox(); // Return empty VBox for pagination
+        });
+        paginationUpcomingApt.setVisible(true);
+    }
+
+    private VBox createPage(int pageIndex, List<Appointment> appointments) {
+        VBox page = new VBox(10);
+        page.setStyle("-fx-padding: 10 0 10 0;");
+
+        int start = pageIndex * CARDS_PER_PAGE;
+        int end = Math.min(start + CARDS_PER_PAGE, appointments.size());
+
+        for (int i = start; i < end; i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/appointmentCard.fxml"));
+                Parent cardContent = loader.load();
+                AppointmentCardController controller = loader.getController();
+                controller.initializeData(appointments.get(i));
+                page.getChildren().add(cardContent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        addFadeTransition(page);
+        return page;
+    }
+
+    private void showEmptyState() {
+        try {
+            URL fxmlResource = getClass().getResource("/edu/careflow/fxml/components/states/emptyAppointmentCard.fxml");
+            Parent cardContent = FXMLLoader.load(fxmlResource);
+            appointmentMainContainer.getChildren().clear();
+            appointmentMainContainer.getChildren().add(cardContent);
+            paginationUpcomingApt.setVisible(false);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
+    private void addFadeTransition(VBox page) {
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), page);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
+    }
+
     private void switchToTableView() {
         vitalsCardContainer.getChildren().clear();
 
@@ -144,7 +246,7 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/chart/vitalChart.fxml"));
             Parent chartCard = loader.load();
             VitalsChartCardController controller = loader.getController();
-            controller.initializeData(vitalsList);
+            controller.setupVitalsChart(vitalsList);
 
             vitalsCardContainer.getChildren().clear();
             vitalsCardContainer.getChildren().add(chartCard);
@@ -162,125 +264,135 @@ public class PatientHomeController {
         }
     }
 
-    public void initializeData(int patientId) {
-        this.currentPatientId = patientId;
-        try {
-            this.latestVitals = vitalsDAO.getLatestVitals(patientId);
-            loadVitalsCard(patientId, latestVitals);
-            loadAppointmentCard(patientId, null); // Default load without sorting
-            loadConditionsCard(patientId);
-            loadPrescriptionsCard(patientId);
-        } catch (SQLException e) {
-            handleDatabaseError(e);
-        }
-    }
 
-    // Add sorting method
-    public void sortAppointmentsByStatus(int patientId) {
-        try {
-            List<Appointment> appointments = appointmentDAO.getAppointmentsByPatientId(patientId);
-            if (appointments != null) {
-                appointments.sort((a1, a2) -> a1.getStatus().compareTo(a2.getStatus()));
-            }
-            loadAppointmentCard(patientId, appointments);
-        } catch (SQLException e) {
-            handleDatabaseError(e);
-        }
-    }
 
     // Modified loadAppointmentCard method
 
-    private void loadAppointmentCard(int patientId, List<Appointment> preSortedAppointments) {
-        try {
-            List<Appointment> appointments = preSortedAppointments != null ?
-                    preSortedAppointments : appointmentDAO.getAppointmentsByPatientId(patientId);
 
-            if (appointments == null || appointments.isEmpty()) {
-                URL fxmlResource = getClass().getResource("/edu/careflow/fxml/components/states/emptyAppointmentCard.fxml");
-                Parent cardContent = FXMLLoader.load(fxmlResource);
-                appointmentMainContainer.setStyle("-fx-alignment: center;");
-                appointmentMainContainer.getChildren().add(cardContent);
-                paginationContainer.setVisible(false);
-                buttonsAptFilter.setVisible(false);
-                return;
-            }
-
-            int totalPages = (int) Math.ceil((double) appointments.size() / cardsPerPage);
-            int startIndex = (currentPage - 1) * cardsPerPage;
-            int endIndex = Math.min(startIndex + cardsPerPage, appointments.size());
-
-            appointmentMainContainer.getChildren().clear();
-            for (int i = startIndex; i < endIndex; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/appointmentCard.fxml"));
-                Parent cardContent = loader.load();
-                AppointmentCardController controller = loader.getController();
-                controller.initializeData(appointments.get(i));
-                appointmentMainContainer.getChildren().add(cardContent);
-            }
-
-            // Add fade-in transition
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), appointmentMainContainer);
-            fadeIn.setFromValue(0);
-            fadeIn.setToValue(1);
-            fadeIn.play();
-
-            updatePaginationButtons(totalPages);
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void goToPreviousPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            loadAppointmentCard(currentPatientId, null);
-        }
-    }
-
-    private void goToNextPage() {
-        List<Appointment> appointments;
-        try {
-            appointments = appointmentDAO.getAppointmentsByPatientId(currentPatientId);
-            int totalPages = (int) Math.ceil((double) appointments.size() / cardsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                loadAppointmentCard(currentPatientId, null);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updatePaginationButtons(int totalPages) {
-        appointmentLeft.setDisable(currentPage == 1);
-        appointmentRight.setDisable(currentPage == totalPages);
-
-        pageLabel.setText("Page " + currentPage + " of " + totalPages);
-    }
 
     private void loadConditionsCard(int patientId) {
         try {
             List<Condition> conditions = ConditionDAO.getConditionsByPatientId(patientId);
 
             if (conditions.isEmpty()) {
-                URL fxmlResource = getClass().getResource("/edu/careflow/fxml/components/states/emptyRecordstCard.fxml");
-                Parent cardContent = FXMLLoader.load(fxmlResource);
-
-                Label emptyLabel = (Label) cardContent.lookup("#pageTitle");
-                emptyLabel.setText("No Conditions Found");
-                conditionsContainer.getChildren().add(cardContent);
+                showEmptyState(conditionsContainer, "No Conditions Found");
+                conditionsPagination.setVisible(false);
+                conditionsContainer.setStyle("-fx-alignment: center;");
                 return;
             }
 
-            for(Condition condition : conditions) {
+            int totalPages = (int) Math.ceil((double) conditions.size() / CARDS_PER_PAGE);
+            conditionsPagination.setPageCount(totalPages);
+            conditionsPagination.setCurrentPageIndex(0);
+
+            // Create and show initial page
+            VBox initialPage = createConditionsPage(0, conditions);
+            conditionsContainer.getChildren().clear();
+            conditionsContainer.getChildren().add(initialPage);
+
+            // Set up pagination
+            conditionsPagination.setPageFactory(pageIndex -> {
+                VBox page = createConditionsPage(pageIndex, conditions);
+                conditionsContainer.getChildren().clear();
+                conditionsContainer.getChildren().add(page);
+                return new VBox();
+            });
+            conditionsPagination.setVisible(true);
+        } catch (SQLException e) {
+            handleDatabaseError(e);
+        }
+    }
+
+    private VBox createConditionsPage(int pageIndex, List<Condition> conditions) {
+        VBox page = new VBox(10);
+        page.setStyle("-fx-padding: 10 0 10 0;");
+
+        int start = pageIndex * CARDS_PER_PAGE;
+        int end = Math.min(start + CARDS_PER_PAGE, conditions.size());
+
+        for (int i = start; i < end; i++) {
+            try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/conditionsCard.fxml"));
                 Parent cardContent = loader.load();
                 ConditionCardController controller = loader.getController();
-                controller.initializeData(condition);
-                conditionsContainer.getChildren().add(cardContent);
+                controller.initializeData(conditions.get(i));
+                page.getChildren().add(cardContent);
+            } catch (IOException e) {
+                handleFxmlLoadingError(e);
             }
-        } catch (SQLException | IOException e ) {
-            e.printStackTrace();
+        }
+
+        addFadeTransition(page);
+        return page;
+    }
+
+    private void loadActiveMedicationsCard(int patientId) {
+        try {
+            List<Prescription> activeMedications = prescriptionDAO.getActivePrescriptions(patientId);
+
+            if (activeMedications.isEmpty()) {
+                showEmptyState(activeMediationContainer, "No Active Medications Found");
+                activeMedicationPagination.setVisible(false);
+                activeMediationContainer.setStyle("-fx-alignment: center;");
+                return;
+            }
+
+            int totalPages = (int) Math.ceil((double) activeMedications.size() / CARDS_PER_PAGE);
+            activeMedicationPagination.setPageCount(totalPages);
+            activeMedicationPagination.setCurrentPageIndex(0);
+
+            // Create and show initial page
+            VBox initialPage = createActiveMedicationsPage(0, activeMedications);
+            activeMediationContainer.getChildren().clear();
+            activeMediationContainer.getChildren().add(initialPage);
+
+            // Set up pagination
+            activeMedicationPagination.setPageFactory(pageIndex -> {
+                VBox page = createActiveMedicationsPage(pageIndex, activeMedications);
+                activeMediationContainer.getChildren().clear();
+                activeMediationContainer.getChildren().add(page);
+                return new VBox();
+            });
+            activeMedicationPagination.setVisible(true);
+        } catch (SQLException e) {
+            handleDatabaseError(e);
+        }
+    }
+
+    private VBox createActiveMedicationsPage(int pageIndex, List<Prescription> medications) {
+        VBox page = new VBox(10);
+        page.setStyle("-fx-padding: 10 0 10 0;");
+
+        int start = pageIndex * CARDS_PER_PAGE;
+        int end = Math.min(start + CARDS_PER_PAGE, medications.size());
+
+        for (int i = start; i < end; i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/prescriptionCard.fxml"));
+                Parent cardContent = loader.load();
+                PrescriptionCardController controller = loader.getController();
+                controller.initializeData(medications.get(i));
+                page.getChildren().add(cardContent);
+            } catch (IOException e) {
+                handleFxmlLoadingError(e);
+            }
+        }
+
+        addFadeTransition(page);
+        return page;
+    }
+
+    private void showEmptyState(VBox container, String message) {
+        try {
+            URL fxmlResource = getClass().getResource("/edu/careflow/fxml/components/states/emptyRecordstCard.fxml");
+            Parent cardContent = FXMLLoader.load(fxmlResource);
+            Label emptyLabel = (Label) cardContent.lookup("#pageTitle");
+            emptyLabel.setText(message);
+            
+            container.getChildren().clear();
+            container.getChildren().add(cardContent);
+        } catch (IOException e) {
+            handleFxmlLoadingError(e);
         }
     }
 
@@ -312,22 +424,28 @@ public class PatientHomeController {
 
     private void loadVitalsCard(int patientId, Vitals recentVitals) {
         try {
-            URL fxmlResource = getFxmlResource(recentVitals);
-            FXMLLoader loader = new FXMLLoader(fxmlResource);
-            Parent cardContent = loader.load();
 
-            DateTimeFormatter todayFormatter = DateTimeFormatter.ofPattern("'Today at' hh:mm a");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEEE, hh:mm a");
 
-            System.out.println(recentVitals);
-
-            latestVitalDate.setText(recentVitals != null ? recentVitals.getRecordedAt().format(todayFormatter) : "No recent vitals");
-
-            if (recentVitals != null) {
-                VitalsCardsController controller = loader.getController();
-                controller.initializeData(patientId);
+            if (recentVitals != null && recentVitals.getRecordedAt().toLocalDate().equals(java.time.LocalDate.now())) {
+                latestVitalDate.setText("Today at " + recentVitals.getRecordedAt().format(timeFormatter));
+            } else {
+                latestVitalDate.setText(recentVitals != null ? recentVitals.getRecordedAt().format(dateFormatter) : "No recent vitals");
             }
 
-            vitalsCardContainer.getChildren().add(cardContent);
+            if (recentVitals != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/vitalsCard.fxml"));
+                Parent cardContent = loader.load();
+                VitalsCardsController controller = loader.getController();
+                controller.initializeData(patientId);
+                vitalsCardContainer.getChildren().add(cardContent);
+            } else {
+                URL fxmlResource = getClass().getResource("/edu/careflow/fxml/components/states/emptyVitalCard.fxml");
+                Parent cardContent = FXMLLoader.load(fxmlResource);
+                vitalsCardContainer.getChildren().add(cardContent);
+            }
+
         } catch (IOException e) {
             handleFxmlLoadingError(e);
         }

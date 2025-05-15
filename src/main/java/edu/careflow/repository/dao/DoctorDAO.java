@@ -11,6 +11,25 @@ import java.util.Random;
 
 public class DoctorDAO {
 
+
+    public List<Doctor> getAllDoctors() throws SQLException {
+        List<Doctor> doctors = new ArrayList<>();
+        String sql = "SELECT * FROM doctors";
+        try (Statement stmt = DatabaseManager.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                doctors.add(new Doctor(
+                        rs.getInt("doctor_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("specialization"),
+                        rs.getString("license_number"),
+                        rs.getString("contact_number")
+                ));
+            }
+        }
+        return doctors;
+    }
     /**
      * Generate a unique random 5-digit doctor ID
      * @return A unique 5-digit doctor ID
@@ -234,7 +253,12 @@ public class DoctorDAO {
                         rs.getString("room"),
                         rs.getString("symptoms"),
                         rs.getString("diagnosis"),
-                        rs.getString("service_type")
+                        rs.getString("service_type"),
+                        rs.getString("appointment_type"),
+                        rs.getString("meeting_link"),
+                        rs.getString("booked_by"),
+                        rs.getString("preferred_contact"),
+                        rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
                     ));
                 }
             }
@@ -267,7 +291,12 @@ public class DoctorDAO {
                         rs.getString("room"),
                         rs.getString("symptoms"),
                         rs.getString("diagnosis"),
-                        rs.getString("service_type")
+                        rs.getString("service_type"),
+                        rs.getString("appointment_type"),
+                        rs.getString("meeting_link"),
+                        rs.getString("booked_by"),
+                        rs.getString("preferred_contact"),
+                        rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
                     ));
                 }
             }

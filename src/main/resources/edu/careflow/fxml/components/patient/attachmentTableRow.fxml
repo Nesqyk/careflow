@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox alignment="CENTER_LEFT" spacing="120.0" styleClass="table-row" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <HBox prefHeight="22.0" prefWidth="175.0" spacing="16.0">
+         <children>
+              <FontIcon fx:id="fileIcon" iconLiteral="fas-file" iconSize="16" />
+              <Hyperlink fx:id="fileName" text="Document.pdf">
+               <font>
+                  <Font name="☞Gilroy-Regular" size="12.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </HBox>
+        <Label fx:id="fileType" text="PDF">
+         <font>
+            <Font name="☞Gilroy-Regular" size="12.0" />
+         </font></Label>
+        <Label fx:id="uploadDate" text="01/01/2024">
+         <font>
+            <Font name="☞Gilroy-Regular" size="12.0" />
+         </font></Label>
+    </children>
+    <padding>
+        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+    </padding>
+</HBox>

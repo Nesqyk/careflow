@@ -97,7 +97,7 @@ public class LoginController  {
                         try {
                             Stage stage = (Stage) usernameTextInput.getScene().getWindow();
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/doctor/containerDoctor.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/doctor/doctorContainerNew.fxml"));
                             Parent doctorRoot = loader.load();
                             Scene doctorScene = new Scene(doctorRoot, stage.getScene().getWidth(), stage.getScene().getHeight());
 

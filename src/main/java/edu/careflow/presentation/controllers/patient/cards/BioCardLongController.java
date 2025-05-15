@@ -4,6 +4,8 @@ import edu.careflow.repository.entities.Vitals;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.time.format.DateTimeFormatter;
+
 public class BioCardLongController {
 
     @FXML
@@ -18,13 +20,14 @@ public class BioCardLongController {
     @FXML
     private Label heightBioLabel;
 
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd — MMM — yyyy, hh:mm a");
+
     public void initializeData(Vitals vitals) {
         // Set the labels with the data from the Vitals object
-        dateBioLabel.setText(vitals.getRecordedAt() != null ? vitals.getRecordedAt().toString() : "--");
-
+        dateBioLabel.setText(vitals.getRecordedAt() != null ? vitals.getRecordedAt().format(dateFormatter) : "--");
         double weight = vitals.getWeightKg();
-        weightBioLabel.setText(weight > 0 ? String.format("%.1f kg", weight) : "--");
-        heightBioLabel.setText(vitals.getHeightCm() > 0 ? String.format("%.1f cm", vitals.getHeightCm()) : "--");
+        weightBioLabel.setText(weight > 0 ? String.format("%.1f", weight) : "--");
+        heightBioLabel.setText(vitals.getHeightCm() > 0 ? String.format("%.1f", vitals.getHeightCm()) : "--");
 
         double height = vitals.getHeightCm();
         if (height > 0 && weight > 0) {

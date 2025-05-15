@@ -15,30 +15,27 @@ public class AttachmentDAO {
     }
 
     public void save(Attachment attachment) throws SQLException {
-        String sql = """
-            INSERT INTO attachments (file_name, original_name, file_type, file_size,
-                                   description, content, patient_id, doctor_id, record_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """;
+        String sql = "INSERT INTO attachments (file_name, original_name, file_type, file_size, "
+                + "description, content, patient_id, doctor_id, record_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setString(1, attachment.getAttachmentName());
             stmt.setString(2, attachment.getOriginalName());
             stmt.setString(3, attachment.getFileType());
-            stmt.setLong(4, attachment.getFileSize());
+            stmt.setInt(4, attachment.getFileSize());
             stmt.setString(5, attachment.getDescription());
             stmt.setBytes(6, attachment.getContent());
-            stmt.setLong(7, attachment.getPatientId());
-            stmt.setLong(8, attachment.getDoctorId());
-            stmt.setLong(9, attachment.getRecordId());
+            stmt.setInt(7, attachment.getPatientId());
+            stmt.setInt(8, attachment.getDoctorId());
+            stmt.setInt(9, attachment.getRecordId());
 
             stmt.executeUpdate();
 
-            try (ResultSet keys = stmt.getGeneratedKeys()) {
-                if (keys.next()) {
-                    attachment.setAttachmentId(keys.getLong(1));
+            try (Statement idStmt = DatabaseManager.getConnection().createStatement()) {
+                ResultSet rs = idStmt.executeQuery("SELECT last_insert_rowid()");
+                if (rs.next()) {
+                    attachment.setAttachmentId(rs.getInt(1));
                 }
             }
         }
@@ -46,13 +43,12 @@ public class AttachmentDAO {
 
     public void update(Attachment attachment) throws SQLException {
         String sql = """
-            UPDATE attachments 
+            UPDATE attachments
             SET file_name = ?, description = ?
             WHERE attachment_id = ?
         """;
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setString(1, attachment.getAttachmentName());
             stmt.setString(2, attachment.getDescription());
             stmt.setLong(3, attachment.getAttachmentId());
@@ -63,8 +59,7 @@ public class AttachmentDAO {
     public void delete(Long attachmentId) throws SQLException {
         String sql = "DELETE FROM attachments WHERE attachment_id = ?";
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, attachmentId);
             stmt.executeUpdate();
         }
@@ -73,8 +68,7 @@ public class AttachmentDAO {
     public Optional<Attachment> findById(Long attachmentId) throws SQLException {
         String sql = "SELECT * FROM attachments WHERE attachment_id = ?";
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, attachmentId);
             ResultSet rs = stmt.executeQuery();
 
@@ -89,8 +83,7 @@ public class AttachmentDAO {
         String sql = "SELECT * FROM attachments WHERE patient_id = ? ORDER BY upload_date DESC";
         List<Attachment> attachments = new ArrayList<>();
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, patientId);
             ResultSet rs = stmt.executeQuery();
 
@@ -105,8 +98,7 @@ public class AttachmentDAO {
         String sql = "SELECT * FROM attachments WHERE doctor_id = ? ORDER BY upload_date DESC";
         List<Attachment> attachments = new ArrayList<>();
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, doctorId);
             ResultSet rs = stmt.executeQuery();
 
@@ -121,8 +113,7 @@ public class AttachmentDAO {
         String sql = "SELECT * FROM attachments WHERE record_id = ? ORDER BY upload_date DESC";
         List<Attachment> attachments = new ArrayList<>();
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, recordId);
             ResultSet rs = stmt.executeQuery();
 
@@ -137,8 +128,7 @@ public class AttachmentDAO {
         String sql = "SELECT * FROM attachments WHERE file_type = ? ORDER BY upload_date DESC";
         List<Attachment> attachments = new ArrayList<>();
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setString(1, fileType);
             ResultSet rs = stmt.executeQuery();
 
@@ -152,8 +142,7 @@ public class AttachmentDAO {
     public boolean exists(Long attachmentId) throws SQLException {
         String sql = "SELECT 1 FROM attachments WHERE attachment_id = ?";
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, attachmentId);
             ResultSet rs = stmt.executeQuery();
             return rs.next();
@@ -165,14 +154,14 @@ public class AttachmentDAO {
                 rs.getString("original_name"),
                 rs.getString("file_name"),
                 rs.getString("file_type"),
-                rs.getLong("file_size"),
+                rs.getInt("file_size"),
                 rs.getString("description"),
                 rs.getBytes("content"),
-                rs.getLong("patient_id"),
-                rs.getLong("doctor_id"),
-                rs.getLong("record_id")
+                rs.getInt("patient_id"),
+                rs.getInt("doctor_id"),
+                rs.getInt("record_id")
         );
-        attachment.setAttachmentId(rs.getLong("attachment_id"));
+        attachment.setAttachmentId(rs.getInt("attachment_id"));
         attachment.setUploadDate(rs.getTimestamp("upload_date").toLocalDateTime());
         return attachment;
     }

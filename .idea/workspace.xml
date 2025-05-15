@@ -5,86 +5,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aabb196-6a19-4e1a-82ba-ee2f61284f22" name="Changes" comment="Lots of things added: login system, dashboard. Lots of integration happened too.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorAppointmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorContainerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorDashboardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorPatientList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorWaitingList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AppointmentCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AttachmentViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/PatientCardDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/PatientCardViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/PatientCardViewDetailed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/ConsultationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientAllergyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientMedicalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PrescriptionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/VitalsBioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AllergyCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AppointmentCardLongController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/BioCardLongController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/ConditionCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/ConsultationCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/PrescriptionCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalCardLongController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsCardSummary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsChartCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/AddPatientForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/AddUserForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/BookAptForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/ConditionsForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/RecordAllergyForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/VitalsBioForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AttachmentDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/ConditionDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PrescriptionDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Attachment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Condition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/PrescriptionDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/css/hello.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/chart/vitalChart.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/addAttachmentCard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/appointmentCard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/states/emptyConditionsCard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/doctor/dashboardPage.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/forms/patientForm.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/medicalPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/NavigationBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/NavigationBarFormRight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/AllergyPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/AttachmentPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/PrescriptionForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/BookingDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/TelemedicineDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Allergy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/admin/containerAdmin.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/videoContainerDoctor.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/attachmentImageCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/attachmentPreviewDialog.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/attachmentTableRow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/invoiceCardPatient.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/showCaseBook.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/videoContainerPatient.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/user/forgotPassword.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/nurse/containerNurse.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/attachmentPage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/receptionist/containerReceptionist.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/15e9f763-eb0b-4c20-9cc0-a7e77ed53c54.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/15e9f763-eb0b-4c20-9cc0-a7e77ed53c54.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/Careflow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/Careflow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorContainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorContainerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/DoctorDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AppointmentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AppointmentCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AttachmentViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/AttachmentViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/PatientCardDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/doctor/cards/PatientCardDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/ConsultationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/ConsultationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientContainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientContainerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientHomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientMedicalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PatientMedicalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PrescriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/PrescriptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/VitalsBioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/VitalsBioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AllergyCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AllergyCardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AppointmentCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/AppointmentCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/MedicationCardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsCardsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsCardsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/BioCardLongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/BioCardLongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/ConditionCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/ConditionCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalCardLongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalCardLongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsChartCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsChartCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/AddPatientForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/AddPatientForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/BookAptForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/BookAptForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/ConditionsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/ConditionsForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/RecordAllergyForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/RecordAllergyForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/VitalsBioForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/presentation/controllers/patient/forms/VitalsBioForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AppointmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AttachmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AttachmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/ConditionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/ConditionDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/DoctorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/DoctorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PatientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PatientDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PrescriptionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/PrescriptionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/VitalsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/VitalsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Medication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Prescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/util/DateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/utils/DateHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/careflow/repository/entities/Attachment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/addAttachmentCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/addAttachmentCard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/appointmentCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/doctor/appointmentCard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/appointmentCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/appointmentCard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/conditionsCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/conditionsCard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/vitalsCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/patient/vitalsCard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/states/emptyAppointmentCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/states/emptyAppointmentCard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/states/emptyRecordstCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/components/states/emptyRecordstCard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/loginPageNew.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/loginPageNew.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientAppointmentPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/appointmentPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/doctor/dashboardPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/doctor/dashboardPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/appointmentPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/appointmentPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientContainer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientContainer.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientHomePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patient/patientHomePage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patientLoginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/careflow/fxml/patientLoginPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +193,7 @@
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Tyty/Downloads/careflow/src/main/resources/edu/careflow/fxml/components/states&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Tyty/Downloads/asdasaww.fxml&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -228,11 +218,11 @@
       <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow\fxml\components\doctor" />
       <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components\patient" />
       <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\presentation\components\states" />
       <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow\fxml\patient" />
       <recent name="C:\Users\Tyty\Downloads\careflow\src\main\resources\edu\careflow" />
-      <recent name="C:\Users\Tyty\Downloads\careflow\src\main\java\edu\careflow\emr" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="edu.careflow" />
@@ -363,7 +353,12 @@
       <workItem from="1746259076764" duration="23861000" />
       <workItem from="1746402074052" duration="9312000" />
       <workItem from="1746490777060" duration="14623000" />
-      <workItem from="1746579179999" duration="6460000" />
+      <workItem from="1746579179999" duration="33932000" />
+      <workItem from="1746716216198" duration="44554000" />
+      <workItem from="1746829690344" duration="33092000" />
+      <workItem from="1747099007656" duration="34013000" />
+      <workItem from="1747201551913" duration="6117000" />
+      <workItem from="1747224144158" duration="28638000" />
     </task>
     <task id="LOCAL-00001" summary="Lots of things added: login system, dashboard. Lots of integration happened too.">
       <option name="closed" value="true" />
@@ -381,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744816596557</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Lots of things added: login system, dashboard. Lots of integration happened too.">
+      <option name="closed" value="true" />
+      <created>1746666886056</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746666886056</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

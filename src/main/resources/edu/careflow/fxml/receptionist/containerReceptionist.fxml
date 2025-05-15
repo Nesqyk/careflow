@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: E1E8F4;" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <VBox prefHeight="768.0" prefWidth="251.0" style="-fx-background-color: FBFBFE; -fx-border-color: #828282; -fx-border-width: 0 1 0 0;">
+            <children>
+                <Region prefHeight="32.0" prefWidth="200.0" />
+                <HBox alignment="CENTER" prefHeight="26.0" prefWidth="187.0">
+                    <children>
+                        <AvatarView fx:id="avatarView" arcSize="12.0" avatarShape="ROUND" size="32.0" />
+                        <Region prefHeight="59.0" prefWidth="118.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="245.0" spacing="4.0">
+                            <children>
+                                <Label fx:id="receptionistName" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="0.0" prefWidth="133.0" text="Receptionist Name">
+                                    <font>
+                                        <Font name="☞Gilroy-SemiBold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="receptionistRole" prefHeight="15.0" prefWidth="178.0" text="Front Desk" textFill="#828282">
+                                    <font>
+                                        <Font name="☞Gilroy-Regular" size="10.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="12.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <Region prefHeight="32.0" prefWidth="187.0" />
+                <VBox prefHeight="605.0" prefWidth="187.0">
+                    <children>
+                        <StackedFontIcon prefWidth="187.0" />
+                        <VBox prefHeight="538.0" prefWidth="187.0" style="-fx-border-color: #828282; -fx-border-width: 0 0 0.2 0;">
+                            <children>
+                                <Button fx:id="dashboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Dashboard">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-home" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="appointmentsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Appointments">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-calendar-alt" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="patientsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Patients">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-users" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="bookingsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Bookings">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-clock" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                                <Region maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="237.0" prefWidth="186.0" />
+                                <Button fx:id="settingsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Settings">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-cog" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="logoutBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Logout">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-door-open" iconSize="16" />
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <Region prefHeight="32.0" prefWidth="187.0" />
+                        <HBox alignment="CENTER" prefHeight="19.0" prefWidth="187.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="135.0">
+                                    <image>
+                                        <Image url="@../../images/logo/combinationMarkDark.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <VBox prefHeight="768.0" prefWidth="749.0">
+            <children>
+                <TabPane prefHeight="768.0" prefWidth="749.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Today's Schedule">
+                            <content>
+                                <VBox spacing="16.0" style="-fx-background-color: FBFBFE;">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                            <children>
+                                                <TextField fx:id="scheduleSearchField" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" promptText="Search appointments..." style="-fx-border-radius: 16px;">
+                                                    <padding>
+                                                        <Insets left="18.0" />
+                                                    </padding>
+                                                </TextField>
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="addAppointmentBtn" styleClass="action-button" text="New Appointment">
+                                                    <graphic>
+                                                        <FontIcon iconLiteral="fas-plus" />
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                            <content>
+                                                <VBox fx:id="appointmentsContainer" spacing="8.0" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab text="Pending Bookings">
+                            <content>
+                                <VBox spacing="16.0" style="-fx-background-color: FBFBFE;">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                            <children>
+                                                <TextField fx:id="bookingsSearchField" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" promptText="Search bookings..." style="-fx-border-radius: 16px;">
+                                                    <padding>
+                                                        <Insets left="18.0" />
+                                                    </padding>
+                                                </TextField>
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="refreshBookingsBtn" styleClass="action-button" text="Refresh">
+                                                    <graphic>
+                                                        <FontIcon iconLiteral="fas-sync" />
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                            <content>
+                                                <VBox fx:id="bookingsContainer" spacing="8.0" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab text="Patient Registry">
+                            <content>
+                                <VBox spacing="16.0" style="-fx-background-color: FBFBFE;">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                            <children>
+                                                <TextField fx:id="patientSearchField" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" promptText="Search patients..." style="-fx-border-radius: 16px;">
+                                                    <padding>
+                                                        <Insets left="18.0" />
+                                                    </padding>
+                                                </TextField>
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="addPatientBtn" styleClass="action-button" text="Register Patient">
+                                                    <graphic>
+                                                        <FontIcon iconLiteral="fas-user-plus" />
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                            <content>
+                                                <VBox fx:id="patientsContainer" spacing="8.0" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,6 +1,8 @@
 package edu.careflow.presentation.controllers.doctor;
 
 import com.dlsc.gemsfx.AvatarView;
+import edu.careflow.repository.dao.PatientDAO;
+import edu.careflow.repository.entities.Patient;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
@@ -13,6 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoctorContainerController {
 
@@ -56,6 +61,7 @@ public class DoctorContainerController {
     @FXML
     private Button settingsBtn;
 
+    private List<Patient> allPatients = new ArrayList<>();
 
     private Button currentActiveButton = null;
     private int currentDoctorId;
@@ -68,7 +74,84 @@ public class DoctorContainerController {
         recordsBtnDoctor.setOnAction(event -> handleRecordsNavigation());
         logoutBtn.setOnAction(event -> handleLogout());
 
+        try {
+            allPatients = new PatientDAO().getAllPatients();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Initial load: show all patients
+
+
+        // Add search listener
+        patientSearchField.textProperty().addListener((obs, oldVal, newVal) -> {
+            updatePatientCards(newVal);
+        });
+
         handleDashboardNavigation();
+    }
+
+    private boolean showingAllPatients = false;
+
+    private void updatePatientCards(String searchText) {
+        patientViewCardsContainer.getChildren().clear();
+        String lower = searchText.toLowerCase();
+
+        List<Patient> filtered = allPatients.stream()
+                .filter(p -> p.getFirstName().toLowerCase().contains(lower) ||
+                        p.getLastName().toLowerCase().contains(lower))
+                .toList();
+
+        if (filtered.isEmpty()) {
+            Label notFound = new Label("No patients found");
+            notFound.setStyle("-fx-font-size: 16px; -fx-text-fill: #828282; -fx-font-family: 'Gilroy-SemiBold';");
+            patientViewCardsContainer.getChildren().add(notFound);
+            return;
+        }
+
+        int maxToShow = showingAllPatients ? filtered.size() : Math.min(2, filtered.size());
+        for (int i = 0; i < maxToShow; i++) {
+            Patient patient = filtered.get(i);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/doctor/patientViewCard.fxml"));
+                Parent card = loader.load();
+
+                Label nameLabel = (Label) card.lookup("#patientName");
+                Label ageLabel = (Label) card.lookup("#patientAge");
+                Label dobLabel = (Label) card.lookup("#patientDateofBirth");
+                Label emailLabel = (Label) card.lookup("#patientEmail");
+                Label createdLabel = (Label) card.lookup("#patientDateCreated");
+
+                if (nameLabel != null) nameLabel.setText(patient.getFirstName() + " " + patient.getLastName());
+                if (ageLabel != null) ageLabel.setText("Age: " + java.time.Period.between(patient.getDateOfBirth(), java.time.LocalDate.now()).getYears());
+                if (dobLabel != null) dobLabel.setText("Date of Birth: " + patient.getDateOfBirth());
+                if (emailLabel != null) emailLabel.setText("Email: " + patient.getEmail());
+                if (createdLabel != null && patient.getCreatedAt() != null) createdLabel.setText("Created: " + patient.getCreatedAt().toLocalDate());
+
+                patientViewCardsContainer.getChildren().add(card);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Add 'View More' button if there are more than 5 and not already showing all
+        if (!showingAllPatients && filtered.size() > 5) {
+            Button viewMoreBtn = new Button("View More Patients");
+            viewMoreBtn.setStyle("-fx-background-color: #0762F2; -fx-text-fill: white; -fx-font-family: 'Gilroy-SemiBold'; -fx-padding: 8 16; -fx-background-radius: 5;");
+            viewMoreBtn.setOnAction(e -> {
+                showingAllPatients = true;
+                updatePatientCards(searchText);
+            });
+            patientViewCardsContainer.getChildren().add(viewMoreBtn);
+        } else if (showingAllPatients && filtered.size() > 5) {
+            Button viewLessBtn = new Button("View Less");
+            viewLessBtn.setStyle("-fx-background-color: #828282; -fx-text-fill: white; -fx-font-family: 'Gilroy-SemiBold'; -fx-padding: 8 16; -fx-background-radius: 5;");
+            viewLessBtn.setOnAction(e -> {
+                showingAllPatients = false;
+                updatePatientCards(searchText);
+            });
+            patientViewCardsContainer.getChildren().add(viewLessBtn);
+        }
     }
     
     @FXML
@@ -87,9 +170,7 @@ public class DoctorContainerController {
     
     @FXML
     private void handleRecordsNavigation() {
-        resetAllBtnStyle();
-        loadPage("doctorRecords");
-        animateButtonSelection(recordsBtnDoctor);
+
     }
     
     @FXML
@@ -159,6 +240,8 @@ public class DoctorContainerController {
             }
             else if (controller instanceof DoctorAppointmentController) {
                 ((DoctorAppointmentController) controller).initializeData(currentDoctorId);
+            } else if(controller instanceof  DoctorContainerController) {
+                ((DoctorContainerController) controller).initializeData(currentDoctorId);
             }
 
             // Check if the new content is already displayed

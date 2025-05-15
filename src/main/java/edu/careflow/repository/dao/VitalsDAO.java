@@ -15,6 +15,26 @@ public class VitalsDAO {
         dbManager = DatabaseManager.getInstance();
     }
 
+    public int generateUniqueVitalsId() throws SQLException {
+        // Keep trying until we find a unique ID
+        while (true) {
+            // Generate random 5 digit number between 10000 and 99999
+            int randomId = 10000 + (int)(Math.random() * 90000);
+
+            // Check if ID exists
+            String sql = "SELECT COUNT(*) FROM vitals WHERE vital_id = ?";
+            try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+                pstmt.setInt(1, randomId);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) == 0) {
+                        // ID is unique, return it
+                        return randomId;
+                    }
+                }
+            }
+        }
+    }
+
     public boolean addVitals(Vitals vitals) throws SQLException {
         String sql = "INSERT INTO vitals (patient_id, nurse_id, weight_kg, height_cm, blood_pressure, heart_rate, temperature, oxygen_saturation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {

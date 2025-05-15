@@ -26,10 +26,10 @@ public class VitalCardLongController {
 
     public void initializeData(Vitals vital) {
         // don't forget to add a null check -> if its null then put something
-        dateVitalsLabel.setText(vital.getRecordedAt() != null ? vital.getRecordedAt().format(dateFormatter) : "Not available");
-        hrLabel.setText(vital.getHeartRate() > 0 ? String.format("%d bpm", vital.getHeartRate()) : "Not available");
-        bpLabel.setText(vital.getBloodPressure() != null ? vital.getBloodPressure() : "Not available");
-        tempLabel.setText(vital.getTemperature() > 0 ? String.format("%.1f °C", vital.getTemperature()) : "Not available");
-        o2Label.setText(vital.getOxygenSaturation() > 0 ? String.format("%.1f %%", vital.getOxygenSaturation()) : "Not available");
+        dateVitalsLabel.setText(vital.getRecordedAt() != null ? vital.getRecordedAt().format(dateFormatter) : "--");
+        hrLabel.setText(vital.getHeartRate() > 0 ? String.format("%d", vital.getHeartRate()) : "--");
+        bpLabel.setText(vital.getBloodPressure() != null ? vital.getBloodPressure() : "--");
+        tempLabel.setText(vital.getTemperature() > 0 ? String.format("%.1f", vital.getTemperature()) : "--");
+        o2Label.setText(vital.getOxygenSaturation() > 0 ? String.format("%.1f", vital.getOxygenSaturation()) : "--");
     }
 }

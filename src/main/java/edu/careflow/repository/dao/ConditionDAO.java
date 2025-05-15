@@ -47,13 +47,14 @@ public class ConditionDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean addCondition(Condition condition) throws SQLException {
-        String sql = "INSERT INTO conditions (patient_id, condition_name, description, onset_date, status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO conditions (patient_id, condition_id, condition_name, description, onset_date, status) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, condition.getPatientId());
-            pstmt.setString(2, condition.getConditionName());
-            pstmt.setString(3, condition.getDescription());
-            pstmt.setDate(4, Date.valueOf(condition.getOnSetDate()));
-            pstmt.setString(5, condition.getStatus());
+            pstmt.setInt(2, condition.getConditionId());
+            pstmt.setString(3, condition.getConditionName());
+            pstmt.setString(4, condition.getDescription());
+            pstmt.setDate(5, Date.valueOf(condition.getOnSetDate()));
+            pstmt.setString(6, condition.getStatus());
 
             return pstmt.executeUpdate() > 0;
         }
@@ -89,6 +90,26 @@ public class ConditionDAO {
             pstmt.setInt(5, condition.getConditionId());
 
             return pstmt.executeUpdate() > 0;
+        }
+    }
+
+    /**
+     * Generate a unique 5-digit condition ID (not present in the conditions table)
+     * @return unique 5-digit integer ID
+     * @throws SQLException if a database access error occurs
+     */
+    public int generateUniqueConditionId() throws SQLException {
+        while (true) {
+            int randomId = 10000 + (int)(Math.random() * 90000); // 5-digit number
+            String sql = "SELECT COUNT(*) FROM conditions WHERE condition_id = ?";
+            try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+                pstmt.setInt(1, randomId);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) == 0) {
+                        return randomId;
+                    }
+                }
+            }
         }
     }
 }

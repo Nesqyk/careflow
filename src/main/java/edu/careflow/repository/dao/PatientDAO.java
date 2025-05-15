@@ -1,6 +1,7 @@
 package edu.careflow.repository.dao;
 
 import edu.careflow.manager.DatabaseManager;
+import edu.careflow.repository.entities.Allergy;
 import edu.careflow.repository.entities.Patient;
 import javafx.scene.image.Image;
 
@@ -9,16 +10,106 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class PatientDAO {
+
+
 
     public PatientDAO() {
         DatabaseManager dbManager = DatabaseManager.getInstance();
     }
+
+
+    public void addAllergy(Allergy allergy) throws SQLException {
+        String sqlAllergy = "INSERT INTO allergies (allergy_id, patient_id, allergen, severity, comment) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sqlAllergy)) {
+            stmt.setInt(1, allergy.getAllergyId());
+            stmt.setInt(2, allergy.getPatientId());
+            stmt.setString(3, allergy.getAllergen());
+            stmt.setString(4, allergy.getSeverity());
+            stmt.setString(5, allergy.getComment());
+            stmt.executeUpdate();
+
+
+            if(allergy.getReactions() != null) {
+                for (String reaction : allergy.getReactions()) {
+                    String sqlReaction = "INSERT INTO allergy_reactions (allergy_id, reaction_description) VALUES (?, ?)";
+                    try (PreparedStatement stmtReaction = DatabaseManager.getConnection().prepareStatement(sqlReaction)) {
+                        stmtReaction.setInt(1, allergy.getAllergyId());
+                        stmtReaction.setString(2, reaction);
+                        stmtReaction.executeUpdate();
+                    }
+                }
+            }
+        }
+    }
+
+    public List<Allergy> getAllergies(int patientId) throws SQLException {
+        String sql = "SELECT a.allergy_id, a.patient_id, a.allergen, a.severity, a.comment, "
+                + "ar.reaction_description FROM allergies a "
+                + "LEFT JOIN allergy_reactions ar ON a.allergy_id = ar.allergy_id "
+                + "WHERE a.patient_id = ?";
+
+        List<Allergy> allergies = new ArrayList<>();
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            stmt.setInt(1, patientId);
+            ResultSet rs = stmt.executeQuery();
+
+            Map<Integer, Allergy> allergyMap = new HashMap<>();
+            while (rs.next()) {
+                int allergyId = rs.getInt("allergy_id");
+                Allergy allergy = allergyMap.get(allergyId);
+                if (allergy == null) {
+                    allergy = new Allergy(
+                            allergyId,
+                            rs.getInt("patient_id"),
+                            rs.getString("allergen"),
+                            rs.getString("severity"),
+                            rs.getString("comment")
+                    );
+                    allergyMap.put(allergyId, allergy);
+                    allergies.add(allergy);
+                }
+                String reaction = rs.getString("reaction_description");
+                if (reaction != null) {
+                    allergy.addReaction(reaction);
+                }
+            }
+        }
+        return allergies;
+    }
+
+    public void updateAllergy(int allergyId, String allergen, String severity, String comment) throws SQLException {
+        String sql = "UPDATE allergies SET allergen = ?, severity = ?, comment = ? WHERE allergy_id = ?";
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, allergen);
+            stmt.setString(2, severity);
+            stmt.setString(3, comment);
+            stmt.setInt(4, allergyId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void deleteAllergy(int allergyId) throws SQLException {
+        // Delete reactions first
+        String sqlReactions = "DELETE FROM allergy_reactions WHERE allergy_id = ?";
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sqlReactions)) {
+            stmt.setInt(1, allergyId);
+            stmt.executeUpdate();
+        }
+
+        // Delete allergy
+        String sqlAllergy = "DELETE FROM allergies WHERE allergy_id = ?";
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sqlAllergy)) {
+            stmt.setInt(1, allergyId);
+            stmt.executeUpdate();
+        }
+    }
+
+
 
     /**
      * Check if a patient exists in the database
@@ -40,7 +131,7 @@ public class PatientDAO {
     }
 
     /**
-     * Insert patient avatar
+     * Insert or update patient avatar
      * @param patientId  The patient ID to load the avatar for
      * @param imageFile  The path of image to load for
      * @throws IOException If an I/O error occurs
@@ -48,11 +139,10 @@ public class PatientDAO {
      */
     public void insertAvatar(int patientId, File imageFile) throws IOException, SQLException {
         byte[] imageData = Files.readAllBytes(imageFile.toPath());
-        String sql = "INSERT OR REPLACE INTO patients VALUES (?, ?, ?)";
-        try (PreparedStatement pstmt =  DatabaseManager.getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, patientId);
-            pstmt.setString(2, imageFile.getName());
-            pstmt.setBytes(3, imageData);
+        String sql = "UPDATE patients SET image_avatar = ? WHERE patient_id = ?";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setBytes(1, imageData);
+            pstmt.setInt(2, patientId);
             pstmt.executeUpdate();
         }
     }
@@ -64,17 +154,18 @@ public class PatientDAO {
      * @throws SQLException  If a database access error occurs
      */
     public Image loadAvatar(int patientId) throws SQLException {
-
-        String sql = "SELECT image_avatar INTO patients WHERE patient_id = ?";
-
+        String sql = "SELECT image_avatar FROM patients WHERE patient_id = ?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, patientId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return new Image(new ByteArrayInputStream(rs.getBytes("image_data")));
+                byte[] imageData = rs.getBytes("image_avatar");
+                if (imageData != null) {
+                    return new Image(new ByteArrayInputStream(imageData));
+                }
             }
         }
-        return  null;
+        return null;
     }
 
 
@@ -158,7 +249,7 @@ public class PatientDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean updatePatient(int patientId, Patient updatedPatient) throws SQLException {
-        String sql = "UPDATE patients SET first_name=?, last_name=?, date_of_birth=?, gender=?, contact_number=?, email=?, address=? WHERE patient_id=?";
+        String sql = "UPDATE patients SET first_name=?, last_name=?, date_of_birth=?, gender=?, contact_number=?, email=?, address=?, updated_at=CURRENT_TIMESTAMP WHERE patient_id=?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, updatedPatient.getFirstName());
             pstmt.setString(2, updatedPatient.getLastName());

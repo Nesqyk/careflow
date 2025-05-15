@@ -8,64 +8,51 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox prefHeight="100.0" prefWidth="280.0" spacing="12.0" style="-fx-border-width: 0 0 0.5 0; -fx-border-color: #828282;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.ConditionCardController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="90.0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.ConditionCardController">
    <children>
-      <VBox prefHeight="100.0" prefWidth="166.0">
+      <VBox spacing="4.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <Label fx:id="conditionNamePatient" styleClass="card-title" text="Condition Name">
+               <font>
+                  <Font name="☞Gilroy-SemiBold" size="16.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="24.0">
                <children>
-                  <Label text="Condition" textFill="#828282" />
-                  <Label fx:id="conditionNamePatient" prefHeight="33.0" prefWidth="185.0" text="Condition Name">
-                     <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Date on Set" textFill="#828282" />
-                  <Label fx:id="dateConditionPatient" text="Date">
-                     <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Status" textFill="#828282" />
-                  <Label fx:id="conditionStatusPatient" text="Confirmed">
-                     <font>
-                        <Font name="☞Gilroy-SemiBold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="90.0">
-               <children>
-                  <Button fx:id="editBtn" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="26.0" styleClass="view-button" stylesheets="@../../../css/styles.css" textAlignment="CENTER" visible="false">
-                     <font>
-                        <Font name="Poppins Regular" size="16.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon iconLiteral="fas-ellipsis-v" iconSize="16" stroke="#402929" strokeWidth="0.0" styleClass="nav-button" wrappingWidth="11.066646575927734">
+                  <VBox spacing="2.0">
+                     <children>
+                        <Label styleClass="card-label" text="Date on Set" textFill="#828282" />
+                        <Label fx:id="dateConditionPatient" styleClass="card-value" text="Date">
                            <font>
-                              <Font name="☞Gilroy-Regular" size="64.0" />
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
                            </font>
-                        </FontIcon>
-                     </graphic>
-                  </Button>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox spacing="2.0">
+                     <children>
+                        <Label styleClass="card-label" text="Status" textFill="#828282" />
+                        <Label fx:id="conditionStatusPatient" styleClass="card-value" text="Confirmed">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
+      <Button fx:id="editBtn" disable="true" mnemonicParsing="false" styleClass="view-button">
+         <graphic>
+            <FontIcon iconLiteral="fas-ellipsis-v" iconSize="16" />
+         </graphic>
+         <HBox.margin>
+            <Insets left="8.0" />
+         </HBox.margin>
+      </Button>
    </children>
    <padding>
-      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
    </padding>
 </HBox>

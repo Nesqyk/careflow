@@ -9,68 +9,58 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox prefHeight="31.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.AppointmentCard">
+<VBox fx:id="appointmentContainer" style="-fx-background-color: white; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.AppointmentCard">
    <children>
-      <HBox alignment="CENTER_LEFT" prefWidth="668.0" style="-fx-border-width: 0 0 0.1 0; -fx-border-color: black;">
+      <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="579.0" spacing="16.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="202.0">
+            <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
                <children>
-                  <Button fx:id="showButton11" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="48.0" styleClass="nav-button" stylesheets="@../../../css/styles.css" textAlignment="CENTER">
+                  <Label fx:id="appointmentId" text="ID: 123" textFill="#0762F2">
                      <font>
-                        <Font name="Poppins Regular" size="18.0" />
+                        <Font name="☞Gilroy-Bold" size="14.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-                     </padding>
-                     <graphic>
-                        <FontIcon fx:id="showDetailsIcon11" iconLiteral="fas-angle-down" iconSize="16" selectionEnd="1" textAlignment="CENTER" wrappingWidth="10.800017356872559" />
-                     </graphic>
-                  </Button>
-                  <Hyperlink fx:id="patientHyperLink11" text="Hyperlink">
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </VBox>
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Hyperlink fx:id="patientHyperLink" alignment="TOP_LEFT" text="John Doe">
                      <font>
-                        <Font name="☞Gilroy-Regular" size="12.0" />
+                        <Font name="☞Gilroy-Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-               </children>
-            </HBox>
-            <VBox fx:id="clinicRoomAppointment11" alignment="CENTER_LEFT" prefHeight="2.0" prefWidth="178.0" spacing="6.0">
-               <children>
-                  <Label fx:id="appointmentId11" text="Label">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="4.0" left="18.0" right="4.0" top="4.0" />
-               </padding>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="114.0" spacing="6.0">
-               <children>
-                  <Label fx:id="appointmentDate11" text="Label">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="4.0" left="18.0" right="4.0" top="4.0" />
-               </padding>
-            </VBox>
-            <VBox prefHeight="51.0" prefWidth="159.0">
-               <children>
-                  <Button fx:id="StartVisitButton11" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" styleClass="nav-button-active" stylesheets="@../../../css/styles.css" text="Start Visit">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </VBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-calendar" iconSize="12" />
+                        <Label fx:id="appointmentDate" text="January 1, 2024" textFill="#757575">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
+            <Button fx:id="StartVisitButton" styleClass="nav-button-active" stylesheets="@../../../css/styles.css" text="Start Visit">
+               <font>
+                  <Font name="☞Gilroy-Regular" size="14.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconLiteral="fas-stethoscope" iconSize="14" />
+               </graphic>
+            </Button>
+            <Button fx:id="showButton" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="34.0" styleClass="nav-button" stylesheets="@../../../css/styles.css">
+               <graphic>
+                  <FontIcon fx:id="showDetailsIcon" iconLiteral="fas-chevron-down" iconSize="12" wrappingWidth="20.199952125549316" />
+               </graphic>
+            </Button>
          </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
       </HBox>
-      <VBox fx:id="appointmentContainer" prefWidth="814.0" />
    </children>
 </VBox>

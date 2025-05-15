@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -20,6 +21,9 @@ public class PatientMedicalController {
     private VBox mainContainer;
 
     @FXML
+    private HBox patientHeaderChoice;
+
+    @FXML
     private Button prescriptionBtn;
 
     @FXML
@@ -28,13 +32,18 @@ public class PatientMedicalController {
     @FXML
     private Button vitalsBtn;
 
+
     private Button currentActiveButton = null;
 
     public void initializeData(int patientId) {
         prescriptionBtn.setOnAction(event -> handlePrescriptionNavigation(patientId));
         recordsBtn.setOnAction(event -> handleRecordsNavigation(patientId));
         vitalsBtn.setOnAction(event -> handleVitalsNavigation(patientId));
-        
+
+        // look up at root of scene then lookup mainContainer then add the patientHeaderChoice
+
+        // how about we add the
+
         // Load prescription page by default
         handlePrescriptionNavigation(patientId);
     }

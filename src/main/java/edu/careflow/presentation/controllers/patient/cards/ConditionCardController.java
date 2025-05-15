@@ -30,7 +30,7 @@ public class ConditionCardController {
         conditionNamePatient.setText(condition.getConditionName());
         conditionStatusPatient.setText(condition.getStatus());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd — MMM — yyyy, hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
         dateConditionPatient.setText(condition.getOnSetDate().format(formatter));
     }

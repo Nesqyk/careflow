@@ -2,6 +2,7 @@ package edu.careflow.presentation.controllers.doctor.cards;
 
 import edu.careflow.repository.dao.AttachmentDAO;
 import edu.careflow.repository.entities.Attachment;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,10 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -48,13 +51,18 @@ public class AttachmentViewController {
     @FXML private Label charCount;
     @FXML private Button cancelButton;
     @FXML private Button addButton;
+    @FXML private ScrollPane scrollPaneAttachment;
+
+    static {
+        nu.pattern.OpenCV.loadLocally();
+    }
 
     private final AttachmentDAO attachmentDAO;
     private File selectedFile;
     private byte[] fileContent;
-    private Long currentPatientId;
-    private Long currentDoctorId;
-    private Long currentRecordId;
+    private int currentPatientId;
+    private int currentDoctorId;
+    private int currentRecordId;
     private Stage stage;
     private static final long MAX_FILE_SIZE = 1048576; // 1MB
     private static final List<String> SUPPORTED_TYPES = List.of(".jpg", ".jpeg", ".png", ".pdf");
@@ -189,8 +197,20 @@ public class AttachmentViewController {
 
     private void closeDialog() {
         cleanupWebcam();
-        stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(150), scrollPaneAttachment);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            // Remove the scrollPane from its parent after fade
+            if (scrollPaneAttachment.getParent() instanceof VBox parentBox) {
+                parentBox.getChildren().remove(scrollPaneAttachment);
+            } else if (scrollPaneAttachment.getParent() != null) {
+                ((Pane) scrollPaneAttachment.getParent()).getChildren().remove(scrollPaneAttachment);
+            }
+            // Set to null to help garbage collection
+            scrollPaneAttachment = null;
+        });
+        fadeOut.play();
     }
 
     private boolean isValidFile(File file) {
@@ -225,7 +245,7 @@ public class AttachmentViewController {
         setupWebcam();
 
         // Add cleanup on window closing
-        stage.setOnCloseRequest(event -> cleanupWebcam());
+        // stage.setOnCloseRequest(event -> cleanupWebcam());
     }
 
     private void setupWebcam() {
@@ -349,7 +369,7 @@ public class AttachmentViewController {
                     selectedFile.getName(),
                     attachmentName.getText().trim(),
                     getFileExtension(selectedFile),
-                    selectedFile.length(),
+                    (int) selectedFile.length(),
                     description.getText().trim(),
                     fileContent,
                     currentPatientId,
@@ -374,15 +394,15 @@ public class AttachmentViewController {
 
 
     // Setters for external data
-    public void setPatientId(Long patientId) {
+    public void setPatientId(int patientId) {
         this.currentPatientId = patientId;
     }
 
-    public void setDoctorId(Long doctorId) {
+    public void setDoctorId(int doctorId) {
         this.currentDoctorId = doctorId;
     }
 
-    public void setRecordId(Long recordId) {
+    public void setRecordId(int recordId) {
         this.currentRecordId = recordId;
     }
 

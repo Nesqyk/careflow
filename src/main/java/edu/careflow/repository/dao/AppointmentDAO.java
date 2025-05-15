@@ -19,16 +19,24 @@ public class AppointmentDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean addAppointment(Appointment appointment) throws SQLException {
-        String sql = "INSERT INTO appointments (appointment_id, patient_id, doctor_id, nurse_id, appointment_date, status, notes, created_at, room) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointments (patient_id, doctor_id, nurse_id, appointment_date, status, notes, created_at, room, symptoms, diagnosis, service_type, appointment_type, meeting_link, booked_by, preferred_contact, booking_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
-            pstmt.setInt(2, appointment.getPatientId());
-            pstmt.setInt(3, appointment.getDoctorId());
-            pstmt.setInt(4, appointment.getNurseId());
-            pstmt.setTimestamp(5, Timestamp.valueOf(appointment.getAppointmentDate()));
-            pstmt.setString(6, appointment.getStatus());
-            pstmt.setString(7, appointment.getNotes());
-            pstmt.setTimestamp(8, Timestamp.valueOf(appointment.getCreatedAt()));
-            pstmt.setString(9, appointment.getRoom());
+            pstmt.setInt(1, appointment.getPatientId());
+            pstmt.setInt(2, appointment.getDoctorId());
+            pstmt.setInt(3, appointment.getNurseId());
+            pstmt.setTimestamp(4, Timestamp.valueOf(appointment.getAppointmentDate()));
+            pstmt.setString(5, appointment.getStatus());
+            pstmt.setString(6, appointment.getNotes());
+            pstmt.setTimestamp(7, Timestamp.valueOf(appointment.getCreatedAt()));
+            pstmt.setString(8, appointment.getRoom());
+            pstmt.setString(9, appointment.getSymptoms());
+            pstmt.setString(10, appointment.getDiagnosis());
+            pstmt.setString(11, appointment.getServiceType());
+            pstmt.setString(12, appointment.getAppointmentType());
+            pstmt.setString(13, appointment.getMeetingLink());
+            pstmt.setString(14, appointment.getBookedBy());
+            pstmt.setString(15, appointment.getPreferredContact());
+            pstmt.setTimestamp(16, Timestamp.valueOf(appointment.getBookingTime()));
 
             return pstmt.executeUpdate() > 0;
         }
@@ -55,7 +63,7 @@ public class AppointmentDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean updateAppointment(Appointment appointment) throws SQLException {
-        String sql = "UPDATE appointments SET patient_id=?, doctor_id=?, nurse_id=?, appointment_date=?, status=?, notes=?, room=?, symptoms=?, diagnosis=?, service_type=? WHERE appointment_id=?";
+        String sql = "UPDATE appointments SET patient_id=?, doctor_id=?, nurse_id=?, appointment_date=?, status=?, notes=?, room=?, symptoms=?, diagnosis=?, service_type=?, appointment_type=?, meeting_link=?, booked_by=?, preferred_contact=?, booking_time=? WHERE appointment_id=?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, appointment.getPatientId());
             pstmt.setInt(2, appointment.getDoctorId());
@@ -64,10 +72,15 @@ public class AppointmentDAO {
             pstmt.setString(5, appointment.getStatus());
             pstmt.setString(6, appointment.getNotes());
             pstmt.setString(7, appointment.getRoom());
-            pstmt.setString(8, appointment.getSymptoms()); // New attribute
-            pstmt.setString(9, appointment.getDiagnosis()); // New attribute
-            pstmt.setString(10, appointment.getServiceType()); // New attribute
-            pstmt.setInt(11, appointment.getAppointmentId());
+            pstmt.setString(8, appointment.getSymptoms());
+            pstmt.setString(9, appointment.getDiagnosis());
+            pstmt.setString(10, appointment.getServiceType());
+            pstmt.setString(11, appointment.getAppointmentType());
+            pstmt.setString(12, appointment.getMeetingLink());
+            pstmt.setString(13, appointment.getBookedBy());
+            pstmt.setString(14, appointment.getPreferredContact());
+            pstmt.setTimestamp(15, Timestamp.valueOf(appointment.getBookingTime()));
+            pstmt.setInt(16, appointment.getAppointmentId());
 
             return pstmt.executeUpdate() > 0;
         }
@@ -201,9 +214,14 @@ public class AppointmentDAO {
                 rs.getString("notes"),
                 rs.getTimestamp("created_at").toLocalDateTime(),
                 rs.getString("room"),
-                rs.getString("symptoms"), // Added symptoms
-                rs.getString("diagnosis"), // Added diagnosis
-                rs.getString("service_type") // Added service type
+                rs.getString("symptoms"),
+                rs.getString("diagnosis"),
+                rs.getString("service_type"),
+                rs.getString("appointment_type"),
+                rs.getString("meeting_link"),
+                rs.getString("booked_by"),
+                rs.getString("preferred_contact"),
+                rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
         );
     }
 }

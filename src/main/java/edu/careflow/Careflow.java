@@ -6,7 +6,7 @@ import edu.careflow.repository.dao.AppointmentDAO;
 import edu.careflow.repository.dao.DoctorDAO;
 import edu.careflow.repository.dao.PatientDAO;
 import edu.careflow.repository.dao.UserDAO;
-import edu.careflow.repository.entities.Appointment;
+import edu.careflow.repository.entities.Allergy;
 import edu.careflow.repository.entities.Patient;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,18 +47,40 @@ public class Careflow extends Application {
     // its manager
     // Initializaiton of the stuff
     @FXML
-    public void start(Stage stage) throws SQLException {
+    public void start(Stage stage) throws SQLException, IOException {
 
+//        byte[] imageContent = getClass().getResourceAsStream("images/logo/desktopIcon.png").readAllBytes();
+//
+//        Attachment attachment = new Attachment(
+//                "desktopIcon.png",             // originalName
+//                "sample_attachment_1",         // attachmentName
+//                "image/png",                         // fileType
+//                imageContent.length,    // fileSize
+//                "Sample image attachment",     // description
+//                imageContent,                  // content
+//                10099,                       // patientId (using sample patient)
+//                13430,                       // doctorId (using sample doctor)
+//                3                            // recordId
+//        );
+//
+//        // Save attachment using AttachmentDAO
+//        AttachmentDAO attachmentDAO = new AttachmentDAO();
+//        attachmentDAO.save(attachment);
 
-        // Vitals vitals = new Vitals(12674, 1, 1, "120/80", 80, 16, 100.0, 180.0, 36.0, 98.0, LocalDateTime.now(), LocalDateTime.now());
+        Allergy allergy = new Allergy(1, 10099, "Severe", "mild", "Almost died dont feed this mf nuts!");
 
-        // VitalsDAO vitalsDAO = new VitalsDAO();
+        PatientDAO patientDAO = new PatientDAO();
+        patientDAO.addAllergy(allergy);
 
-        // vitalsDAO.addVitals(vitals);
+//         Vitals vitals = new Vitals(10099, 1, 1, "120/80", 80, 16, 100.0, 180.0, 36.0, 98.0, LocalDateTime.now(), LocalDateTime.now());
+//
+//         VitalsDAO vitalsDAO = new VitalsDAO();
+//
+//        vitalsDAO.addVitals(vitals);
 
         // insertSamplePatients();
-        Appointment appointment = new Appointment(9, 10099, 13430, 1, LocalDateTime.now(), "Scheduled", "none", LocalDateTime.now(), "", "", "", "");
-        appointmentDAO.addAppointment(appointment);
+//        Appointment appointment = new Appointment(9, 10099, 13430, 1, LocalDateTime.now(), "Scheduled", "none", LocalDateTime.now(), "", "", "", "");
+//        appointmentDAO.addAppointment(appointment);
 //
 //        Doctor doctor = new Doctor(id, "Kim", "Kardashian", "General Medicine", "123", "123");
 //        doctorDAO.createDoctor(doctor);

@@ -6,13 +6,15 @@ module edu.careflow {
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
     requires opencv;
+    requires javafx.web;
+    requires java.desktop;
 
 
     // Exports packages from the correct paths
 //    exports edu.careflow.application;
 //    exports edu.careflow.application.config;
 //    exports edu.careflow.presentation;
-
+    exports edu.careflow.presentation.controllers.patient.forms;
     exports  edu.careflow.presentation.controllers.doctor;
     exports  edu.careflow.presentation.controllers.doctor.cards;
     exports edu.careflow.manager;
@@ -43,6 +45,9 @@ module edu.careflow {
 //    exports edu.careflow.util.exception;
 
     // Opens packages to allow reflective access for JavaFX
+    exports edu.careflow.presentation.controllers.components.table to javafx.fxml;
+    opens edu.careflow.presentation.controllers.components.table;
+    opens edu.careflow.presentation.controllers.patient.forms;
     opens edu.careflow.presentation.controllers to javafx.fxml;
     opens edu.careflow.presentation.controllers.patient.cards to javafx.fxml;
     opens edu.careflow.presentation.controllers.doctor;

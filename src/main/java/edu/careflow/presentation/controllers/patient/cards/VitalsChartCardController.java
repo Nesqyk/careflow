@@ -1,148 +1,210 @@
 package edu.careflow.presentation.controllers.patient.cards;
 
 import edu.careflow.repository.entities.Vitals;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.util.Duration;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class VitalsChartCardController {
 
-    @FXML
-    private Button bpBtn;
-
-    @FXML
-    private Button heartRateBtn;
-
-    @FXML
-    private Button oxygenBtn;
-
-    @FXML
-    private Button tempBtn;
-
-    @FXML
-    private LineChart<String, Number> vitalsLineChart;
+    @FXML private LineChart<String, Number> vitalsLineChart;
+    @FXML private Button heartRateBtn;
+    @FXML private Button oxygenBtn;
+    @FXML private Button tempBtn;
+    @FXML private Button bpBtn;
 
     private List<Vitals> vitalsList;
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd");
 
-    public void initializeData(List<Vitals> vitalsList) {
+    @FXML
+    public void initialize() {
+        // Clear any existing data
+        vitalsLineChart.getData().clear();
+        vitalsLineChart.setAnimated(false); // Disable animations for better performance
+
+        // Setup button style classes
+        setupButtonStyles();
+
+        // Setup button actions
+        setupButtonActions();
+    }
+
+    private void setupButtonStyles() {
+        // Add default styling
+        heartRateBtn.getStyleClass().add("nav-button-active");
+        oxygenBtn.getStyleClass().remove("nav-button-active");
+        tempBtn.getStyleClass().remove("nav-button-active");
+        bpBtn.getStyleClass().remove("nav-button-active");
+    }
+
+    private void setupButtonActions() {
+        heartRateBtn.setOnAction(e -> {
+            updateActiveButton(heartRateBtn);
+            displayHeartRateChart();
+        });
+
+        oxygenBtn.setOnAction(e -> {
+            updateActiveButton(oxygenBtn);
+            displayOxygenChart();
+        });
+
+        tempBtn.setOnAction(e -> {
+            updateActiveButton(tempBtn);
+            displayTemperatureChart();
+        });
+
+        bpBtn.setOnAction(e -> {
+            updateActiveButton(bpBtn);
+            displayBloodPressureChart();
+        });
+    }
+
+    private void updateActiveButton(Button activeButton) {
+        // Remove active class from all buttons
+        heartRateBtn.getStyleClass().remove("nav-button-active");
+        oxygenBtn.getStyleClass().remove("nav-button-active");
+        tempBtn.getStyleClass().remove("nav-button-active");
+        bpBtn.getStyleClass().remove("nav-button-active");
+
+        // Add active class to selected button
+        activeButton.getStyleClass().add("nav-button-active");
+    }
+
+    public void setupVitalsChart(List<Vitals> vitalsList) {
         this.vitalsList = vitalsList;
 
-        // Style the chart
-        vitalsLineChart.getStyleClass().add("chart");
-        vitalsLineChart.setCreateSymbols(false);
-        vitalsLineChart.setAnimated(true);
-        vitalsLineChart.getStyleClass().add("chart");
-
-        vitalsLineChart.getXAxis().setTickLabelRotation(0);
-        ((NumberAxis) vitalsLineChart.getYAxis()).setTickUnit(5);
-
-        updateChart("hr");
-
-        bpBtn.setOnAction(e -> updateChart("bp"));
-        heartRateBtn.setOnAction(e -> updateChart("hr"));
-        oxygenBtn.setOnAction(e -> updateChart("o2"));
-        tempBtn.setOnAction(e -> updateChart("temp"));
+        // Default to heart rate view
+        displayHeartRateChart();
     }
 
-    private void updateChart(String vitalType) {
-        resetButtonStates();
+    public void setupBiometricChart(List<Vitals> vitalsList) {
+        this.vitalsList = vitalsList;
+
+        // For biometrics, different buttons will be used
+        heartRateBtn.setText("Weight");
+        oxygenBtn.setText("Height");
+        tempBtn.setText("BMI");
+        bpBtn.setVisible(false);
+
+        // Default to weight view
+        displayWeightChart();
+    }
+
+    private void displayHeartRateChart() {
         vitalsLineChart.getData().clear();
 
-        NumberAxis yAxis = (NumberAxis) vitalsLineChart.getYAxis();
         XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Heart Rate (bpm)");
 
-        switch (vitalType) {
-            case "bp":
-                bpBtn.getStyleClass().addAll("nav-button-active", "nav-button-animating");
-                plotBloodPressure(series);
-                yAxis.setLabel("Blood Pressure (mmHg)");
-                break;
-            case "hr":
-                heartRateBtn.getStyleClass().addAll("nav-button-active", "nav-button-animating");
-                plotSimpleVital(series, v -> v.getHeartRate(), "Heart Rate");
-                yAxis.setLabel("Heart Rate (bpm)");
-                break;
-            case "o2":
-                oxygenBtn.getStyleClass().addAll("nav-button-active", "nav-button-animating");
-                plotSimpleVital(series, v -> v.getOxygenSaturation(), "Oxygen Saturation");
-                yAxis.setLabel("Oxygen Saturation (%)");
-                break;
-            case "temp":
-                tempBtn.getStyleClass().addAll("nav-button-active", "nav-button-animating");
-                plotSimpleVital(series, v -> v.getTemperature(), "Temperature");
-                yAxis.setLabel("Temperature (°C)");
-                break;
-        }
-
-
-        vitalsLineChart.setOpacity(0);
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(500), vitalsLineChart);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-    }
-
-    private void resetButtonStates() {
-        bpBtn.getStyleClass().removeAll("nav-button-active", "nav-button-animating");
-        heartRateBtn.getStyleClass().removeAll("nav-button-active", "nav-button-animating");
-        oxygenBtn.getStyleClass().removeAll("nav-button-active", "nav-button-animating");
-        tempBtn.getStyleClass().removeAll("nav-button-active", "nav-button-animating");
-    }
-
-    private void plotSimpleVital(XYChart.Series<String, Number> series, VitalValueExtractor extractor, String name) {
-        series.setName(name);
-
-        for (int i = 0; i < vitalsList.size(); i++) {
-            XYChart.Data<String, Number> data = new XYChart.Data<>(String.valueOf(i), extractor.extract(vitalsList.get(i)));
-            series.getData().add(data);
-        }
-
-        vitalsLineChart.getData().add(series);
-
-        if (series.getNode() != null) {
-            series.getNode().getStyleClass().add("chart-series-line");
-        }
-
-        for (XYChart.Data<String, Number> data : series.getData()) {
-            if (data.getNode() != null) {
-                data.getNode().getStyleClass().add("chart-line-symbol");
-            }
-        }
-    }
-
-    private void plotBloodPressure(XYChart.Series<String, Number> series) {
-        series.setName("Blood Pressure");
-
-        for (int i = 0; i < vitalsList.size(); i++) {
-            String[] bpParts = vitalsList.get(i).getBloodPressure().split("/");
-            if (bpParts.length == 2) {
-                int systolic = Integer.parseInt(bpParts[0]);
-                XYChart.Data<String, Number> data = new XYChart.Data<>(String.valueOf(i), systolic);
-                series.getData().add(data);
+        for (Vitals vital : vitalsList) {
+            if (vital.getHeartRate() > 0) {
+                String date = vital.getRecordedAt().format(dateFormatter);
+                series.getData().add(new XYChart.Data<>(date, vital.getHeartRate()));
             }
         }
 
         vitalsLineChart.getData().add(series);
-
-        if (series.getNode() != null) {
-            series.getNode().getStyleClass().add("chart-series-line");
-        }
-
-        for (XYChart.Data<String, Number> data : series.getData()) {
-            if (data.getNode() != null) {
-                data.getNode().getStyleClass().add("chart-line-symbol");
-            }
-        }
+        applySeriesStyle(series);
     }
 
-    @FunctionalInterface
-    private interface VitalValueExtractor {
-        double extract(Vitals vital);
+    private void displayOxygenChart() {
+        vitalsLineChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Oxygen Level (%)");
+
+        for (Vitals vital : vitalsList) {
+            if (vital.getOxygenSaturation() > 0) {
+                String date = vital.getRecordedAt().format(dateFormatter);
+                series.getData().add(new XYChart.Data<>(date, vital.getOxygenSaturation()));
+            }
+        }
+
+        vitalsLineChart.getData().add(series);
+        applySeriesStyle(series);
+    }
+
+    private void displayTemperatureChart() {
+        vitalsLineChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Temperature (°C)");
+
+        for (Vitals vital : vitalsList) {
+            if (vital.getTemperature() > 0) {
+                String date = vital.getRecordedAt().format(dateFormatter);
+                series.getData().add(new XYChart.Data<>(date, vital.getTemperature()));
+            }
+        }
+
+        vitalsLineChart.getData().add(series);
+        applySeriesStyle(series);
+    }
+
+    private void displayBloodPressureChart() {
+        vitalsLineChart.getData().clear();
+
+        XYChart.Series<String, Number> systolicSeries = new XYChart.Series<>();
+        systolicSeries.setName("Systolic");
+
+        XYChart.Series<String, Number> diastolicSeries = new XYChart.Series<>();
+        diastolicSeries.setName("Diastolic");
+
+        for (Vitals vital : vitalsList) {
+            if (vital.getBloodPressure() != null && !vital.getBloodPressure().isEmpty()) {
+                String date = vital.getRecordedAt().format(dateFormatter);
+                try {
+                    String[] bpParts = vital.getBloodPressure().split("/");
+                    if (bpParts.length == 2) {
+                        int systolic = Integer.parseInt(bpParts[0].trim());
+                        int diastolic = Integer.parseInt(bpParts[1].trim());
+
+                        systolicSeries.getData().add(new XYChart.Data<>(date, systolic));
+                        diastolicSeries.getData().add(new XYChart.Data<>(date, diastolic));
+                    }
+                } catch (Exception e) {
+                    // Skip invalid blood pressure readings
+                }
+            }
+        }
+
+        vitalsLineChart.getData().addAll(systolicSeries, diastolicSeries);
+        applySeriesStyle(systolicSeries);
+        applySeriesStyle(diastolicSeries);
+    }
+
+    private void displayWeightChart() {
+        vitalsLineChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Weight (kg)");
+
+        for (Vitals vital : vitalsList) {
+            if (vital.getWeightKg() > 0) {
+                String date = vital.getRecordedAt().format(dateFormatter);
+                series.getData().add(new XYChart.Data<>(date, vital.getWeightKg()));
+            }
+        }
+
+        vitalsLineChart.getData().add(series);
+        applySeriesStyle(series);
+    }
+
+    private void applySeriesStyle(XYChart.Series<String, Number> series) {
+        // Apply custom styling to data points
+        for (XYChart.Data<String, Number> data : series.getData()) {
+            if (data.getNode() != null) {
+                data.getNode().setStyle(
+                        "-fx-background-color: #0762F2, white; " +
+                                "-fx-background-insets: 0, 2; " +
+                                "-fx-background-radius: 5px; " +
+                                "-fx-padding: 5px;"
+                );
+            }
+        }
     }
 }

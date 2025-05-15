@@ -202,5 +202,21 @@ public class PrescriptionDAO {
         }
         return prescriptions;
     }
-}
 
+//    public List<Prescription> getActivePrescriptionsByPatientId(int patientId) throws SQLException {
+//        List<Prescription> activePrescriptions = new ArrayList<>();
+//        String query = "SELECT * FROM prescriptions WHERE patient_id = ? AND end_date >= CURRENT_DATE ORDER BY start_date DESC";
+//
+//        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+//            stmt.setInt(1, patientId);
+//            ResultSet rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//                Prescription prescription = mapResultSetToPrescription(rs);
+//                activePrescriptions.add(prescription);
+//            }
+//        }
+//
+//        return activePrescriptions;
+//    }
+}

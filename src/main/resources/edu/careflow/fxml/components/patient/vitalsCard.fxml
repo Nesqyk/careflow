@@ -1,146 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.VitalsCardsController">
+<VBox maxWidth="-Infinity" minWidth="-Infinity" spacing="16.0" style="-fx-background-color: transparent;" styleClass="vitals-container" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.VitalsCardsController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="93.0" prefWidth="600.0" spacing="62.0">
+      <HBox alignment="CENTER" spacing="12.0">
          <children>
-            <VBox spacing="12.0">
+            <VBox minWidth="134.0" prefHeight="86.0" prefWidth="134.0" styleClass="vital-card">
                <children>
-                  <VBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
                      <children>
-                        <Label text="BP" />
-                        <Label text="mmHg" textFill="#848484">
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="bpPatientLabel" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                        <FontIcon iconLiteral="fas-heart" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="Blood Pressure" />
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT">
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
                      <children>
-                        <Label text="Heart Rate" />
-                        <Label text="beats/min" textFill="#848484">
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="hrPatientLabel" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                        <Label fx:id="bpPatientLabel" prefHeight="30.0" prefWidth="100.0" styleClass="vital-value" text="120/80" />
+                        <Label prefWidth="86.0" styleClass="vital-unit" text="mmHg" />
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </VBox>
-            <VBox spacing="12.0">
+
+            <VBox styleClass="vital-card">
                <children>
-                  <VBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
                      <children>
-                        <Label text="Tempearture" />
-                        <Label text="deg c" textFill="#848484">
+                        <FontIcon iconLiteral="fas-heartbeat" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="Heart Rate">
                            <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="tempPatientLabel" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                              <Font name="☞Gilroy-SemiBold" size="12.0" />
+                           </font></Label>
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT">
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
                      <children>
-                        <Label text="Oxygen Saturation" />
-                        <Label text="\%" textFill="#848484">
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="oxygenLevelPatient" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                        <Label fx:id="hrPatientLabel" styleClass="vital-value" text="75" />
+                        <Label styleClass="vital-unit" text="bpm" />
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+
+            <VBox styleClass="vital-card">
                <children>
-                  <VBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
                      <children>
-                        <Label text="Height" />
-                        <Label text="beats/min" textFill="#848484">
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="heightPatientLabel" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                        <FontIcon iconLiteral="fas-thermometer-half" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="Temperature" />
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT">
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
                      <children>
-                        <Label text="BMI" />
-                        <Label textFill="#848484">
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                           <graphic>
-                              <Label fx:id="bmiPatientLabel" text="Label">
-                                 <font>
-                                    <Font name="☞Gilroy-SemiBold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
+                        <Label fx:id="tempPatientLabel" styleClass="vital-value" text="36.5" />
+                        <Label styleClass="vital-unit" text="°C" />
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </VBox>
-            <VBox>
+
+            <VBox styleClass="vital-card">
                <children>
-                  <Label text="Weight" />
-                  <Label text="mmHg" textFill="#848484">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="12.0" />
-                     </font>
-                     <graphic>
-                        <Label fx:id="weightPatientLabel" text="Label">
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-lungs" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="Oxygen" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
+                     <children>
+                        <Label fx:id="oxygenLevelPatient" styleClass="vital-value" text="98" />
+                        <Label styleClass="vital-unit" text="\%" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <HBox alignment="CENTER" spacing="12.0">
+         <children>
+            <VBox styleClass="vital-card">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-ruler-vertical" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" stylesheets="@../../../css/styles.css" text="Height">
                            <font>
-                              <Font name="☞Gilroy-SemiBold" size="18.0" />
-                           </font>
-                        </Label>
-                     </graphic>
-                  </Label>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
+                     <children>
+                        <Label fx:id="heightPatientLabel" styleClass="vital-value" text="175" />
+                        <Label styleClass="vital-unit" text="cm" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <VBox styleClass="vital-card">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-weight" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="Weight" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BASELINE_LEFT" spacing="4.0">
+                     <children>
+                        <Label fx:id="weightPatientLabel" styleClass="vital-value" text="70" />
+                        <Label styleClass="vital-unit" text="kg" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <VBox styleClass="vital-card">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-calculator" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="BMI" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="bmiPatientLabel" styleClass="vital-value" text="22.9" />
+               </children>
+            </VBox>
+
+            <VBox styleClass="vital-card">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-info-circle" styleClass="vital-icon" />
+                        <Label styleClass="vital-title" text="BMI Status" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="bmiStatusLabel" styleClass="vital-value" text="Normal" />
                </children>
             </VBox>
          </children>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="24.0" top="24.0" />
+   </padding>
 </VBox>

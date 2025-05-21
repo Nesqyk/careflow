@@ -10,25 +10,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="patientContainerHome" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="patientContainerHome" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.admin.AdminDashboardController">
    <children>
       <HBox prefHeight="271.0" prefWidth="910.0" spacing="32.0">
          <children>
             <VBox prefHeight="207.0" prefWidth="376.0" spacing="12.0" style="-fx-background-color: FBFBFE;" styleClass="card-property" stylesheets="@../../css/styles.css">
                <children>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="193.0" styleClass="border-left-blue" text="Total Staffs" wrapText="true">
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="193.0" styleClass="border-left-blue" text="Total Receptionists" wrapText="true">
                      <font>
                         <Font name="☞Gilroy-Bold" size="14.0" />
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="activeVisitsCount" alignment="CENTER" prefHeight="52.0" prefWidth="218.0" text="0" textAlignment="CENTER">
+                        <Label fx:id="totalNurses" alignment="CENTER" prefHeight="52.0" prefWidth="218.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="☞Gilroy-Regular" size="32.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="220.0" text="Number of Patient/s">
+                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="220.0" text="Number of Receptionists">
                            <font>
                               <Font name="☞Gilroy-Regular" size="12.0" />
                            </font>
@@ -49,12 +49,12 @@
                   </Label>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="totalVisitsCount" alignment="CENTER" prefHeight="52.0" prefWidth="23.0" text="0" textAlignment="CENTER">
+                        <Label fx:id="totalDoctors" alignment="CENTER" prefHeight="52.0" prefWidth="23.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="☞Gilroy-Regular" size="32.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="143.0" text="Number of Patient/s">
+                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="143.0" text="Number of Doctors">
                            <font>
                               <Font name="☞Gilroy-Regular" size="12.0" />
                            </font>
@@ -68,19 +68,19 @@
             </VBox>
             <VBox prefHeight="207.0" prefWidth="376.0" spacing="12.0" style="-fx-background-color: FBFBFE;" styleClass="card-property" stylesheets="@../../css/styles.css">
                <children>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="193.0" styleClass="border-left-blue" text="Total Doctors" wrapText="true">
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="193.0" styleClass="border-left-blue" text="Total Nurses" wrapText="true">
                      <font>
                         <Font name="☞Gilroy-Bold" size="14.0" />
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="activeVisitsCount1" alignment="CENTER" prefHeight="52.0" prefWidth="218.0" text="0" textAlignment="CENTER">
+                        <Label fx:id="totalStaffs" alignment="CENTER" prefHeight="52.0" prefWidth="218.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="☞Gilroy-Regular" size="32.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="220.0" text="Number of Patient/s">
+                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="220.0" text="Number of Nurses">
                            <font>
                               <Font name="☞Gilroy-Regular" size="12.0" />
                            </font>
@@ -121,17 +121,17 @@
                      <children>
                         <HBox fx:id="buttonsAptFilter" alignment="CENTER" minHeight="-Infinity" prefHeight="32.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.5; -fx-border-radius: 6px;">
                            <children>
-                              <Button fx:id="pendingAptBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="123.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Nurse" textAlignment="CENTER">
+                              <Button fx:id="nurseUsers" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="123.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Nurse" textAlignment="CENTER">
                                  <font>
                                     <Font name="☞Gilroy-Regular" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="scheduleAptBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="135.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Doctors" textAlignment="CENTER">
+                              <Button fx:id="doctorUsers" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="135.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Doctors" textAlignment="CENTER">
                                  <font>
                                     <Font name="☞Gilroy-Regular" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="completedAptBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="142.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Receptionist" textAlignment="CENTER">
+                              <Button fx:id="receptionistUsers" alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="142.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Receptionist" textAlignment="CENTER">
                                  <font>
                                     <Font name="☞Gilroy-Regular" size="12.0" />
                                  </font>
@@ -148,7 +148,7 @@
                   </HBox>
                   <Separator opacity="0.3" prefWidth="624.0" visible="false" />
                   <VBox fx:id="mainContainer" prefHeight="238.0" prefWidth="598.0" />
-                  <Pagination maxPageIndicatorCount="5" prefHeight="29.0" prefWidth="624.0" />
+                  <Pagination fx:id="paginationContainer" maxPageIndicatorCount="5" prefHeight="29.0" prefWidth="624.0" />
                </children>
             </VBox>
          </children>

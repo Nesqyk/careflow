@@ -259,5 +259,55 @@ public class UserDAO {
             }
         }
     }
+
+    /**
+     * Validates user login credentials
+     * @param username The username to validate
+     * @param password The password to validate
+     * @return true if credentials are valid, false otherwise
+     */
+    public boolean validateLogin(String username, String password) {
+        try {
+            User user = validateUser(username, password);
+            return user != null;
+        } catch (Exception e) {
+            System.err.println("Login validation error for User :" + username + " : " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Registers a new user
+     * @param user The user to register
+     * @return The generated user ID if successful, -1 otherwise
+     */
+    public int registerUser(User user) {
+        try {
+            return insertUser(user);
+        } catch (Exception e) {
+            System.err.println("User registration error: " + e.getMessage());
+            return -1;
+        }
+    }
+
+    /**
+     * Resets the user's password directly without email or token
+     * @param username The username of the user
+     * @param newPassword The new password to set
+     * @return true if password reset was successful, false otherwise
+     */
+    public boolean resetPassword(String username, String newPassword) {
+        try {
+            User user = getUserByUsername(username);
+            if (user != null) {
+                user.setPassword(newPassword);
+                return updateUserPassword(user.getUser_id(), newPassword);
+            }
+            return false;
+        } catch (Exception e) {
+            System.err.println("Password reset error for User: " + username + " : " + e.getMessage());
+            return false;
+        }
+    }
 }
 

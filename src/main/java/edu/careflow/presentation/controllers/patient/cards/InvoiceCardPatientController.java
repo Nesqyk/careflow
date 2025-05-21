@@ -23,6 +23,7 @@ public class InvoiceCardPatientController {
     @FXML private VBox invoiceCard;
 
     private int appointmentId;
+    private int billingId;
     private Runnable onPaidCallback;
     private final BillingDAO billingDAO = new BillingDAO();
 
@@ -39,6 +40,7 @@ public class InvoiceCardPatientController {
 
     public void initializeData(Billing billing) {
         this.appointmentId = billing.getAppointmentId();
+        this.billingId = billing.getBillingId();
         invoiceNumberLabel.setText("INV-" + String.format("%05d", billing.getBillingId()));
         serviceLabel.setText(billing.getDescription() != null ? billing.getDescription() : "Service");
         dateLabel.setText(billing.getDueDate() != null ? billing.getDueDate().toLocalDate().toString() : "-");
@@ -70,7 +72,7 @@ public class InvoiceCardPatientController {
             Parent overviewRoot = loader.load();
             
             InvoiceOverviewPatientController controller = loader.getController();
-            controller.loadInvoiceData(appointmentId);
+            controller.loadInvoiceDataByBillingId(billingId);
             
             rightBoxContainer.getChildren().add(overviewRoot);
         } catch (Exception ex) {

@@ -499,7 +499,7 @@
     </routine>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-21.03:57:25</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-21.13:54:14</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1695,7 +1695,6 @@
       <Predicate>status IN (&apos;Scheduled&apos;, &apos;Completed&apos;, &apos;Cancelled&apos;, &apos;No-Show&apos;, &apos;Pending&apos;)</Predicate>
     </check>
     <column id="599" parent="557" name="appointment_id">
-      <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
@@ -1874,7 +1873,6 @@
       <ColNames>record_id</ColNames>
     </index>
     <column id="639" parent="559" name="billing_id">
-      <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>

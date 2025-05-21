@@ -48,6 +48,21 @@ public class NurseDAO {
         }
     }
 
+    public boolean createNurse(Nurse nurse) throws SQLException {
+        String sql = "INSERT INTO nurses (nurse_id, first_name, last_name, license_number, contact_number, created_at) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, nurse.getNurseId());
+            pstmt.setString(2, nurse.getFirstName());
+            pstmt.setString(3, nurse.getLastName());
+            pstmt.setString(4, nurse.getLicenseNumber());
+            pstmt.setString(5, nurse.getPhone());
+            pstmt.setDate(6, java.sql.Date.valueOf(nurse.getCreatedAt()));
+            
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+
     private Nurse mapResultSetToNurse(ResultSet rs) throws SQLException {
         return new Nurse(
             rs.getInt("nurse_id"),

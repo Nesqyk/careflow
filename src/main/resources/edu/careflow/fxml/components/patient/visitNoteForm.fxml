@@ -95,7 +95,7 @@
             </VBox>
 
             <!-- Image Upload -->
-            <VBox spacing="8.0" styleClass="details-card">
+            <VBox spacing="8.0" styleClass="details-card" visible="false">
                <children>
                   <Label styleClass="section-header" text="Image">
                      <font><Font name="☞Gilroy-SemiBold" size="14.0" /></font>

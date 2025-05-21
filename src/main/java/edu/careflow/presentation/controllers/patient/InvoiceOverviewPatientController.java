@@ -222,6 +222,93 @@ public class InvoiceOverviewPatientController {
             showError("Failed to load invoice data: " + e.getMessage());
         }
     }
+    
+    /**
+     * Loads invoice data directly by billing ID instead of appointment ID.
+     * This ensures we always get the correct invoice data when viewing different invoices.
+     * 
+     * @param billingId The ID of the billing/invoice to load
+     */
+    public void loadInvoiceDataByBillingId(int billingId) {
+        try {
+            currentBilling = billingDAO.getBillingById(billingId);
+            if (currentBilling != null) {
+                // Load the associated bill rate
+                currentBillRate = billRateDAO.getBillRateById(currentBilling.getServiceRateId());
+                
+                // Get appointment and patient information
+                Appointment appointment = null;
+                Patient patient = null;
+                
+                if (currentBilling.getAppointmentId() > 0) {
+                    appointment = appointmentDAO.getAppointmentById(currentBilling.getAppointmentId());
+                }
+                
+                if (currentBilling.getPatientId() > 0) {
+                    patient = patientDAO.getPatientById(currentBilling.getPatientId());
+                }
+                
+                // Set basic invoice information
+                invoiceIdLabel.setText("#INV-" + String.format("%05d", currentBilling.getBillingId()));
+                
+                // Set status with appropriate styling
+                String status = currentBilling.getStatus();
+                statusLabel.setText(status);
+                statusLabel.getStyleClass().removeAll("paid-status", "unpaid-status");
+                statusLabel.getStyleClass().add("PAID".equalsIgnoreCase(status) ? "paid-status" : "unpaid-status");
+
+                // Set patient information
+                if (patient != null) {
+                    patientNameLabel.setText(patient.getFirstName() + " " + patient.getLastName());
+                    patientIdLabel.setText("PT-" + String.format("%05d", patient.getPatientId()));
+                }
+
+                // Set dates
+                if (appointment != null && appointment.getAppointmentDate() != null) {
+                    issueDateLabel.setText(appointment.getAppointmentDate().format(dateFormatter));
+                } else if (currentBilling.getCreatedAt() != null) {
+                    issueDateLabel.setText(currentBilling.getCreatedAt().format(dateFormatter));
+                }
+                
+                if (currentBilling.getDueDate() != null) {
+                    dueDateLabel.setText(currentBilling.getDueDate().format(dateFormatter));
+                }
+
+                // Set payment information
+                paymentMethodLabel.setText(currentBilling.getPaymentMethod() != null ? 
+                    currentBilling.getPaymentMethod() : "Not specified");
+                paymentStatusLabel.setText(status);
+                paymentStatusLabel.getStyleClass().removeAll("paid-status", "unpaid-status");
+                paymentStatusLabel.getStyleClass().add("PAID".equalsIgnoreCase(status) ? "paid-status" : "unpaid-status");
+
+                // Calculate and set amounts
+                BigDecimal subtotal = currentBilling.getSubtotal();
+                BigDecimal tax = currentBilling.getTaxAmount();
+                BigDecimal discount = currentBilling.getDiscountAmount();
+                BigDecimal total = currentBilling.getAmount();
+
+                // Ensure amounts are not null
+                if (subtotal == null) subtotal = BigDecimal.ZERO;
+                if (tax == null) tax = BigDecimal.ZERO;
+                if (discount == null) discount = BigDecimal.ZERO;
+                if (total == null) total = BigDecimal.ZERO;
+
+                // Format and display amounts
+                subtotalLabel.setText(String.format("₱%.2f", subtotal));
+                taxLabel.setText(String.format("₱%.2f", tax));
+                totalLabel.setText(String.format("₱%.2f", total));
+
+                // Load services into table
+                servicesTable.getItems().clear();
+                servicesTable.getItems().add(currentBilling);
+            } else {
+                showError("No billing information found for this invoice.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to load invoice data: " + e.getMessage());
+        }
+    }
 
     private void handlePrint() {
         if (currentBilling == null) {

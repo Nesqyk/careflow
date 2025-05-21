@@ -363,7 +363,8 @@ public class GenerateInvoiceController {
             if (isEditMode) {
                 billingDAO.updateBilling(billing);
             } else {
-                billingDAO.addBilling(billing);
+                int newBillingId = billingDAO.addBilling(billing);
+                billing.setBillingId(newBillingId); // Update the billing ID with the newly generated one
             }
 
             // Save selected services

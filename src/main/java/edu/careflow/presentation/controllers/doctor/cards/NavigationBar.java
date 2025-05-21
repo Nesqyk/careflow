@@ -358,7 +358,7 @@ public class NavigationBar {
                                     .orElse(null);
                                 if (procedureRate != null) {
                                     totalAmount[0] = totalAmount[0].add(procedureRate.getRateAmount());
-                                    serviceDescription.append("- ").append(procedureRate.getServiceType()).append(": $")
+                                    serviceDescription.append("- ").append(procedureRate.getServiceType()).append(": ₱")
                                         .append(procedureRate.getRateAmount()).append("\n");
                                 }
                             }
@@ -371,7 +371,7 @@ public class NavigationBar {
                                     .orElse(null);
                                 if (diagnosticRate != null) {
                                     totalAmount[0] = totalAmount[0].add(diagnosticRate.getRateAmount());
-                                    serviceDescription.append("- ").append(diagnosticRate.getServiceType()).append(": $")
+                                    serviceDescription.append("- ").append(diagnosticRate.getServiceType()).append(": ₱")
                                         .append(diagnosticRate.getRateAmount()).append("\n");
                                 }
                             }
@@ -384,7 +384,7 @@ public class NavigationBar {
                                     .orElse(null);
                                 if (prescriptionRate != null) {
                                     totalAmount[0] = totalAmount[0].add(prescriptionRate.getRateAmount());
-                                    serviceDescription.append("- ").append(prescriptionRate.getServiceType()).append(": $")
+                                    serviceDescription.append("- ").append(prescriptionRate.getServiceType()).append(": ₱")
                                         .append(prescriptionRate.getRateAmount()).append("\n");
                                 }
                             }
@@ -409,7 +409,7 @@ public class NavigationBar {
                             
                             if (consultationRate != null) {
                                 totalAmount[0] = totalAmount[0].add(consultationRate.getRateAmount());
-                                serviceDescription.append("- ").append(consultationRate.getServiceType()).append(": $")
+                                serviceDescription.append("- ").append(consultationRate.getServiceType()).append(": ₱")
                                     .append(consultationRate.getRateAmount()).append("\n");
                             }
 
@@ -420,7 +420,7 @@ public class NavigationBar {
                                     .findFirst()
                                     .orElse(doctorRates.get(0));
                                 totalAmount[0] = defaultRate.getRateAmount();
-                                serviceDescription.append("- Basic Consultation: $").append(defaultRate.getRateAmount()).append("\n");
+                                serviceDescription.append("- Basic Consultation: ₱").append(defaultRate.getRateAmount()).append("\n");
                             }
 
                             // Calculate tax (8% tax rate)
@@ -430,9 +430,9 @@ public class NavigationBar {
                             BigDecimal totalWithTax = subtotal.add(taxAmount);
 
                             // Add tax information to service description
-                            serviceDescription.append("\nSubtotal: $").append(subtotal).append("\n");
-                            serviceDescription.append("Tax (8%): $").append(taxAmount).append("\n");
-                            serviceDescription.append("Total: $").append(totalWithTax).append("\n");
+                            serviceDescription.append("\nSubtotal: ₱").append(subtotal).append("\n");
+                            serviceDescription.append("Tax (8%): ₱").append(taxAmount).append("\n");
+                            serviceDescription.append("Total: ₱").append(totalWithTax).append("\n");
 
                             // Show bill overview
                             FXMLLoader billLoader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/doctor/billOverview.fxml"));
@@ -454,7 +454,10 @@ public class NavigationBar {
                                         
                                         // Save billing record
                                         BillingDAO billingDAO = new BillingDAO();
-                                        billingDAO.addBilling(billing);
+                                        int newBillingId = billingDAO.addBilling(billing);
+                                        
+                                        // Set the billing ID in the controller for future updates
+                                        billController.setBillingId(newBillingId);
 
                                         // Update appointment status
                                         currentAppointment.setStatus("Completed");
@@ -601,7 +604,15 @@ public class NavigationBar {
             }
         }
 
-        billingDAO.addBilling(billing);
+        int newBillingId = billingDAO.addBilling(billing);
+        billing.setBillingId(newBillingId); // Update the billing ID with the newly generated one
+
+        // Update appointment status
+        currentAppointment.setStatus("Completed");
+        appointmentDAO.updateAppointment(currentAppointment);
+
+        showAlert("Success", "Visit ended and bill generated successfully.", Alert.AlertType.INFORMATION);
+        closeForm();
     }
 
     private boolean hasVitalsRecord(int patientId) {

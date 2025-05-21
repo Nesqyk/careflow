@@ -9,11 +9,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDAO {
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
+    public int generateUniqueAppointmentId() throws SQLException {
+        int appointmentId;
+        boolean isUnique = false;
+
+        do {
+            // Generate a random 5-digit number (10000 to 99999)
+            appointmentId = 10000 + (int)(Math.random() * 90000);
+
+            // Check if the ID already exists
+            String sql = "SELECT COUNT(*) FROM appointments WHERE appointment_id = ?";
+            try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+                pstmt.setInt(1, appointmentId);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        isUnique = rs.getInt(1) == 0;
+                    }
+                }
+            }
+        } while (!isUnique);
+
+        return appointmentId;
+    }
+
 
     /**
      * Add a new appointment
@@ -22,7 +50,7 @@ public class AppointmentDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean addAppointment(Appointment appointment) throws SQLException {
-        String sql = "INSERT INTO appointments (patient_id, doctor_id, nurse_id, appointment_date, status, notes, created_at, room, symptoms, diagnosis, service_type, appointment_type, meeting_link, booked_by, preferred_contact, booking_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointments (patient_id, doctor_id, nurse_id, appointment_date, status, notes, created_at, room, symptoms, diagnosis, service_type, appointment_type, meeting_link, booked_by, preferred_contact, booking_time, appointment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, appointment.getPatientId());
             pstmt.setInt(2, appointment.getDoctorId());
@@ -40,6 +68,7 @@ public class AppointmentDAO {
             pstmt.setString(14, appointment.getBookedBy());
             pstmt.setString(15, appointment.getPreferredContact());
             pstmt.setTimestamp(16, DateTimeUtil.toTimestamp(appointment.getBookingTime()));
+            pstmt.setInt(17,appointment.getAppointmentId());
 
             return pstmt.executeUpdate() > 0;
         }

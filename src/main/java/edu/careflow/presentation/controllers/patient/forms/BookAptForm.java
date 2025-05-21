@@ -42,10 +42,6 @@ public class BookAptForm {
     @FXML private ToggleGroup bookTypeRadio;
     @FXML private ScrollPane scrollPaneBook;
     @FXML private ToggleGroup prefferedContactRadio;
-//    @FXML private RadioButton inPersonRadio;
-//    @FXML private RadioButton onlineRadio;
-//    @FXML private ComboBox<String> preferredContactCombo;
-//    @FXML private TextField meetingLinkField;
 
     private AppointmentDAO appointmentDAO;
     private DoctorDAO doctorDAO;
@@ -63,7 +59,6 @@ public class BookAptForm {
         setupComboBoxes();
         setupButtons();
         setupListeners();
-        setupAppointmentTypeRadios();
     }
 
     private void setupDatePicker() {
@@ -100,7 +95,6 @@ public class BookAptForm {
     private void setupButtons() {
         bookBtn.setOnAction(e -> handleBooking());
         cancelBtn.setOnAction(e -> handleCancel());
-        cancelBtn.setOnAction(e -> handleClose());
         closeBtn.setOnAction(e -> handleClose());
     }
 
@@ -171,9 +165,8 @@ public class BookAptForm {
         }
 
         if (hasError) {
-            // add label here
-
             showError("Please fill all required fields");
+            return;
         }
 
         try {
@@ -183,20 +176,28 @@ public class BookAptForm {
             );
 
             RadioButton selectedType = (RadioButton) bookTypeRadio.getSelectedToggle();
+            if (selectedType == null) {
+                showError("Please select an appointment type (In-Person or Online)");
+                return;
+            }
+            
             String appointmentType = selectedType.getText();
-
             String meetingLink = "";
+
+            // Generate meeting link only for online appointments
             if ("Online".equalsIgnoreCase(appointmentType)) {
                 try {
                     meetingLink = patientDAO.generateUniqueJitsiMeetingLink();
                 } catch (Exception e) {
                     e.printStackTrace();
                     showError("Failed to generate meeting link");
+                    return;
                 }
             }
 
+            int generatedId = appointmentDAO.generateUniqueAppointmentId();
             Appointment appointment = new Appointment(
-                    0,
+                    generatedId,
                     currentPatientId,
                     doctorCombo.getValue().getDoctorId(),
                     0,
@@ -204,19 +205,17 @@ public class BookAptForm {
                     "Pending",
                     noteField.getText(),
                     LocalDateTime.now(),
-                    meetingLink,
+                    "",
                     "",
                     "",
                     typeServiceCombo.getValue(),
                     appointmentType,
-                    "",
+                    meetingLink,
                     "Patient",
                     ((RadioButton) prefferedContactRadio.getSelectedToggle()).getText(),
                     LocalDateTime.now()
             );
-            /**
-             *
-             */
+
             boolean success = appointmentDAO.addAppointment(appointment);
             if (success) {
                 // Load and show booking confirmation
@@ -239,7 +238,9 @@ public class BookAptForm {
                     appointmentTimeLabel.setText(pickTimeCombo.getValue());
                     serviceTypeLabel.setText(typeServiceCombo.getValue());
                     appointmentNoteLabel.setText(noteField.getText());
-                    if (meetingLinkLabel != null && !meetingLink.isEmpty()) {
+                    
+                    // Show meeting link only for online appointments
+                    if (meetingLinkLabel != null && "Online".equalsIgnoreCase(appointmentType) && !meetingLink.isEmpty()) {
                         meetingLinkLabel.setText("Meeting Link: " + meetingLink);
                         meetingLinkLabel.setVisible(true);
                     } else if (meetingLinkLabel != null) {
@@ -247,7 +248,6 @@ public class BookAptForm {
                     }
 
                     // Find stackPaneContainer from scene root and add confirmation
-
                     Scene scene = scrollPaneBook.getScene();
                     if (scene != null) {
                         StackPane container = (StackPane) scene.lookup("#stackPaneContainer");
@@ -285,22 +285,8 @@ public class BookAptForm {
         }
     }
 
-    private boolean validateForm() {
-        if (doctorCombo.getValue() == null ||
-                pickDate.getValue() == null ||
-                pickTimeCombo.getValue() == null ||
-                typeServiceCombo.getValue() == null ||
-                noteField.getText().trim().isEmpty()) {
-
-            showError("Please fill all required fields");
-            return false;
-        }
-        return true;
-    }
-
     private void handleCancel() {
         // Reset form fields except date picker
-
         doctorCombo.setValue(null);
         pickTimeCombo.setValue(null);
         typeServiceCombo.setValue(null);
@@ -326,7 +312,6 @@ public class BookAptForm {
         fadeOut.play();
     }
 
-
     private void showError(String message) {
         new Alert(Alert.AlertType.ERROR, message).show();
     }
@@ -337,25 +322,5 @@ public class BookAptForm {
 
     public void setPatientId(int patientId) {
         this.currentPatientId = patientId;
-    }
-
-//    private void setupPreferredContact() {
-//        preferredContactCombo.getItems().addAll(
-//            "Email",
-//            "Phone",
-//            "SMS"
-//        );
-//    }
-
-    private void setupAppointmentTypeRadios() {
-//        inPersonRadio.setToggleGroup(bookTypeRadio);
-//        onlineRadio.setToggleGroup(bookTypeRadio);
-//        inPersonRadio.setSelected(true);
-//
-//        // Show/hide meeting link field based on appointment type
-//        meetingLinkField.setVisible(false);
-//        bookTypeRadio.selectedToggleProperty().addListener((obs, old, newVal) -> {
-//            meetingLinkField.setVisible(onlineRadio.isSelected());
-//        });
     }
 }

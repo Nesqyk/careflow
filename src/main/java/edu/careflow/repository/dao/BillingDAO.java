@@ -42,28 +42,34 @@ public class BillingDAO {
         }
     }
 
-    public void addBilling(Billing billing) throws SQLException {
-        String sql = "INSERT INTO billing (patient_id, doctor_id, service_rate_id, amount, status, due_date, paid_date, description, created_at, updated_at, appointment_id, billing_date, payment_method, reference_number, tax_amount, discount_amount, subtotal) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?)";
+    public int addBilling(Billing billing) throws SQLException {
+        String sql = "INSERT INTO billing (billing_id, patient_id, doctor_id, service_rate_id, amount, status, due_date, paid_date, description, created_at, updated_at, appointment_id, billing_date, payment_method, reference_number, tax_amount, discount_amount, subtotal) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?, ?, ?, ?, ?, ?, ?)";
+
+        // Generate unique billing ID
+        billing.setBillingId(generateUniqueBillingId());
 
         try (Connection conn = dbManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, billing.getPatientId());
-            pstmt.setInt(2, billing.getDoctorId());
-            pstmt.setInt(3, billing.getServiceRateId());
-            pstmt.setBigDecimal(4, billing.getAmount());
-            pstmt.setString(5, billing.getStatus());
-            pstmt.setTimestamp(6, DateTimeUtil.toTimestamp(billing.getDueDate()));
-            pstmt.setTimestamp(7, DateTimeUtil.toTimestamp(billing.getPaidDate()));
-            pstmt.setString(8, billing.getDescription());
-            pstmt.setObject(9, billing.getAppointmentId());
-            pstmt.setTimestamp(10, DateTimeUtil.toTimestamp(billing.getBillingDate()));
-            pstmt.setString(11, billing.getPaymentMethod());
-            pstmt.setString(12, billing.getReferenceNumber());
-            pstmt.setBigDecimal(13, billing.getTaxAmount());
-            pstmt.setBigDecimal(14, billing.getDiscountAmount());
-            pstmt.setBigDecimal(15, billing.getSubtotal());
+            pstmt.setInt(1, billing.getBillingId());
+            pstmt.setInt(2, billing.getPatientId());
+            pstmt.setInt(3, billing.getDoctorId());
+            pstmt.setInt(4, billing.getServiceRateId());
+            pstmt.setBigDecimal(5, billing.getAmount());
+            pstmt.setString(6, billing.getStatus());
+            pstmt.setTimestamp(7, DateTimeUtil.toTimestamp(billing.getDueDate()));
+            pstmt.setTimestamp(8, DateTimeUtil.toTimestamp(billing.getPaidDate()));
+            pstmt.setString(9, billing.getDescription());
+            pstmt.setInt(10, billing.getAppointmentId() != null ? billing.getAppointmentId() : 0);
+            pstmt.setTimestamp(11, DateTimeUtil.toTimestamp(billing.getBillingDate()));
+            pstmt.setString(12, billing.getPaymentMethod());
+            pstmt.setString(13, billing.getReferenceNumber());
+            pstmt.setBigDecimal(14, billing.getTaxAmount());
+            pstmt.setBigDecimal(15, billing.getDiscountAmount());
+            pstmt.setBigDecimal(16, billing.getSubtotal());
+            
             pstmt.executeUpdate();
+            return billing.getBillingId();
         }
     }
 

@@ -118,7 +118,8 @@ public class PaymentFormController {
                 }
                 
                 // Add the new billing record
-                billingDAO.addBilling(billing);
+                int newBillingId = billingDAO.addBilling(billing);
+                this.billingId = newBillingId; // Update the billing ID with the newly generated one
             }
             
             this.patientId = billing != null ? billing.getPatientId() : null;

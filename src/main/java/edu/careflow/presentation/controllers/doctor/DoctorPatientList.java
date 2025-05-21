@@ -10,10 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +136,60 @@ public class DoctorPatientList {
 
     @FXML
     private void handleDownload() {
-        // TODO: Implement download functionality
+        if (allPatients.isEmpty()) {
+            showAlert("No Data", "There are no patients to download.", javafx.scene.control.Alert.AlertType.INFORMATION);
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Patient List");
+        fileChooser.setInitialFileName("patient_list_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        Stage stage = (Stage) downloadBtn.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                // Write CSV header
+                writer.write("Patient ID,First Name,Last Name,Email,Contact Number,Date of Birth,Gender,Address\n");
+
+                // Write patient data
+                for (Patient patient : allPatients) {
+                    writer.write(String.format("%d,%s,%s,%s,%s,%s,%s,%s\n",
+                        patient.getPatientId(),
+                        escapeCsvField(patient.getFirstName()),
+                        escapeCsvField(patient.getLastName()),
+                        escapeCsvField(patient.getEmail()),
+                        escapeCsvField(patient.getContact()),
+                        escapeCsvField(patient.getDateOfBirth().toString()),
+                        escapeCsvField(patient.getGender()),
+                        escapeCsvField(patient.getAddress())
+                    ));
+                }
+
+                showAlert("Success", "Patient list has been downloaded successfully.", javafx.scene.control.Alert.AlertType.INFORMATION);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to download patient list: " + e.getMessage(), javafx.scene.control.Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    private String escapeCsvField(String field) {
+        if (field == null) return "";
+        if (field.contains(",") || field.contains("\"") || field.contains("\n")) {
+            return "\"" + field.replace("\"", "\"\"") + "\"";
+        }
+        return field;
+    }
+
+    private void showAlert(String title, String content, javafx.scene.control.Alert.AlertType type) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
 

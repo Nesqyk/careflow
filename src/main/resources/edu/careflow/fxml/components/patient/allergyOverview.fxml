@@ -40,7 +40,7 @@
                         </HBox>
                     </VBox>
                     <Region HBox.hgrow="ALWAYS" />
-                    <Button fx:id="editButton" styleClass="action-button" text="Edit">
+                    <Button fx:id="editButton" styleClass="action-button" text="Edit" visible="false">
                         <graphic>
                             <FontIcon iconLiteral="fas-edit" iconSize="14" />
                         </graphic>

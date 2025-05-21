@@ -272,7 +272,18 @@ public class AppointmentForm {
             appointment.setStatus(statusComboBox.getValue());
 
             // Contact Information
-            appointment.setMeetingLink(meetingLinkField.getText());
+            // Generate meeting link only for online appointments
+            if ("Online".equalsIgnoreCase(appointmentTypeComboBox.getValue())) {
+                try {
+                    String meetingLink = patientDAO.generateUniqueJitsiMeetingLink();
+                    appointment.setMeetingLink(meetingLink);
+                } catch (Exception e) {
+                    showError("Error", "Failed to generate meeting link");
+                    return;
+                }
+            } else {
+                appointment.setMeetingLink("");
+            }
             appointment.setPreferredContact(preferredContactField.getText());
             appointment.setBookedBy(bookedByField.getText());
             appointment.setNurseId(nurseComboBox.getValue() != null ? nurseComboBox.getValue().getNurseId() : 0);

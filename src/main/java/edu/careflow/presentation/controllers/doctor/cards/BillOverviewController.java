@@ -1,6 +1,7 @@
 package edu.careflow.presentation.controllers.doctor.cards;
 
 import edu.careflow.repository.dao.PatientDAO;
+import edu.careflow.repository.dao.BillingDAO;
 import edu.careflow.repository.entities.Appointment;
 import edu.careflow.repository.entities.BillRate;
 import edu.careflow.repository.entities.Billing;
@@ -53,6 +54,8 @@ public class BillOverviewController {
     private Consumer<Billing> onConfirmCallback;
     private Runnable onCancelCallback;
     private PatientDAO patientDAO;
+    private BillingDAO billingDAO;
+    private int billingId; // Track the billing ID
 
     @FXML
     public void initialize() {
@@ -60,6 +63,7 @@ public class BillOverviewController {
         cancelButton.setOnAction(e -> handleCancel());
         confirmButton.setOnAction(e -> handleConfirm());
         patientDAO = new PatientDAO();
+        billingDAO = new BillingDAO();
     }
 
     public void setData(Appointment appointment, List<BillRate> doctorRates, BigDecimal totalAmount, 
@@ -107,6 +111,39 @@ public class BillOverviewController {
                 servicesContainer.getChildren().add(serviceBox);
             }
         }
+    }
+    
+    /**
+     * Updates the view with the latest billing data.
+     * This ensures the view always shows the most up-to-date information.
+     */
+    public void refreshData() {
+        if (billingId > 0) {
+            try {
+                Billing latestBilling = billingDAO.getBillingById(billingId);
+                if (latestBilling != null) {
+                    // Update the view with the latest data
+                    totalAmountLabel.setText("$" + latestBilling.getAmount().toString());
+                    
+                    // Update other fields as needed
+                    if (latestBilling.getDueDate() != null) {
+                        dueDateLabel.setText(latestBilling.getDueDate().toLocalDate().toString());
+                    }
+                    
+                    // You can add more updates here as needed
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Sets the billing ID for this overview.
+     * This allows the controller to track which billing is being displayed.
+     */
+    public void setBillingId(int billingId) {
+        this.billingId = billingId;
     }
 
     private HBox createServiceBox(String serviceText) {

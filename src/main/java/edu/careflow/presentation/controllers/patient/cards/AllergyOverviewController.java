@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.geometry.Insets;
 
 public class AllergyOverviewController {
     @FXML private Label allergenNameLabel;
@@ -42,6 +43,10 @@ public class AllergyOverviewController {
                 onCloseCallback.run();
             }
         });
+
+        // Set up reactions container styling
+        reactionsContainer.setSpacing(8);
+        reactionsContainer.setPadding(new Insets(10));
     }
 
     public void loadAllergyData(Allergy allergy) {
@@ -54,22 +59,40 @@ public class AllergyOverviewController {
         
         // Clear and populate reactions
         reactionsContainer.getChildren().clear();
+        
         if (allergy.getReactions() != null && !allergy.getReactions().isEmpty()) {
+            // Add a header label
+            Label reactionsHeader = new Label("Reactions:");
+            reactionsHeader.setFont(Font.font("Gilroy-Bold", 14));
+            reactionsHeader.setStyle("-fx-text-fill: #333333;");
+            reactionsContainer.getChildren().add(reactionsHeader);
+
+            // Add each reaction with bullet point
             for (String reaction : allergy.getReactions()) {
+                VBox reactionBox = new VBox();
+                reactionBox.setSpacing(4);
+                
                 Label reactionLabel = new Label("• " + reaction);
-                reactionLabel.setFont(Font.font("☞Gilroy-Regular", 14));
+                reactionLabel.setFont(Font.font("Gilroy-Regular", 14));
                 reactionLabel.setWrapText(true);
-                reactionsContainer.getChildren().add(reactionLabel);
+                reactionLabel.setStyle("-fx-text-fill: #4A4A4A;");
+                
+                reactionBox.getChildren().add(reactionLabel);
+                reactionsContainer.getChildren().add(reactionBox);
             }
         } else {
             Label noReactionsLabel = new Label("No reactions recorded");
-            noReactionsLabel.setFont(Font.font("☞Gilroy-Regular", 14));
-            noReactionsLabel.setTextFill(javafx.scene.paint.Color.valueOf("#828282"));
+            noReactionsLabel.setFont(Font.font("Gilroy-Regular", 14));
+            noReactionsLabel.setStyle("-fx-text-fill: #828282;");
             reactionsContainer.getChildren().add(noReactionsLabel);
         }
 
-        // TODO: Add recorded date and doctor information when available in the Allergy entity
-        recordedDateLabel.setText("Not available");
+        // Set recorded date and doctor information
+        if (allergy.getAppointmentId() > 0) {
+            recordedDateLabel.setText("Recorded during appointment #" + allergy.getAppointmentId());
+        } else {
+            recordedDateLabel.setText("Not available");
+        }
         recordedByLabel.setText("Not available");
     }
 }

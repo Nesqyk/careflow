@@ -13,6 +13,10 @@ module edu.careflow {
 //    exports edu.careflow.application;
 //    exports edu.careflow.application.config;
 //    exports edu.careflow.presentation;
+
+
+    exports  edu.careflow.presentation.controllers.admin;
+    opens edu.careflow.presentation.controllers.admin;
     opens edu.careflow.presentation.controllers.receptionist;
     exports edu.careflow.presentation.controllers.receptionist;
     exports edu.careflow.presentation.controllers.nurse;
@@ -51,6 +55,9 @@ module edu.careflow {
 
     // Opens packages to allow reflective access for JavaFX
     exports edu.careflow.presentation.controllers.components.table to javafx.fxml;
+    exports  edu.careflow.presentation.controllers.components.user to javafx.fxml;
+
+    opens edu.careflow.presentation.controllers.components.user to javafx.fxml;
 
     opens edu.careflow.presentation.controllers.nurse;
     opens edu.careflow.presentation.controllers.components.table;

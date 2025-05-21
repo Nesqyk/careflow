@@ -4,7 +4,6 @@ import java.sql.Time;
 
 public class User {
 
-    private int id;
     private int user_id; //
     private String password;
     private String username; // 这里存储的是 username
@@ -35,8 +34,24 @@ public class User {
         this.password = password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public int getId() {
-        return id;
+        return user_id;
     }
 
     public int getUser_id() {
@@ -80,7 +95,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "user_id=" + user_id +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' + // 这里返回的是 username
                 ", roleId=" + roleId +

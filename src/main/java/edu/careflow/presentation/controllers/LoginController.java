@@ -177,6 +177,29 @@ public class LoginController  {
                             handleNavigationError(e, "Receptionist Dashboard");
                         }
                         break;
+                    case 3: // Admin role
+                        try {
+                            Stage stage = (Stage) usernameTextInput.getScene().getWindow();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/admin/containerAdminNew.fxml"));
+                            Parent adminRoot = loader.load();
+                            Scene adminScene = new Scene(adminRoot, stage.getScene().getWidth(), stage.getScene().getHeight());
+
+                            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), adminRoot);
+                            fadeIn.setFromValue(0.2);
+                            fadeIn.setToValue(1.0);
+
+                            // Optionally, get the controller if needed
+                            // Object controller = loader.getController();
+
+                            stage.setScene(adminScene);
+                            stage.setTitle("CareFlow | Admin Dashboard");
+                            stage.centerOnScreen();
+
+                            fadeIn.play();
+                        } catch(IOException e) {
+                            handleNavigationError(e, "Admin Dashboard");
+                        }
+                        break;
                 }
 
             } catch (Exception e) {

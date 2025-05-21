@@ -134,7 +134,7 @@
                               <Insets bottom="10.0" top="8.0" />
                            </VBox.margin>
                         </VBox>
-                        <Hyperlink text="Forgot Password?" textFill="#0762f2">
+                        <Hyperlink text="Forgot Password?" textFill="#0762f2" visible="false">
                            <font>
                               <Font name="☞Gilroy-Regular" size="16.0" />
                            </font>

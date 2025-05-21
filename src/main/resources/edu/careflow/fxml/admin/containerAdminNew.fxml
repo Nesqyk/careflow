@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,7 +16,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<StackPane fx:id="stackPaneContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stackPaneContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.admin.ContainerAdminController">
    <children>
       <BorderPane fx:id="mainHomeLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: E1E8F4;" stylesheets="@../../css/styles.css">
          <left>
@@ -35,7 +34,7 @@
                         <Region prefHeight="59.0" prefWidth="118.0" />
                         <VBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="245.0" spacing="4.0">
                            <children>
-                              <Label fx:id="receptionistName" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="0.0" prefWidth="133.0" text="Receptionist Name">
+                              <Label fx:id="adminName" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="0.0" prefWidth="133.0" text="Admin Name">
                                  <font>
                                     <Font name="☞Gilroy-SemiBold" size="12.0" />
                                  </font>
@@ -58,7 +57,7 @@
                         <StackedFontIcon prefWidth="187.0" />
                         <VBox prefHeight="538.0" prefWidth="187.0" style="-fx-border-color: #828282; -fx-border-width: 0 0 0.2 0;">
                            <children>
-                              <Button fx:id="dashboardBtnReceptionist" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Dashboard">
+                              <Button fx:id="dashboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" text="Dashboard">
                                  <font>
                                     <Font name="Poppins Regular" size="16.0" />
                                  </font>
@@ -70,7 +69,7 @@
                                     </FontIcon>
                                  </graphic>
                               </Button>
-                              <Button fx:id="patientListReceptionist" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Users">
+                              <Button fx:id="usersListBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" stylesheets="@../../css/styles.css" text="Users">
                                  <font>
                                     <Font name="Poppins Regular" size="16.0" />
                                  </font>
@@ -96,7 +95,7 @@
                                  </graphic>
                               </Button>
                               <Region prefHeight="32.0" prefWidth="200.0" />
-                              <Button fx:id="addPatientBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="10.0" prefWidth="187.0" styleClass="cta-button" text="Add User" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="addUserBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="10.0" prefWidth="187.0" styleClass="cta-button" text="Add User" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font name="☞Gilroy-Regular" size="1.0" />
                                  </font>
@@ -132,22 +131,6 @@
          <center>
             <VBox fx:id="patientCardsProperties" prefHeight="768.0" prefWidth="749.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefWidth="100.0" spacing="8.0" style="-fx-background-color: FBFBFE;">
-                     <children>
-                        <TextField fx:id="patientSearchField" minHeight="-Infinity" prefHeight="42.0" prefWidth="586.0" promptText="Search patient name" style="-fx-border-radius: 16px;">
-                           <padding>
-                              <Insets left="18.0" />
-                           </padding>
-                           <font>
-                              <Font name="☞Gilroy-Regular" size="12.0" />
-                           </font>
-                        </TextField>
-                        <VBox fx:id="patientViewCardsContainer" style="-fx-background-color: FBFBFE;" />
-                     </children>
-                     <padding>
-                        <Insets left="32.0" right="32.0" top="64.0" />
-                     </padding>
-                  </VBox>
                   <ScrollPane fx:id="pageContainer" fitToWidth="true" hbarPolicy="NEVER" prefHeight="931.0" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="mainContainer" prefWidth="771.0" />

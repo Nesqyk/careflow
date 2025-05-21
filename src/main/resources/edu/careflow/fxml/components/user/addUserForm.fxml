@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<ScrollPane hbarPolicy="NEVER" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.AddUserForm">
+<ScrollPane fx:id="scrollPaneContainer" hbarPolicy="NEVER" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.forms.AddUserForm">
    <content>
       <VBox prefWidth="480.0" spacing="24.0" style="-fx-background-color: white;">
          <padding>
@@ -136,7 +137,7 @@
                               <Font name="Poppins Regular" size="12.0" />
                            </font></Label>
                         <VBox spacing="8.0">
-                           <RadioButton mnemonicParsing="false" text="Doctor">
+                           <RadioButton fx:id="doctorRadio" mnemonicParsing="false" text="Doctor">
                               <toggleGroup>
                                  <ToggleGroup fx:id="roleRadio" />
                               </toggleGroup>
@@ -144,8 +145,8 @@
                                  <Font name="Poppins Regular" size="12.0" />
                               </font>
                            </RadioButton>
-                           <RadioButton mnemonicParsing="false" text="Nurse" toggleGroup="$roleRadio" />
-                           <RadioButton mnemonicParsing="false" text="Admin / Receptionist" toggleGroup="$roleRadio" />
+                           <RadioButton fx:id="nurseRadio" mnemonicParsing="false" text="Nurse" toggleGroup="$roleRadio" />
+                           <RadioButton fx:id="adminReceptionistRadio" mnemonicParsing="false" text="Admin / Receptionist" toggleGroup="$roleRadio" />
                         </VBox>
                      </VBox>
 
@@ -154,7 +155,59 @@
                            <font>
                               <Font name="Poppins Regular" size="12.0" />
                            </font></Label>
-                        <VBox fx:id="roleDetailsContainer" />
+                        <VBox fx:id="roleDetailsContainer" spacing="16.0">
+                           <VBox fx:id="doctorDetails" spacing="8.0" visible="false">
+                              <Label text="Specialization">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="specializationComboBox" promptText="Select specialization" />
+                              
+                              <Label text="License Number">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox spacing="12.0">
+                                 <TextField fx:id="yrLicensureField" prefWidth="50.0" promptText="xx" />
+                                 <TextField fx:id="uniqueIdField" prefWidth="215.0" promptText="xxxxxx" />
+                              </HBox>
+                              
+                              <Label text="Contact Number">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="contactField" promptText="63 9XX XXX XXXX" />
+                           </VBox>
+                           
+                           <VBox fx:id="nurseDetails" spacing="8.0" visible="false">
+                              <Label text="License Number">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox spacing="12.0">
+                                 <TextField fx:id="yrLicensureField" prefWidth="50.0" promptText="xx" />
+                                 <TextField fx:id="uniqueIdField" prefWidth="215.0" promptText="xxxxxx" />
+                              </HBox>
+                              
+                              <Label text="Department">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nurseDepartmentField" promptText="Enter department" />
+                              
+                              <Label text="Contact Number">
+                                 <font>
+                                    <Font name="Poppins Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="contactField" promptText="63 9XX XXX XXXX" />
+                           </VBox>
+                        </VBox>
                      </VBox>
                   </VBox>
                </children>

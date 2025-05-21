@@ -2,6 +2,7 @@ package edu.careflow.repository.dao;
 
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Attachment;
+import edu.careflow.utils.DateTimeUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,7 +163,7 @@ public class AttachmentDAO {
                 rs.getInt("record_id")
         );
         attachment.setAttachmentId(rs.getInt("attachment_id"));
-        attachment.setUploadDate(rs.getTimestamp("upload_date").toLocalDateTime());
+        attachment.setUploadDate(DateTimeUtil.fromTimestamp(rs.getTimestamp("upload_date")));
         return attachment;
     }
 }

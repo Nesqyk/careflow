@@ -56,6 +56,9 @@ public class VitalsBioForm {
     private int currentPatientId;
     private final VitalsDAO vitalsDAO = new VitalsDAO();
 
+    private int nursedId;
+    private int appointmentId;
+
     @FXML
     private void initialize() {
         // Add listeners for weight and height to calculate BMI
@@ -98,16 +101,24 @@ public class VitalsBioForm {
         }
     }
 
+    public void setIds(int patientId, int nurseId, int appointmentId) {
+        this.currentPatientId = patientId;
+        this.nursedId = nurseId;
+        this.appointmentId = appointmentId;
+    }
+
+    public int getNurseId() {
+        return this.nursedId;
+    }
+
     private void handleSave() {
         try {
-
             int vitalId = vitalsDAO.generateUniqueVitalsId();
 
-            // TODO : add random id generator
             Vitals vitals = new Vitals(
                     currentPatientId,
                     vitalId,
-                    1,
+                    getNurseId() == 0 ? 1 : getNurseId(), // Default to 1 if nurseId is not set
                     formatBloodPressure(),
                     parseIntegerField(heartRateField),
                     0,
@@ -115,8 +126,9 @@ public class VitalsBioForm {
                     parseDoubleField(heightField),
                     parseDoubleField(temperatureField),
                     parseDoubleField(oxygenField),
-                    LocalDateTime.now(),
-                    null
+                    LocalDateTime.now(), // Using DateTimeUtil for consistent timezone
+                    null,
+                    appointmentId
             );
 
             boolean success = vitalsDAO.addVitals(vitals);

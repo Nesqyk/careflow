@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Main Application Guide
+
+The [Careflow.java](mdc:src/main/java/edu/careflow/Careflow.java) is the main application class that serves as the entry point for the Careflow application. Here are the key aspects:
+
+## Application Structure
+- Extends JavaFX `Application` class for GUI functionality
+- Uses FXML for UI layout and styling
+- Implements a login-based authentication system
+
+## Key Components
+- Database initialization through `DatabaseManager`
+- Data Access Objects (DAOs) for:
+  - Appointments
+  - Patients
+  - Users
+  - Doctors
+
+## UI Components
+- Main window size: 1024x768
+- Uses custom CSS styling from `css/styles.css`
+- Custom application icon from `images/logo/desktopIcon.png`
+
+## Database Integration
+- Database connection is initialized in the `main` method
+- Uses `DatabaseManager` singleton pattern for database operations
+
+## Authentication Flow
+1. Application starts with login page
+2. Checks for existing user session
+3. Redirects to dashboard if authenticated
+

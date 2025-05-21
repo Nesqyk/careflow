@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="patientCardContainer" style="-fx-background-color: white; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.nurse.NursePatientCardController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="74.0" spacing="16.0">
+         <children>
+            <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
+               <children>
+                  <Label fx:id="patientIdLabel" text="ID: 0000" textFill="#0762F2">
+                     <font>
+                        <Font name="☞Gilroy-Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </VBox>
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="patientNameLabel" alignment="TOP_LEFT" text="Patient Name">
+                     <font>
+                        <Font name="☞Gilroy-Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <FontIcon iconLiteral="fas-heartbeat" iconSize="12" />
+                        <Label fx:id="statusLabel" text="Scheduled" textFill="#757575">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane HBox.hgrow="ALWAYS" />
+            <MenuButton fx:id="actionsMenuBtn" prefHeight="26.0" prefWidth="6.0" styleClass="nav-button" stylesheets="@../../css/styles.css">
+               <items>
+                  <MenuItem fx:id="addVitalsMenuItem" text="Add Vitals">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-plus-circle" iconSize="14" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="vitalsHistoryMenuItem" text="Vitals History">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-history" iconSize="14" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="downloadVitalsMenuItem" text="Download Vitals">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-file-excel" iconSize="14" />
+                     </graphic>
+                  </MenuItem>
+               </items>
+            </MenuButton>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>

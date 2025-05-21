@@ -1,0 +1,184 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# FXML Resources Guide
+
+## Directory Structure
+```
+src/main/resources/edu/careflow/fxml/
+├── components/           # Reusable UI components
+│   ├── receptionist/    # Receptionist-specific components
+│   │   ├── appointmentCardReceptionist.fxml
+│   │   └── invoiceCard.fxml
+│   ├── doctor/         # Doctor-specific components
+│   ├── nurse/          # Nurse-specific components
+│   └── patient/        # Patient-specific components
+├── admin/              # Administrator interface
+├── doctor/             # Doctor interface
+├── nurse/              # Nurse interface
+├── patient/            # Patient interface
+├── receptionist/       # Receptionist interface
+├── forms/              # Common form templates
+├── chart/              # Chart and visualization components
+└── user/               # User-related components
+```
+
+## Main Pages
+- `loginPageNew.fxml` - Main login page with modern UI
+- `patientLoginPage.fxml` - Patient-specific login interface
+- `registerPage.fxml` - User registration form
+- `dashboardPage.fxml` - Main dashboard with role-based views
+- `loadingState.fxml` - Loading screen with animations
+
+## Role-Specific Views
+
+### Receptionist Views
+- `receptionist/appointments.fxml` - Appointment management
+- `receptionist/patients.fxml` - Patient records
+- `receptionist/billing.fxml` - Billing and invoicing
+- `receptionist/schedule.fxml` - Schedule management
+
+### Doctor Views
+- `doctor/consultations.fxml` - Patient consultations
+- `doctor/prescriptions.fxml` - Prescription management
+- `doctor/medical-records.fxml` - Medical records
+- `doctor/schedule.fxml` - Doctor's schedule
+
+### Nurse Views
+- `nurse/patient-care.fxml` - Patient care management
+- `nurse/vitals.fxml` - Vital signs monitoring
+- `nurse/medications.fxml` - Medication administration
+- `nurse/schedule.fxml` - Nurse's schedule
+
+### Patient Views
+- `patient/appointments.fxml` - Appointment booking
+- `patient/medical-history.fxml` - Medical history
+- `patient/prescriptions.fxml` - Prescription records
+- `patient/billing.fxml` - Billing and payments
+
+## Common Components
+
+### Card Components
+- `components/receptionist/appointmentCardReceptionist.fxml`
+  - Modern appointment card with status indicators
+  - MenuButton for actions (edit, download)
+  - Color-coded status labels
+  - Patient and time information
+
+- `components/receptionist/invoiceCard.fxml`
+  - Invoice display with payment status
+  - Amount and date information
+  - Action buttons for payment processing
+
+### Form Components
+- `forms/patient-form.fxml` - Patient registration/editing
+- `forms/appointment-form.fxml` - Appointment scheduling
+- `forms/prescription-form.fxml` - Prescription creation
+- `forms/billing-form.fxml` - Invoice generation
+
+### Chart Components
+- `chart/vitals-chart.fxml` - Vital signs visualization
+- `chart/appointment-chart.fxml` - Appointment statistics
+- `chart/revenue-chart.fxml` - Financial analytics
+
+## Related Resources
+
+### CSS Styles
+Location: `src/main/resources/edu/careflow/css/`
+- `styles.css` - Main stylesheet with:
+  - Card styles (appointment, invoice)
+  - Button styles (primary, secondary, icon)
+  - Form element styles
+  - Status indicators
+  - Navigation styles
+
+### Images
+Location: `src/main/resources/edu/careflow/images/`
+- Icons and logos
+- Background images
+- UI elements
+
+### Fonts
+Location: `src/main/resources/edu/careflow/fonts/`
+- Gilroy font family
+  - Gilroy-Regular
+  - Gilroy-SemiBold
+  - Gilroy-Bold
+
+## Component Usage Guidelines
+
+### Card Components
+1. Appointment Card
+   ```xml
+   <fx:include source="components/receptionist/appointmentCardReceptionist.fxml"/>
+   ```
+   - Use for displaying appointment information
+   - Supports status indicators (confirmed, pending, cancelled)
+   - Includes action menu for edit and download
+
+2. Invoice Card
+   ```xml
+   <fx:include source="components/receptionist/invoiceCard.fxml"/>
+   ```
+   - Use for displaying invoice information
+   - Shows payment status and amount
+   - Includes action buttons for payment processing
+
+### Form Components
+1. Patient Form
+   ```xml
+   <fx:include source="forms/patient-form.fxml"/>
+   ```
+   - Use for patient registration and editing
+   - Includes validation and error handling
+   - Supports file attachments
+
+2. Appointment Form
+   ```xml
+   <fx:include source="forms/appointment-form.fxml"/>
+   ```
+   - Use for scheduling appointments
+   - Includes date/time selection
+   - Supports doctor/patient selection
+
+## Styling Guidelines
+
+### Card Styling
+- Use `card-property` class for base card styling
+- Add role-specific classes (e.g., `appointment-card`, `invoice-card`)
+- Maintain consistent padding and spacing
+- Use appropriate shadow effects
+
+### Status Indicators
+- Use semantic colors for status
+- Maintain consistent padding and border radius
+- Use appropriate font weights
+
+### Action Buttons
+- Use `icon-button` class for icon buttons
+- Maintain consistent sizing and spacing
+- Include tooltips for better UX
+
+## Best Practices
+1. Component Organization
+   - Keep components modular and reusable
+   - Use consistent naming conventions
+   - Maintain clear directory structure
+
+2. Styling
+   - Use CSS classes instead of inline styles
+   - Maintain consistent color scheme
+   - Follow responsive design principles
+
+3. Performance
+   - Minimize nested containers
+   - Use appropriate layout managers
+   - Optimize image resources
+
+4. Accessibility
+   - Include appropriate labels
+   - Maintain proper contrast ratios
+   - Support keyboard navigation
+

@@ -1,0 +1,257 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Controller Architecture Guide
+
+## Root Controllers
+- [LoginController.java](mdc:src/main/java/edu/careflow/presentation/controllers/LoginController.java) - Main login handling
+- [DashboardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/DashboardController.java) - Main dashboard
+- [RegisterController.java](mdc:src/main/java/edu/careflow/presentation/controllers/RegisterController.java) - User registration
+- [VitalsController.java](mdc:src/main/java/edu/careflow/presentation/controllers/VitalsController.java) - Vitals management
+- [Controller.java](mdc:src/main/java/edu/careflow/presentation/controllers/Controller.java) - Base controller class
+
+## Role-Based Controllers
+
+### Patient Controllers
+- **Main Controllers**:
+  - [PatientHomeController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientHomeController.java) - Patient dashboard
+  - [PatientProfileController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientProfileController.java) - Profile management
+  - [PatientContainerController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientContainerController.java) - Container management
+  - [PrescriptionController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PrescriptionController.java) - Prescription management
+  - [PatientAppointmentController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientAppointmentController.java) - Appointment management
+  - [PatientMedicalController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientMedicalController.java) - Medical records
+  - [PatientLoginController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientLoginController.java) - Patient login
+  - [PatientAllergyController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/PatientAllergyController.java) - Allergy management
+
+- **Form Controllers** (`forms/`):
+  - [PrescriptionForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/PrescriptionForm.java) - Prescription creation/editing
+  - [AppointmentForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/AppointmentForm.java) - Appointment creation
+  - [AddPatientForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/AddPatientForm.java) - Patient registration
+  - [BookAptForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/BookAptForm.java) - Appointment booking
+  - [ConditionsForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/ConditionsForm.java) - Medical conditions
+  - [VitalsBioForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/VitalsBioForm.java) - Vitals and bio data
+  - [RecordAllergyForm.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/forms/RecordAllergyForm.java) - Allergy recording
+
+- **Card Controllers** (`cards/`):
+  - [PrescriptionCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/PrescriptionCardController.java) - Prescription display
+  - [AppointmentCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/AppointmentCardController.java) - Appointment display
+  - [ConditionCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/ConditionCardController.java) - Condition display
+  - [BioCardLongController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/BioCardLongController.java) - Detailed bio display
+  - [VitalCardLongController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalCardLongController.java) - Detailed vitals
+  - [VitalsChartCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/VitalsChartCardController.java) - Vitals charts
+  - [AllergyCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/AllergyCardController.java) - Allergy display
+  - [ConsultationCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/patient/cards/ConsultationCardController.java) - Consultation display
+
+### Doctor Controllers
+- **Main Controllers**:
+  - [DoctorDashboardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorDashboardController.java) - Doctor's dashboard
+  - [DoctorRatesController.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorRatesController.java) - Rate management
+  - [DoctorContainerController.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorContainerController.java) - Container management
+  - [DoctorPatientList.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorPatientList.java) - Patient list view
+  - [DoctorWaitingListController.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorWaitingListController.java) - Waiting list management
+  - [DoctorAppointmentController.java](mdc:src/main/java/edu/careflow/presentation/controllers/doctor/DoctorAppointmentController.java) - Appointment handling
+
+### Nurse Controllers
+- **Main Controllers**:
+  - [NurseDashboardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/nurse/NurseDashboardController.java) - Nurse's dashboard
+  - [NursePatientListController.java](mdc:src/main/java/edu/careflow/presentation/controllers/nurse/NursePatientListController.java) - Patient list management
+  - [ContainerNurseController.java](mdc:src/main/java/edu/careflow/presentation/controllers/nurse/ContainerNurseController.java) - Container management
+
+- **Card Controllers**:
+  - [NursePatientListCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/nurse/NursePatientListCardController.java) - Patient list cards
+  - [NursePatientCardController.java](mdc:src/main/java/edu/careflow/presentation/controllers/nurse/NursePatientCardController.java) - Individual patient cards
+
+## Shared Components
+- `components/table/` - Reusable table components
+
+## Architecture Patterns
+1. **Role-Based Organization**
+   - Separate controllers for each role (Patient, Doctor, Nurse)
+   - Role-specific dashboards and features
+   - Shared base controller class
+
+2. **Component Types**
+   - Main Controllers: Handle primary functionality
+   - Form Controllers: Handle data input and editing
+   - Card Controllers: Handle display of individual items
+
+3. **UI Patterns**
+   - Dashboard-based navigation
+   - Card-based content display
+   - Form-based data entry
+   - Container-based layout management
+
+4. **Common Features**
+   - Patient list management
+   - Appointment handling
+   - Medical records
+   - Profile management
+
+## Overview
+The application follows a layered architecture with clear separation of concerns:
+
+1. **Presentation Layer (Controllers)**
+   - Handles UI logic and user interactions
+   - Located in `edu.careflow.presentation.controllers`
+   - Organized by user type (doctor, patient, admin)
+
+2. **Business Layer (Services)**
+   - Contains business logic
+   - Located in `edu.careflow.services`
+   - Handles data validation and processing
+
+3. **Data Access Layer (DAOs)**
+   - Manages database operations
+   - Located in `edu.careflow.repository.dao`
+   - Uses prepared statements for security
+
+4. **Entity Layer (Models)**
+   - Represents database tables
+   - Located in `edu.careflow.repository.entities`
+   - Contains data validation rules
+
+## Entity Structure
+Each entity should:
+- Be in `edu.careflow.repository.entities`
+- Have private fields with getters/setters
+- Include data validation
+- Have a corresponding DAO class
+
+Example entities:
+- `Patient`: Stores patient information
+- `Doctor`: Stores doctor information
+- `Appointment`: Manages appointment data
+- `Prescription`: Handles prescription records
+- `VisitNote`: Manages medical visit documentation with status tracking (Draft/Final/Archived)
+- `Attachment`: Handles file attachments
+- `Allergy`: Tracks patient allergies
+- `Condition`: Records medical conditions
+- `Vitals`: Stores vital signs
+- `User`: Manages user authentication
+
+## Controller Responsibilities
+1. **Container Controllers**
+   - Main layout controllers
+   - Handle navigation
+   - Manage child controllers
+   - Examples:
+     - `DoctorContainerController`
+     - `PatientContainerController`
+     - `AdminContainerController`
+
+2. **Form Controllers**
+   - Handle specific forms
+   - Validate input
+   - Process submissions
+   - Examples:
+     - `PrescriptionForm`
+     - `VisitNoteForm` (with draft/final status management)
+     - `RecordAllergyForm`
+     - `ConditionsForm`
+     - `VitalsBioForm`
+
+3. **Card Controllers**
+   - Display information cards
+   - Handle card-specific actions
+   - Examples:
+     - `AppointmentCard`
+     - `PatientCard`
+     - `DoctorCard`
+     - `NavigationBar`
+
+## Form Controller Structure
+Each form controller should:
+1. **Initialize**
+   - Load initial data
+   - Set up event handlers
+   - Configure validation
+
+2. **Validate**
+   - Check required fields
+   - Validate data types
+   - Show error messages
+
+3. **Process**
+   - Save to database
+   - Update UI
+   - Handle errors
+
+4. **Clean Up**
+   - Clear form data
+   - Reset validation
+   - Close form
+
+## Navigation Flow
+1. **User Login**
+   - `LoginController` → `*ContainerController`
+
+2. **Doctor Flow**
+   - `DoctorContainerController` → `AppointmentList` → `PatientView` → `*Form`
+
+3. **Patient Flow**
+   - `PatientContainerController` → `AppointmentList` → `DoctorView` → `*Form`
+
+4. **Admin Flow**
+   - `AdminContainerController` → `UserManagement` → `*Form`
+
+## Error Handling
+1. **Validation Errors**
+   - Show in form
+   - Use red borders
+   - Display error messages
+
+2. **Database Errors**
+   - Log to console
+   - Show user-friendly message
+   - Rollback changes
+
+3. **System Errors**
+   - Log to file
+   - Show generic message
+   - Provide recovery options
+
+## UI Components
+1. **Forms**
+   - Use `GridPane` for layout
+   - Include validation
+   - Show error messages
+   - Support draft/final states (for visit notes)
+
+2. **Cards**
+   - Use `VBox` for layout
+   - Include action buttons
+   - Show status indicators
+
+3. **Navigation**
+   - Use `MenuBar` for main navigation
+   - Use `Button` for actions
+   - Show breadcrumbs
+
+## Best Practices
+1. **Code Organization**
+   - One controller per form
+   - Clear method names
+   - Consistent error handling
+
+2. **UI Design**
+   - Consistent styling
+   - Clear feedback
+   - Responsive layout
+   - Status indicators for draft/final states
+
+3. **Security**
+   - Validate all input
+   - Use prepared statements
+   - Check permissions
+
+4. **Performance**
+   - Lazy loading
+   - Efficient queries
+   - Cache when appropriate
+
+
+
+
+

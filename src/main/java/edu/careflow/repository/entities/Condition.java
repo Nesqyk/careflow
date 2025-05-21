@@ -16,14 +16,17 @@ public class Condition {
 
     private final String status;
 
+    private final int appointmentId;
 
-    public Condition(int conditionId, int patientId, String conditionName, String description, LocalDate onSetDate, String status) {
+
+    public Condition(int conditionId, int patientId, String conditionName, String description, LocalDate onSetDate, String status, int appointmentId) {
         this.conditionId = conditionId;
         this.patientId = patientId;
         this.conditionName = conditionName;
         this.description = description;
         this.onSetDate = onSetDate;
         this.status = status;
+        this.appointmentId = appointmentId;
     }
 
 
@@ -49,5 +52,9 @@ public class Condition {
 
     public String getStatus() {
         return status;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
     }
 }

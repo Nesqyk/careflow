@@ -3,11 +3,15 @@ package edu.careflow.repository.dao;
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Doctor;
 import edu.careflow.repository.entities.Appointment;
+import edu.careflow.repository.entities.Patient;
+import edu.careflow.utils.DateTimeUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class DoctorDAO {
 
@@ -18,13 +22,20 @@ public class DoctorDAO {
         try (Statement stmt = DatabaseManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
+                java.sql.Timestamp createdTs = rs.getTimestamp("created_at");
+                java.time.LocalDateTime createdAt = createdTs != null ? DateTimeUtil.fromTimestamp(createdTs) : null;
+                java.sql.Timestamp updatedTs = rs.getTimestamp("updated_at");
+                java.time.LocalDateTime updatedAt = updatedTs != null ? DateTimeUtil.fromTimestamp(updatedTs) : null;
                 doctors.add(new Doctor(
                         rs.getInt("doctor_id"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("specialization"),
                         rs.getString("license_number"),
-                        rs.getString("contact_number")
+                        rs.getString("contact_number"),
+                        createdAt,
+                        updatedAt,
+                        rs.getInt("availability") == 1
                 ));
             }
         }
@@ -54,9 +65,7 @@ public class DoctorDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean createDoctor(Doctor doctor) throws SQLException {
-        // Generate a unique 5-digit ID for the doctor
-        
-        String sql = "INSERT INTO doctors (doctor_id, first_name, last_name, specialization, license_number, contact_number) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO doctors (doctor_id, first_name, last_name, specialization, license_number, contact_number, created_at, updated_at, availability) VALUES (?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, doctor.getDoctorId());
             pstmt.setString(2, doctor.getFirstName());
@@ -64,6 +73,7 @@ public class DoctorDAO {
             pstmt.setString(4, doctor.getSpecialization());
             pstmt.setString(5, doctor.getLicenseNumber());
             pstmt.setString(6, doctor.getContactNumber());
+            pstmt.setInt(7, doctor.isAvailable() ? 1 : 0);
 
             return pstmt.executeUpdate() > 0;
         }
@@ -95,13 +105,25 @@ public class DoctorDAO {
             pstmt.setString(1, doctorId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    // Safely handle timestamps
+                    LocalDateTime createdAt = rs.getTimestamp("created_at") != null ? 
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")) : 
+                        DateTimeUtil.now();
+                    
+                    LocalDateTime updatedAt = rs.getTimestamp("updated_at") != null ? 
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at")) : 
+                        DateTimeUtil.now();
+
                     return new Doctor(
                         rs.getInt("doctor_id"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("specialization"),
                         rs.getString("license_number"),
-                        rs.getString("contact_number")
+                        rs.getString("contact_number"),
+                        createdAt,
+                        updatedAt,
+                        rs.getInt("availability") == 1
                     );
                 }
             }
@@ -128,7 +150,10 @@ public class DoctorDAO {
                         rs.getString("last_name"),
                         rs.getString("specialization"),
                         rs.getString("license_number"),
-                        rs.getString("contact_number")
+                        rs.getString("contact_number"),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at")),
+                        rs.getInt("availability") == 1
                     ));
                 }
             }
@@ -148,7 +173,7 @@ public class DoctorDAO {
         String sql = "SELECT * FROM doctors WHERE specialization = ? AND availability = ?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, specialization);
-            pstmt.setBoolean(2, availability);
+            pstmt.setInt(2, availability ? 1 : 0);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     doctors.add(new Doctor(
@@ -157,7 +182,10 @@ public class DoctorDAO {
                         rs.getString("last_name"),
                         rs.getString("specialization"),
                         rs.getString("license_number"),
-                        rs.getString("contact_number")
+                        rs.getString("contact_number"),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at")),
+                        rs.getInt("availability") == 1
                     ));
                 }
             }
@@ -175,7 +203,7 @@ public class DoctorDAO {
         List<Doctor> doctors = new ArrayList<>();
         String sql = "SELECT * FROM doctors WHERE availability = ?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
-            pstmt.setBoolean(1, availability);
+            pstmt.setInt(1, availability ? 1 : 0);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     doctors.add(new Doctor(
@@ -184,7 +212,10 @@ public class DoctorDAO {
                         rs.getString("last_name"),
                         rs.getString("specialization"),
                         rs.getString("license_number"),
-                        rs.getString("contact_number")
+                        rs.getString("contact_number"),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at")),
+                        rs.getInt("availability") == 1
                     ));
                 }
             }
@@ -199,7 +230,7 @@ public class DoctorDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean updateDoctor(Doctor doctor) throws SQLException {
-        String sql = "UPDATE doctors SET first_name=?, last_name=?, specialization=?, license_number=?, contact_number=? WHERE doctor_id=?";
+        String sql = "UPDATE doctors SET first_name=?, last_name=?, specialization=?, license_number=?, contact_number=?, updated_at=datetime('now') WHERE doctor_id=?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, doctor.getFirstName());
             pstmt.setString(2, doctor.getLastName());
@@ -220,9 +251,9 @@ public class DoctorDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean updateAvailability(String doctorId, boolean available) throws SQLException {
-        String sql = "UPDATE doctors SET availability = ? WHERE doctor_id = ?";
+        String sql = "UPDATE doctors SET availability = ?, updated_at = datetime('now') WHERE doctor_id = ?";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
-            pstmt.setBoolean(1, available);
+            pstmt.setInt(1, available ? 1 : 0);
             pstmt.setString(2, doctorId);
             return pstmt.executeUpdate() > 0;
         }
@@ -236,7 +267,7 @@ public class DoctorDAO {
      */
     public List<Appointment> getDoctorAppointments(String doctorId) throws SQLException {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE doctor_id = ?";
+        String sql = "SELECT * FROM appointments WHERE doctor_id = ? ORDER BY appointment_date";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, doctorId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -246,10 +277,10 @@ public class DoctorDAO {
                         rs.getInt("patient_id"),
                         rs.getInt("doctor_id"),
                         rs.getInt("nurse_id"),
-                        rs.getTimestamp("appointment_date").toLocalDateTime(),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("appointment_date")),
                         rs.getString("status"),
                         rs.getString("notes"),
-                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
                         rs.getString("room"),
                         rs.getString("symptoms"),
                         rs.getString("diagnosis"),
@@ -258,7 +289,7 @@ public class DoctorDAO {
                         rs.getString("meeting_link"),
                         rs.getString("booked_by"),
                         rs.getString("preferred_contact"),
-                        rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("booking_time"))
                     ));
                 }
             }
@@ -274,7 +305,7 @@ public class DoctorDAO {
      */
     public List<Appointment> getUpcomingAppointments(String doctorId) throws SQLException {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date > NOW()";
+        String sql = "SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date > datetime('now') ORDER BY appointment_date";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, doctorId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -284,10 +315,10 @@ public class DoctorDAO {
                         rs.getInt("patient_id"),
                         rs.getInt("doctor_id"),
                         rs.getInt("nurse_id"),
-                        rs.getTimestamp("appointment_date").toLocalDateTime(),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("appointment_date")),
                         rs.getString("status"),
                         rs.getString("notes"),
-                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
                         rs.getString("room"),
                         rs.getString("symptoms"),
                         rs.getString("diagnosis"),
@@ -296,7 +327,7 @@ public class DoctorDAO {
                         rs.getString("meeting_link"),
                         rs.getString("booked_by"),
                         rs.getString("preferred_contact"),
-                        rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("booking_time"))
                     ));
                 }
             }
@@ -337,5 +368,39 @@ public class DoctorDAO {
             }
         }
         return 0;
+    }
+
+    /**
+     * Get all patients associated with a specific doctor through their appointments
+     * @param doctorId The ID of the doctor
+     * @return List of patients who have had appointments with the doctor
+     * @throws SQLException If a database access error occurs
+     */
+    public List<Patient> getPatientsByDoctorId(int doctorId) throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT DISTINCT p.* FROM patients p " +
+                    "JOIN appointments a ON p.patient_id = a.patient_id " +
+                    "WHERE a.doctor_id = ?";
+        
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, doctorId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    patients.add(new Patient(
+                        rs.getInt("patient_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getDate("date_of_birth").toLocalDate(),
+                        rs.getString("gender"),
+                        rs.getString("contact_number"),
+                        rs.getString("email"),
+                        rs.getString("address"),
+                        rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                        rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
+                    ));
+                }
+            }
+        }
+        return patients;
     }
 }

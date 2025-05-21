@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import com.dlsc.gemsfx.AvatarView?>
+
+<VBox fx:id="detailsContainer" prefHeight="335.0" spacing="32.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.admin.AdminUserDetailCardController">
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="16.0">
+         <children>
+            <AvatarView fx:id="userAvatar" prefHeight="64.0" prefWidth="64.0" />
+            <VBox spacing="4.0">
+               <children>
+                  <Label fx:id="userRole" text="User Role">
+                     <font>
+                        <Font name="☞Gilroy-SemiBold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userDateCreated" text="Date Created">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <VBox spacing="8.0">
+         <children>
+            <Label style="-fx-text-fill: #0762F2;" text="User Details">
+               <font>
+                  <Font name="☞Gilroy-Bold" size="14.0" />
+               </font>
+            </Label>
+            <VBox spacing="8.0">
+               <children>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Label styleClass="details-label" text="Username:">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="username" text="admin_user" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Label styleClass="details-label" text="Full Name:">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="fullName" text="John Doe" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Label styleClass="details-label" text="Contact:">
+                           <font>
+                              <Font name="☞Gilroy-SemiBold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="contactNumber" text="63 9XX XXX XXXX" wrapText="true">
+                           <font>
+                              <Font name="☞Gilroy-Regular" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+
+      <VBox spacing="8.0">
+         <children>
+            <Label style="-fx-text-fill: #0762F2;" text="Notes">
+               <font>
+                  <Font name="☞Gilroy-Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="userNotes" style="-fx-background-color: white; -fx-background-radius: 4;" wrapText="true">
+               <font>
+                  <Font name="☞Gilroy-Regular" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+   </padding>
+</VBox> 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox spacing="24.0" style="-fx-background-color: #F8FAFC;" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+    </padding>
+
+    <!-- Header Section -->
+    <VBox spacing="8.0">
+        <Label styleClass="section-header" text="Payments">
+            <font>
+                <Font name="Gilroy-Bold" size="24.0" />
+            </font>
+        </Label>
+        <Label styleClass="card-label" text="View and pay your medical bills" />
+    </VBox>
+
+    <!-- Filter Section -->
+    <HBox spacing="16.0" alignment="CENTER_LEFT">
+        <ComboBox fx:id="statusFilter" promptText="Filter by Status" prefWidth="200.0" />
+        <ComboBox fx:id="dateFilter" promptText="Filter by Date" prefWidth="200.0" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="refreshButton" styleClass="button-interface">
+            <graphic>
+                <FontIcon iconLiteral="fas-sync" iconSize="16" />
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Invoices List -->
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent;">
+        <VBox spacing="16.0">
+            <!-- Invoice Cards will be added here dynamically -->
+            <fx:include source="../components/patient/invoiceCardPatient.fxml" />
+            <fx:include source="../components/patient/invoiceCardPatient.fxml" />
+            <fx:include source="../components/patient/invoiceCardPatient.fxml" />
+        </VBox>
+    </ScrollPane>
+
+    <!-- Payment Dialog (Hidden by default) -->
+    <Dialog fx:id="paymentDialog" title="Make Payment" styleClass="payment-dialog">
+        <dialogPane>
+            <DialogPane>
+                <content>
+                    <VBox spacing="16.0" styleClass="payment-form">
+                        <!-- Payment Method Selection -->
+                        <VBox spacing="8.0">
+                            <Label text="Select Payment Method" styleClass="section-header" />
+                            <HBox spacing="16.0">
+                                <ToggleButton fx:id="cardPaymentBtn" text="Credit Card" styleClass="method-toggle" selected="true">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-credit-card" />
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="bankTransferBtn" text="Bank Transfer" styleClass="method-toggle">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-university" />
+                                    </graphic>
+                                </ToggleButton>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Card Payment Form -->
+                        <VBox fx:id="cardPaymentForm" spacing="16.0">
+                            <TextField fx:id="cardNumberField" promptText="Card Number" />
+                            <HBox spacing="16.0">
+                                <TextField fx:id="expiryField" promptText="MM/YY" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="cvvField" promptText="CVV" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <TextField fx:id="cardNameField" promptText="Name on Card" />
+                        </VBox>
+
+                        <!-- Bank Transfer Form -->
+                        <VBox fx:id="bankTransferForm" spacing="16.0" visible="false">
+                            <ComboBox fx:id="bankSelection" promptText="Select Bank" />
+                            <TextField fx:id="accountNumberField" promptText="Account Number" />
+                            <TextField fx:id="accountNameField" promptText="Account Name" />
+                        </VBox>
+
+                        <!-- Payment Summary -->
+                        <VBox styleClass="payment-summary" spacing="8.0">
+                            <Label text="Payment Summary" styleClass="section-header" />
+                            <HBox spacing="16.0">
+                                <Label text="Amount:" />
+                                <Label fx:id="paymentAmountLabel" text="₱120.00" styleClass="invoice-amount-label" />
+                            </HBox>
+                            <HBox spacing="16.0">
+                                <Label text="Service:" />
+                                <Label fx:id="serviceNameLabel" text="General Consultation" />
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </content>
+                <buttonTypes>
+                    <ButtonType fx:constant="CANCEL" />
+                    <ButtonType text="Pay Now" fx:constant="OK" />
+                </buttonTypes>
+            </DialogPane>
+        </dialogPane>
+    </Dialog>
+</VBox> 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="visitNoteCard" spacing="32.0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="16" left="24" right="24" top="16" />
+    </padding>
+    <children>
+        <!-- Optional: Image -->
+        <ImageView fx:id="noteImageView" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" visible="false" />
+
+        <!-- Main Details -->
+        <VBox alignment="TOP_LEFT" spacing="8.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                    <children>
+                        <Label fx:id="visitDateLabel" text="2024-05-20">
+                            <font>
+                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #B0B0B0;" text="•" />
+                        <Label fx:id="doctorNameLabel" text="Dr. John Doe">
+                            <font>
+                                <Font name="☞Gilroy-SemiBold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox spacing="24.0">
+                    <children>
+                        <VBox spacing="2.0">
+                            <children>
+                                <Label style="-fx-text-fill: #0762F2;" text="Primary Diagnosis:">
+                                    <font>
+                                        <Font name="☞Gilroy-Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="primaryDiagnosisLabel" text="Hypertension" wrapText="true">
+                                    <font>
+                                        <Font name="☞Gilroy-Regular" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox spacing="2.0">
+                            <children>
+                                <Label style="-fx-text-fill: #0762F2;" text="Secondary Diagnosis:">
+                                    <font>
+                                        <Font name="☞Gilroy-Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="secondaryDiagnosisLabel" text="Diabetes Type 2" wrapText="true">
+                                    <font>
+                                        <Font name="☞Gilroy-Regular" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <VBox spacing="2.0">
+                    <children>
+                        <Label style="-fx-text-fill: #0762F2;" text="Notes:">
+                            <font>
+                                <Font name="☞Gilroy-Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="notesLabel" text="Patient is advised to monitor blood pressure daily." wrapText="true">
+                            <font>
+                                <Font name="☞Gilroy-Regular" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

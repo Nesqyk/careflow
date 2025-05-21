@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox styleClass="invoice-detail-container" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.InvoiceOverviewPatientController">
+    <padding>
+        <Insets bottom="24" left="24" right="24" top="24" />
+    </padding>
+   <HBox alignment="CENTER_LEFT" styleClass="details-card">
+      <children>
+         <Label alignment="CENTER" prefHeight="22.0" prefWidth="200.0" styleClass="section-header" text="Invoice Details">
+            <font>
+               <Font name="☞Gilroy-SemiBold" size="16.0" />
+            </font>
+         </Label>
+         <Region HBox.hgrow="ALWAYS" />
+         <Button fx:id="closeButton" styleClass="icon-button">
+            <graphic>
+               <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+            </graphic>
+         </Button>
+      </children>
+   </HBox>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox spacing="4">
+            <Label fx:id="invoiceIdLabel" styleClass="invoice-id" text="#INV-0000" />
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Label fx:id="statusLabel" styleClass="invoice-status-label, paid-status" text="PAID" />
+      <VBox.margin>
+         <Insets top="16.0" />
+      </VBox.margin>
+    </HBox>
+
+    <!-- Content Grid -->
+    <GridPane hgap="48" styleClass="details-grid" vgap="24">
+        <padding>
+            <Insets top="24" />
+        </padding>
+
+        <!-- Patient Info Section -->
+        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label styleClass="section-header" text="Patient Information" />
+            <VBox spacing="16" styleClass="info-container">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-user" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Patient Name" />
+                        <Label fx:id="patientNameLabel" styleClass="detail-value" text="John Doe" />
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-id-card" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Patient ID" />
+                        <Label fx:id="patientIdLabel" styleClass="detail-value" text="PT-0000" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Invoice Info Section -->
+        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label styleClass="section-header" text="Invoice Information" />
+            <VBox spacing="16" styleClass="info-container">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-calendar" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Issue Date" />
+                        <Label fx:id="issueDateLabel" styleClass="detail-value" text="01/01/2024" />
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-clock" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Due Date" />
+                        <Label fx:id="dueDateLabel" styleClass="detail-value" text="15/01/2024" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Services Section -->
+        <VBox spacing="8" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label styleClass="section-header" text="Services" />
+            <TableView fx:id="servicesTable" styleClass="services-table">
+                <columns>
+                    <TableColumn fx:id="serviceColumn" text="Service" />
+                    <TableColumn fx:id="descriptionColumn" text="Description" />
+                    <TableColumn fx:id="quantityColumn" text="Quantity" />
+                    <TableColumn fx:id="rateColumn" text="Rate" />
+                    <TableColumn fx:id="amountColumn" text="Amount" />
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Payment Details Section -->
+        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label styleClass="section-header" text="Payment Details" />
+            <VBox spacing="16" styleClass="info-container">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-credit-card" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Payment Method" />
+                        <Label fx:id="paymentMethodLabel" styleClass="detail-value" text="Credit Card" />
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fas-clock" styleClass="detail-icon" />
+                    <VBox spacing="2">
+                        <Label styleClass="detail-label" text="Payment Status" />
+                        <Label fx:id="paymentStatusLabel" styleClass="detail-value" text="Paid" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Summary Section -->
+        <VBox spacing="8" styleClass="summary-section" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Label styleClass="summary-label" text="Subtotal:" />
+                <Label fx:id="subtotalLabel" styleClass="summary-value" text="" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Label styleClass="summary-label" text="Tax (10%):" />
+                <Label fx:id="taxLabel" styleClass="summary-value" text="" />
+            </HBox>
+            <Separator />
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Label styleClass="total-label" text="Total:" />
+                <Label fx:id="totalLabel" styleClass="total-value" text="" />
+            </HBox>
+        </VBox>
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <!-- Action Buttons -->
+    <HBox alignment="CENTER" spacing="16">
+        <padding>
+            <Insets top="24" />
+        </padding>
+        <Button fx:id="printButton" prefHeight="34.0" prefWidth="198.0" styleClass="action-button" text="Print Invoice">
+            <graphic>
+                <FontIcon iconLiteral="fas-print" />
+            </graphic>
+        </Button>
+        <Button fx:id="downloadButton" prefHeight="32.0" prefWidth="194.0" styleClass="cta-button" text="Download PDF">
+            <graphic>
+                <FontIcon iconLiteral="fas-download" />
+            </graphic>
+        </Button>
+    </HBox>
+</VBox>

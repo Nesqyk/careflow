@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/15e9f763-eb0b-4c20-9cc0-a7e77ed53c54/console.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/java/edu/careflow/manager/DatabaseManager.java" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AppointmentDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/edu/careflow/repository/dao/AttachmentDAO.java" dialect="GenericSQL" />

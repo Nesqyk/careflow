@@ -3,89 +3,67 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="172.0" prefWidth="302.0" spacing="12.0" styleClass="card-property" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AllergyCardController">
-   <children>
-      <VBox alignment="CENTER" prefWidth="166.0" spacing="8.0">
-         <children>
-            <VBox spacing="4.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" spacing="8.0">
-                     <children>
-                        <FontIcon iconColor="#0762f2" iconLiteral="fas-allergies" iconSize="14" />
-                        <Label text="Allergen" textFill="#828282">
-                           <font>
-                              <Font name="☞Gilroy-SemiBold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Label fx:id="allergenNameLabel" prefHeight="33.0" prefWidth="185.0" styleClass="text-bold" text="Allergen Name">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox spacing="4.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" spacing="8.0">
-                     <children>
-                        <FontIcon iconColor="#0762f2" iconLiteral="fas-comment" iconSize="14" />
-                        <Label text="Comment" textFill="#828282">
-                           <font>
-                              <Font name="☞Gilroy-SemiBold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Label fx:id="commentLabel" prefWidth="166.0" styleClass="text-regular" text="Comment" wrapText="true">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefWidth="100.0" spacing="8.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="53.0" prefWidth="90.0" spacing="4.0">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
-                     <children>
-                        <FontIcon iconColor="#0762f2" iconLiteral="fas-exclamation-triangle" iconSize="14" />
-                        <Label text="Severity" textFill="#828282">
-                           <font>
-                              <Font name="☞Gilroy-SemiBold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Label fx:id="severityNameLabel" styleClass="text-bold" text="Confirmed">
-                     <font>
-                        <Font name="☞Gilroy-Regular" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_RIGHT" prefWidth="88.0">
-               <children>
-                  <Button fx:id="editButton" disable="true" mnemonicParsing="false" prefHeight="39.0" prefWidth="54.0" styleClass="nav-button">
-                     <graphic>
-                        <FontIcon iconLiteral="fas-ellipsis-v" />
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </children>
+<VBox fx:id="allergyCard" prefHeight="54.0" prefWidth="600.0" spacing="0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.AllergyCardController">
+    <effect>
+        <DropShadow color="#20000000" height="4" radius="8" spread="0.1" width="0" />
+    </effect>
+    <HBox alignment="CENTER_LEFT" prefWidth="568.0" spacing="16.0">
+        <!-- Left accent bar with icon -->
+        <VBox alignment="CENTER" minWidth="64.0" prefHeight="26.0" prefWidth="64.0" style="-fx-background-radius: 8; -fx-border-width: 0.2; -fx-border-color: black; -fx-border-radius: 8;" styleClass="action-button">
+            <children>
+                <FontIcon iconColor="white" iconLiteral="fas-allergies" iconSize="24" />
+            </children>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+        
+        <!-- Main content area -->
+        <VBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="426.0" spacing="4.0" style="-fx-background-color: white; -fx-background-radius: 0 8 8 0;" stylesheets="@../../../css/styles.css" HBox.hgrow="ALWAYS">
+            <!-- Allergen name and severity -->
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label fx:id="allergenNameLabel" styleClass="section-header" text="Allergen Name">
+                    <font>
+                        <Font name="☞Gilroy-Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Rectangle fill="#E0E0E0" height="16" width="1" />
+                <HBox alignment="CENTER_LEFT" spacing="4.0">
+                    <FontIcon iconColor="#FF4B4B" iconLiteral="fas-exclamation-triangle" iconSize="12" />
+                    <Label fx:id="severityNameLabel" styleClass="detail-label" text="Confirmed">
+                        <font>
+                            <Font name="☞Gilroy-SemiBold" size="13.0" />
+                        </font>
+                    </Label>
+                </HBox>
+            </HBox>
+            
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+            </padding>
+        </VBox>
+        
+        <!-- Action buttons -->
+        <VBox alignment="CENTER" spacing="8.0">
+            <Button fx:id="editButton" style="-fx-background-color: #F5F5F5; -fx-background-radius: 6;" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-ellipsis-v" iconSize="18" />
+                </graphic>
+            </Button>
+        </VBox>
+        
+        <padding>
+            <Insets bottom="0.0" left="0.0" right="16.0" top="0.0" />
+        </padding>
+    </HBox>
    <padding>
-      <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
    </padding>
-</HBox>
+</VBox>

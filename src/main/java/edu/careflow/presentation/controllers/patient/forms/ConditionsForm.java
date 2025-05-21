@@ -45,6 +45,7 @@ public class ConditionsForm {
     private javafx.scene.control.ScrollPane scrollPaneConditions;
 
     private int currentPatientId;
+    private int appointmentId;
     private final ConditionDAO conditionDAO = new ConditionDAO();
 
     private static final List<String> COMMON_CONDITIONS = Arrays.asList(
@@ -78,7 +79,8 @@ public class ConditionsForm {
                     conditionName,
                     "", // description (not in form)
                     onsetDate,
-                    status
+                    status,
+                    appointmentId
             );
             boolean success = conditionDAO.addCondition(condition);
             if (success) {
@@ -140,8 +142,9 @@ public class ConditionsForm {
         return true;
     }
 
-    public void setPatientId(int patientId) {
+    public void setIds(int patientId, int appointmentId) {
         this.currentPatientId = patientId;
+        this.appointmentId = appointmentId;
     }
 
     private void handleClose() {

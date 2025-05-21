@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="appointmentCard" prefHeight="98.0" prefWidth="579.0" spacing="0" style="-fx-background-color: white; -fx-background-radius: 12;" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER_LEFT" spacing="16.0">
+        <!-- Colored ID bar -->
+        <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
+            <children>
+                <Label fx:id="appointmentIdLabel" styleClass="appointment-id-label" text="APT-12345" textFill="#0762F2" />
+            </children>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+        <!-- Main info -->
+        <VBox spacing="4.0" stylesheets="@../../../css/styles.css" HBox.hgrow="ALWAYS">
+            <Label fx:id="patientNameLabel" styleClass="appointment-patient-label" text="John Doe" />
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <FontIcon iconLiteral="fas-calendar" iconSize="12" />
+                <Label fx:id="dateLabel" styleClass="appointment-date-label" stylesheets="@../../../css/styles.css" text="2024-06-01" />
+            </HBox>
+            <Label fx:id="timeLabel" styleClass="appointment-time-label" text="10:00 AM" />
+        </VBox>
+        <!-- Status and Menu -->
+        <VBox alignment="CENTER" spacing="8.0">
+            <Label fx:id="statusLabel" styleClass="appointment-status-label confirmed-status" stylesheets="@../../../css/styles.css" text="CONFIRMED" />
+            <MenuButton fx:id="actionMenu" styleClass="nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-ellipsis-v" iconSize="18" />
+                </graphic>
+                <items>
+                    <MenuItem fx:id="editMenuItem" text="Edit Appointment">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-edit" iconSize="16" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="downloadMenuItem" text="Download Details">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-download" iconSize="16" />
+                        </graphic>
+                    </MenuItem>
+                </items>
+            </MenuButton>
+        </VBox>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+        </padding>
+    </HBox>
+</VBox>

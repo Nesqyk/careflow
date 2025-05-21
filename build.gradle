@@ -30,6 +30,14 @@ tasks.withType(JavaCompile) {
 application {
   mainModule = 'edu.careflow'
   mainClass = 'edu.careflow.Careflow'
+  
+  // Add JVM arguments for Apache POI
+  applicationDefaultJvmArgs = [
+    '--add-opens=java.base/java.lang=ALL-UNNAMED',
+    '--add-opens=java.base/java.io=ALL-UNNAMED',
+    '--add-opens=java.base/java.util=ALL-UNNAMED',
+    '--add-opens=java.base/java.util.concurrent=ALL-UNNAMED'
+  ]
 }
 
 javafx {
@@ -53,6 +61,14 @@ dependencies {
   implementation ('org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1')
   implementation ('org.controlsfx:controlsfx:11.2.0')
   implementation 'com.calendarfx:view:11.12.7'
+  
+  // Apache POI for Excel
+  implementation 'org.apache.poi:poi:5.2.5'
+  implementation 'org.apache.poi:poi-ooxml:5.2.5'
+  implementation 'org.apache.commons:commons-collections4:4.4'
+  implementation 'commons-io:commons-io:2.15.1'
+  implementation 'org.apache.commons:commons-math3:3.6.1'
+  implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
 }
 
 test {

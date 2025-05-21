@@ -2,6 +2,7 @@ package edu.careflow.repository.dao;
 
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Vitals;
+import edu.careflow.utils.DateTimeUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,23 +37,31 @@ public class VitalsDAO {
     }
 
     public boolean addVitals(Vitals vitals) throws SQLException {
-        String sql = "INSERT INTO vitals (patient_id, nurse_id, weight_kg, height_cm, blood_pressure, heart_rate, temperature, oxygen_saturation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int uniqueId = generateUniqueVitalsId();
+
+        String sql = "INSERT INTO vitals (vital_id, patient_id, nurse_id, weight_kg, height_cm, " +
+                    "blood_pressure, heart_rate, temperature, oxygen_saturation, appointment_id, recorded_at) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now', '+8 hours'))";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, vitals.getPatientId());
-            pstmt.setInt(2, vitals.getNurseId());
-            pstmt.setDouble(3, vitals.getWeightKg());
-            pstmt.setDouble(4, vitals.getHeightCm());
-            pstmt.setString(5, vitals.getBloodPressure());
-            pstmt.setInt(6, vitals.getHeartRate());
-            pstmt.setDouble(7, vitals.getTemperature());
-            pstmt.setDouble(8, vitals.getOxygenSaturation());
+            pstmt.setInt(1, uniqueId);
+            pstmt.setInt(2, vitals.getPatientId());
+            pstmt.setInt(3, vitals.getNurseId());
+            pstmt.setDouble(4, vitals.getWeightKg());
+            pstmt.setDouble(5, vitals.getHeightCm());
+            pstmt.setString(6, vitals.getBloodPressure());
+            pstmt.setInt(7, vitals.getHeartRate());
+            pstmt.setDouble(8, vitals.getTemperature());
+            pstmt.setDouble(9, vitals.getOxygenSaturation());
+            pstmt.setInt(10, vitals.getAppointmentId());
 
             return pstmt.executeUpdate() > 0;
         }
     }
 
     public boolean updateVitals(Vitals vitals) throws SQLException {
-        String sql = "UPDATE vitals SET patient_id=?, nurse_id=?, weight_kg=?, height_cm=?, blood_pressure=?, heart_rate=?, temperature=?, oxygen_saturation=? WHERE vital_id=?";
+        String sql = "UPDATE vitals SET patient_id=?, nurse_id=?, weight_kg=?, height_cm=?, blood_pressure=?, " +
+                    "heart_rate=?, temperature=?, oxygen_saturation=?, appointment_id=?, recorded_at=date('now') " +
+                    "WHERE vital_id=?";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, vitals.getPatientId());
             pstmt.setInt(2, vitals.getNurseId());
@@ -62,7 +71,8 @@ public class VitalsDAO {
             pstmt.setInt(6, vitals.getHeartRate());
             pstmt.setDouble(7, vitals.getTemperature());
             pstmt.setDouble(8, vitals.getOxygenSaturation());
-            pstmt.setInt(9, vitals.getVitalsId());
+            pstmt.setInt(9, vitals.getAppointmentId());
+            pstmt.setInt(10, vitals.getVitalsId());
 
             return pstmt.executeUpdate() > 0;
         }
@@ -93,8 +103,9 @@ public class VitalsDAO {
                             rs.getDouble("height_cm"),
                             rs.getDouble("temperature"),
                             rs.getDouble("oxygen_saturation"),
-                            rs.getTimestamp("recorded_at").toLocalDateTime(),
-                            null // updatedAt not in table
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                            null, // updatedAt not in table
+                            rs.getInt("appointment_id")
                     );
                 }
             }
@@ -119,8 +130,9 @@ public class VitalsDAO {
                         rs.getDouble("height_cm"),
                         rs.getDouble("temperature"),
                         rs.getDouble("oxygen_saturation"),
-                        rs.getTimestamp("recorded_at").toLocalDateTime(),
-                        null // updatedAt not in table
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                        null, // updatedAt not in table
+                        rs.getInt("appointment_id")
                 ));
             }
         }
@@ -145,8 +157,9 @@ public class VitalsDAO {
                             rs.getDouble("height_cm"),
                             rs.getDouble("temperature"),
                             rs.getDouble("oxygen_saturation"),
-                            rs.getTimestamp("recorded_at").toLocalDateTime(),
-                            null // updatedAt not in table
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                            null, // updatedAt not in table
+                            rs.getInt("appointment_id")
                     ));
                 }
             }
@@ -172,8 +185,9 @@ public class VitalsDAO {
                             rs.getDouble("height_cm"),
                             rs.getDouble("temperature"),
                             rs.getDouble("oxygen_saturation"),
-                            rs.getTimestamp("recorded_at").toLocalDateTime(),
-                            null // updatedAt not in table
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                            null, // updatedAt not in table
+                            rs.getInt("appointment_id")
                     ));
                 }
             }
@@ -198,12 +212,41 @@ public class VitalsDAO {
                             rs.getDouble("height_cm"),
                             rs.getDouble("temperature"),
                             rs.getDouble("oxygen_saturation"),
-                            rs.getTimestamp("recorded_at").toLocalDateTime(),
-                            null // updatedAt not in table
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                            null, // updatedAt not in table
+                            rs.getInt("appointment_id")
                     );
                 }
             }
         }
         return null;
+    }
+
+    public List<Vitals> getVitalsByAppointmentId(int appointmentId) throws SQLException {
+        List<Vitals> vitalsList = new ArrayList<>();
+        String sql = "SELECT * FROM vitals WHERE appointment_id=?";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, appointmentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    vitalsList.add(new Vitals(
+                            rs.getInt("patient_id"),
+                            rs.getInt("vital_id"),
+                            rs.getInt("nurse_id"),
+                            rs.getString("blood_pressure"),
+                            rs.getInt("heart_rate"),
+                            0, // respiratoryRate not in table
+                            rs.getDouble("weight_kg"),
+                            rs.getDouble("height_cm"),
+                            rs.getDouble("temperature"),
+                            rs.getDouble("oxygen_saturation"),
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("recorded_at")),
+                            null, // updatedAt not in table
+                            rs.getInt("appointment_id")
+                    ));
+                }
+            }
+        }
+        return vitalsList;
     }
 }

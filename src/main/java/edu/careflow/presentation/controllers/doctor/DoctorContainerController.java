@@ -1,7 +1,9 @@
 package edu.careflow.presentation.controllers.doctor;
 
 import com.dlsc.gemsfx.AvatarView;
+import edu.careflow.repository.dao.DoctorDAO;
 import edu.careflow.repository.dao.PatientDAO;
+import edu.careflow.repository.entities.Doctor;
 import edu.careflow.repository.entities.Patient;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -9,8 +11,12 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -41,6 +47,9 @@ public class DoctorContainerController {
     private VBox mainContainer;
 
     @FXML
+    private BorderPane mainHomeLayout;
+
+    @FXML
     private ScrollPane pageContainer;
 
     @FXML
@@ -59,23 +68,48 @@ public class DoctorContainerController {
     private Button recordsBtnDoctor;
 
     @FXML
+    private VBox rightBoxContainer;
+
+    @FXML
     private Button settingsBtn;
+
+    @FXML
+    private StackPane stackPaneContainer;
+
+    @FXML
+    private VBox topBoxContainer;
 
     private List<Patient> allPatients = new ArrayList<>();
 
     private Button currentActiveButton = null;
     private int currentDoctorId;
 
-    public void initializeData(int doctorId) {
-        this.currentDoctorId = doctorId;
+    private DoctorDAO doctorDAO = new DoctorDAO();
 
-        dashboardBtnDoctor.setOnAction(event -> handleDashboardNavigation());
-        patientListBtnDoctor.setOnAction(event -> handlePatientListNavigation());
-        recordsBtnDoctor.setOnAction(event -> handleRecordsNavigation());
-        logoutBtn.setOnAction(event -> handleLogout());
+    public void initializeData(int doctorId) {
+
 
         try {
+
+            Doctor doctor = doctorDAO.getDoctorById(Integer.toString(doctorId));
+            this.currentDoctorId = doctorId;
+            if(doctor != null) {
+                doctorName.setText(doctor.getFirstName() + " " + doctor.getLastName());
+                doctorSpecilization.setText(doctor.getSpecialization());
+                // avatarView.setImage(doctor.getAvatar());
+            } else {
+                System.out.println("Doctor not found");
+            }
+
+            dashboardBtnDoctor.setOnAction(event -> handleDashboardNavigation());
+            patientListBtnDoctor.setOnAction(event -> handlePatientListNavigation());
+            recordsBtnDoctor.setOnAction(event -> handleRecordsNavigation());
+            logoutBtn.setOnAction(event -> handleLogout());
+            settingsBtn.setOnAction(event -> handleSettings());
+
+
             allPatients = new PatientDAO().getAllPatients();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -170,13 +204,116 @@ public class DoctorContainerController {
     
     @FXML
     private void handleRecordsNavigation() {
-
+        resetAllBtnStyle();
+        loadPage("doctorWaitingList");
+        animateButtonSelection(recordsBtnDoctor);
     }
     
     @FXML
     private void handleLogout() {
-        // TODO: Implement logout functionality
-        // This would typically clear session data and navigate to login screen
+        try {
+            // Set main layout opacity
+            mainHomeLayout.setOpacity(0.5);
+
+            // Load the logout confirmation card
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/user/logoutCard.fxml"));
+            Parent logoutCard = loader.load();
+
+            // Add to StackPane instead of rightBoxContainer
+            stackPaneContainer.getChildren().add(logoutCard);
+
+            // Center the logout card in the StackPane
+            StackPane.setAlignment(logoutCard, Pos.CENTER);
+
+            // Get the yes/no buttons from the logout card
+            Button yesButton = (Button) logoutCard.lookup("#logoutBtn");
+            Button noButton = (Button) logoutCard.lookup("#cancelBtn");
+
+            // Handle Yes button - return to login
+            yesButton.setOnAction(e -> {
+                try {
+                    // Load the login page
+                    FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/loginPageNew.fxml"));
+                    Parent loginPage = loginLoader.load();
+
+                    // Get the current scene from any node
+                    Scene currentScene = mainContainer.getScene();
+                    currentScene.setRoot(loginPage);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Failed to load login page").show();
+                }
+            });
+
+            // Handle No button - close the logout card and restore opacity
+            noButton.setOnAction(e -> {
+                // Restore opacity
+                mainHomeLayout.setOpacity(1.0);
+
+                // Remove the logout card from StackPane
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(200), logoutCard);
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+                fadeOut.setOnFinished(event -> stackPaneContainer.getChildren().remove(logoutCard));
+                fadeOut.play();
+            });
+
+            // Add fade-in animation for the logout card
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), logoutCard);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load logout confirmation").show();
+        }
+    }
+    
+    @FXML
+    private void handleSettings() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/doctor/doctorRatesForm.fxml"));
+            Parent settingsForm = loader.load();
+            
+            // Get the controller and initialize it with the current doctor ID
+            DoctorRatesController controller = loader.getController();
+            controller.initializeData(currentDoctorId);
+            
+            // First fade out existing content if any
+            if (!rightBoxContainer.getChildren().isEmpty()) {
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(150), rightBoxContainer.getChildren().get(0));
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+                fadeOut.setOnFinished(e -> {
+                    rightBoxContainer.getChildren().setAll(settingsForm);
+
+                    // Fade in new content with slide up effect
+                    FadeTransition fadeIn = new FadeTransition(Duration.millis(200), settingsForm);
+                    fadeIn.setFromValue(0.0);
+                    fadeIn.setToValue(1.0);
+
+                    TranslateTransition slideIn = new TranslateTransition(Duration.millis(200), settingsForm);
+                    slideIn.setFromY(20);
+                    slideIn.setToY(0);
+
+                    ParallelTransition parallelIn = new ParallelTransition(fadeIn, slideIn);
+                    parallelIn.play();
+                });
+                fadeOut.play();
+            } else {
+                rightBoxContainer.getChildren().setAll(settingsForm);
+
+                // Simple fade in for first load
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), settingsForm);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load settings form").show();
+        }
     }
     
     public void loadAppointment() {
@@ -189,6 +326,7 @@ public class DoctorContainerController {
         dashboardBtnDoctor.getStyleClass().setAll("nav-button");
         patientListBtnDoctor.getStyleClass().setAll("nav-button");
         recordsBtnDoctor.getStyleClass().setAll("nav-button");
+        settingsBtn.getStyleClass().setAll("nav-button");
     }
     
     private void animateButtonSelection(Button button) {
@@ -242,6 +380,10 @@ public class DoctorContainerController {
                 ((DoctorAppointmentController) controller).initializeData(currentDoctorId);
             } else if(controller instanceof  DoctorContainerController) {
                 ((DoctorContainerController) controller).initializeData(currentDoctorId);
+            } else if(controller instanceof  DoctorPatientList) {
+                ((DoctorPatientList) controller).initializeData(currentDoctorId);
+            } else if(controller instanceof DoctorWaitingListController) {
+                ((DoctorWaitingListController) controller).initializeData(currentDoctorId);
             }
 
             // Check if the new content is already displayed
@@ -287,5 +429,9 @@ public class DoctorContainerController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load " + fxmlFile + " page").show();
         }
+    }
+
+    public void setDoctorId(int id) {
+        this.currentDoctorId = id;
     }
 }

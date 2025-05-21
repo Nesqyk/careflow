@@ -28,9 +28,11 @@ public class Vitals {
 
     private LocalDateTime updatedAt;
 
+    private int appointmentId;
 
 
-    public Vitals(int patientId, int vitalsId, int nurseId, String bloodPressure, int heartRate, int respiratoryRate, double weightKg, double heightCm, double temperature, double oxygenSaturation, LocalDateTime recordedAt,  LocalDateTime updatedAt) {
+
+    public Vitals(int patientId, int vitalsId, int nurseId, String bloodPressure, int heartRate, int respiratoryRate, double weightKg, double heightCm, double temperature, double oxygenSaturation, LocalDateTime recordedAt,  LocalDateTime updatedAt, int appointmentId) {
         this.patientId = patientId;
         this.vitalsId = vitalsId;
         this.nurseId = nurseId;
@@ -43,6 +45,7 @@ public class Vitals {
         this.oxygenSaturation = oxygenSaturation;
         this.recordedAt = recordedAt;
         this.updatedAt = updatedAt;
+        this.appointmentId = appointmentId;
     }
 
     public double getHeightCm() {
@@ -95,4 +98,15 @@ public class Vitals {
         this.patientId = patientId;
     }
 
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public void setVitalsId(int vitalsId) {
+        this.vitalsId = vitalsId;
+    }
 }

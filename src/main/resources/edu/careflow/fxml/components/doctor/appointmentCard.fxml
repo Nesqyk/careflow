@@ -11,7 +11,7 @@
 
 <VBox fx:id="appointmentContainer" style="-fx-background-color: white; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.AppointmentCard">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="579.0" spacing="16.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="579.0" spacing="16.0" stylesheets="@../../../css/styles.css">
          <children>
             <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
                <children>

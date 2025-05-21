@@ -32,7 +32,8 @@ public class ConditionDAO {
                             rs.getString("condition_name"),
                             rs.getString("description"),
                             rs.getDate("onset_date").toLocalDate(),
-                            rs.getString("status")
+                            rs.getString("status"),
+                            rs.getInt("appointment_id")
                     ));
                 }
             }
@@ -47,7 +48,7 @@ public class ConditionDAO {
      * @throws SQLException If a database access error occurs
      */
     public boolean addCondition(Condition condition) throws SQLException {
-        String sql = "INSERT INTO conditions (patient_id, condition_id, condition_name, description, onset_date, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO conditions (patient_id, condition_id, condition_name, description, onset_date, status, appointment_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, condition.getPatientId());
             pstmt.setInt(2, condition.getConditionId());
@@ -55,6 +56,7 @@ public class ConditionDAO {
             pstmt.setString(4, condition.getDescription());
             pstmt.setDate(5, Date.valueOf(condition.getOnSetDate()));
             pstmt.setString(6, condition.getStatus());
+            pstmt.setInt(7, condition.getAppointmentId());
 
             return pstmt.executeUpdate() > 0;
         }
@@ -111,5 +113,27 @@ public class ConditionDAO {
                 }
             }
         }
+    }
+
+    public List<Condition> getConditionsByAppointmentId(int appointmentId) throws SQLException {
+        List<Condition> conditions = new ArrayList<>();
+        String sql = "SELECT * FROM conditions WHERE appointment_id = ?";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, appointmentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    conditions.add(new Condition(
+                            rs.getInt("condition_id"),
+                            rs.getInt("patient_id"),
+                            rs.getString("condition_name"),
+                            rs.getString("description"),
+                            rs.getDate("onset_date").toLocalDate(),
+                            rs.getString("status"),
+                            rs.getInt("appointment_id")
+                    ));
+                }
+            }
+        }
+        return conditions;
     }
 }

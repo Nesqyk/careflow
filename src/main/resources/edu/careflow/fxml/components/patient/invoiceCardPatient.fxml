@@ -3,195 +3,48 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<ScrollPane hbarPolicy="NEVER" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../css/styles.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <content>
-        <VBox spacing="24.0" style="-fx-background-color: white;">
-            <padding>
-                <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
-            </padding>
+<VBox fx:id="invoiceCard" prefHeight="120.0" prefWidth="600.0" spacing="0" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.cards.InvoiceCardPatientController">
+    <HBox alignment="CENTER_LEFT" spacing="16.0">
+        <!-- Colored ID bar -->
+        <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
             <children>
-                <!-- Invoice Header -->
-                <HBox styleClass="details-card">
-                    <children>
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label styleClass="section-header" text="INVOICE">
-                                <font>
-                                    <Font name="☞Gilroy-SemiBold" size="24.0" />
-                                </font>
-                            </Label>
-                            <Label fx:id="invoiceNumberLabel" text="INV-2024-001">
-                                <font>
-                                    <Font name="☞Gilroy-Medium" size="14.0" />
-                                </font>
-                            </Label>
-                        </VBox>
-                        <VBox alignment="TOP_RIGHT">
-                            <Label fx:id="invoiceDateLabel" text="March 20, 2024">
-                                <font>
-                                    <Font name="☞Gilroy-Medium" size="14.0" />
-                                </font>
-                            </Label>
-                            <Label fx:id="dueDateLabel" text="Due: April 20, 2024">
-                                <font>
-                                    <Font name="☞Gilroy-Medium" size="14.0" />
-                                </font>
-                            </Label>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                    </padding>
-                </HBox>
-
-                <!-- Patient and Doctor Details -->
-                <HBox spacing="24.0">
-                    <children>
-                        <!-- Patient Info -->
-                        <VBox styleClass="details-card" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label styleClass="section-header" text="Bill To">
-                                    <font>
-                                        <Font name="☞Gilroy-SemiBold" size="16.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="patientNameLabel" text="Patient Name">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="patientAddressLabel" text="Patient Address">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="patientContactLabel" text="Contact Number">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                            <padding>
-                                <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                            </padding>
-                        </VBox>
-
-                        <!-- Doctor Info -->
-                        <VBox styleClass="details-card" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label styleClass="section-header" text="Attending Physician">
-                                    <font>
-                                        <Font name="☞Gilroy-SemiBold" size="16.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="doctorNameLabel" text="Dr. Name">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="specialtyLabel" text="Specialty">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="licenseLabel" text="License No.">
-                                    <font>
-                                        <Font name="☞Gilroy-Medium" size="14.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                            <padding>
-                                <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                </HBox>
-
-                <!-- Invoice Items -->
-                <VBox spacing="16.0" styleClass="details-card">
-                    <children>
-                        <TableView fx:id="invoiceItemsTable" VBox.vgrow="ALWAYS">
-                            <columns>
-                                <TableColumn fx:id="itemColumn" prefWidth="300.0" text="Description" />
-                                <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
-                                <TableColumn fx:id="rateColumn" prefWidth="120.0" text="Rate" />
-                                <TableColumn fx:id="amountColumn" prefWidth="150.0" text="Amount" />
-                            </columns>
-                        </TableView>
-
-                        <!-- Totals -->
-                        <VBox alignment="TOP_RIGHT" spacing="8.0">
-                            <HBox spacing="16.0">
-                                <Label text="Subtotal:" />
-                                <Label fx:id="subtotalLabel" text="₱0.00" />
-                            </HBox>
-                            <HBox spacing="16.0">
-                                <Label text="Tax (12%):" />
-                                <Label fx:id="taxLabel" text="₱0.00" />
-                            </HBox>
-                            <HBox spacing="16.0">
-                                <Label styleClass="section-header" text="Total:">
-                                    <font>
-                                        <Font name="☞Gilroy-Bold" size="16.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="totalLabel" styleClass="section-header" text="₱0.00">
-                                    <font>
-                                        <Font name="☞Gilroy-Bold" size="16.0" />
-                                    </font>
-                                </Label>
-                            </HBox>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                    </padding>
-                </VBox>
-
-                <!-- Notes and Payment Details -->
-                <VBox spacing="16.0" styleClass="details-card">
-                    <children>
-                        <Label styleClass="section-header" text="Payment Details">
-                            <font>
-                                <Font name="☞Gilroy-SemiBold" size="16.0" />
-                            </font>
-                        </Label>
-                        <VBox spacing="8.0">
-                            <Label text="Bank Account:" />
-                            <Label fx:id="bankDetailsLabel" text="Bank Name: Sample Bank&#10;Account Name: CareFlow Medical Center&#10;Account Number: 1234-5678-9012" />
-                        </VBox>
-                        <Label text="Notes:" />
-                        <Label fx:id="notesLabel" text="Payment is due within 30 days. Please include invoice number in payment reference." wrapText="true" />
-                    </children>
-                    <padding>
-                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                    </padding>
-                </VBox>
-
-                <!-- Action Buttons -->
-                <HBox alignment="CENTER_RIGHT" spacing="16.0">
-                    <Button fx:id="printBtn" prefHeight="40.0" prefWidth="160.0" styleClass="border-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-print" />
-                        </graphic>
-                        <text>Print Invoice</text>
-                    </Button>
-                    <Button fx:id="downloadBtn" prefHeight="40.0" prefWidth="160.0" styleClass="cta-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-download" />
-                        </graphic>
-                        <text>Download PDF</text>
-                    </Button>
-                </HBox>
+                <Label fx:id="invoiceNumberLabel" styleClass="invoice-title-label" text="INV-12345" textFill="#0762F2" />
             </children>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
         </VBox>
-    </content>
-</ScrollPane>
+        <!-- Main info -->
+        <VBox alignment="CENTER_LEFT" spacing="4.0" stylesheets="@../../../css/styles.css" HBox.hgrow="ALWAYS">
+            <Label fx:id="serviceLabel" styleClass="invoice-service-label" text="General Consultation" />
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <FontIcon iconLiteral="fas-calendar" iconSize="12" />
+                <Label fx:id="dateLabel" styleClass="invoice-date-label" stylesheets="@../../../css/styles.css" text="2024-06-01" />
+            </HBox>
+            <Label fx:id="amountLabel" styleClass="invoice-amount-label" text="120.00" />
+        </VBox>
+        <!-- Status and Actions -->
+        <VBox alignment="CENTER" spacing="8.0">
+            <Label fx:id="statusLabel" styleClass="invoice-status-label paid-status" stylesheets="@../../../css/styles.css" text="PAID" />
+            <HBox spacing="8.0" alignment="CENTER">
+                <Button fx:id="previewButton" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-eye" iconSize="18" />
+                    </graphic>
+                </Button>
+                <Button fx:id="payButton" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-credit-card" iconSize="18" />
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+        </padding>
+    </HBox>
+</VBox>

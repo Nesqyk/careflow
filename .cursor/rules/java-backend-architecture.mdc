@@ -1,0 +1,39 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Java Backend Architecture Guide
+
+## Core Components
+
+### Entity Layer
+- Located in `src/main/java/edu/careflow/repository/entities/`
+- Key entities:
+  - [Prescription.java](mdc:src/main/java/edu/careflow/repository/entities/Prescription.java) - Prescription records
+  - [PrescriptionDetails.java](mdc:src/main/java/edu/careflow/repository/entities/PrescriptionDetails.java) - Medication details
+  - [Patient.java](mdc:src/main/java/edu/careflow/repository/entities/Patient.java) - Patient information
+  - [Doctor.java](mdc:src/main/java/edu/careflow/repository/entities/Doctor.java) - Doctor information
+
+### Data Access Layer
+- Located in `src/main/java/edu/careflow/repository/dao/`
+- Uses DAO pattern for database operations
+- Key DAOs:
+  - [MedicationDAO.java](mdc:src/main/java/edu/careflow/repository/dao/MedicationDAO.java) - Prescription operations
+  - [PatientDAO.java](mdc:src/main/java/edu/careflow/repository/dao/PatientDAO.java) - Patient operations
+  - [PrescriptionDAO.java](mdc:src/main/java/edu/careflow/repository/dao/PrescriptionDAO.java) - Prescription queries
+
+### Database Management
+- [DatabaseManager.java](mdc:src/main/java/edu/careflow/manager/DatabaseManager.java) - Singleton for database connections
+- SQLite database located at `src/main/resources/database.db`
+- Tables:
+  - `prescriptions` - Main prescription records
+  - `prescription_details` - Medication details
+  - `patients` - Patient information
+  - `doctors` - Doctor information
+
+## Design Patterns
+- DAO Pattern for data access
+- Singleton Pattern for database management
+- MVC Pattern for UI components
+- Repository Pattern for data operations

@@ -1,66 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox alignment="CENTER" prefHeight="725.0" prefWidth="752.0" spacing="32.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PrescriptionController">
+<VBox prefHeight="725.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PrescriptionController">
    <children>
-      <VBox prefHeight="494.0" prefWidth="342.0">
+      <VBox fx:id="prescriptionHistory" prefHeight="760.0" prefWidth="752.0" spacing="16.0" styleClass="card-property" stylesheets="@../../css/styles.css">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
          <children>
-            <VBox fx:id="activeMedicationContainer" prefHeight="683.0" prefWidth="328.0" spacing="12.0" styleClass="card-property" stylesheets="@../../css/styles.css">
-               <padding>
-                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <VBox prefHeight="35.0" prefWidth="302.0" spacing="12.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="243.0" styleClass="border-left-blue" text="Prescription History" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER_RIGHT" spacing="12.0">
                      <children>
-                        <Label alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="167.0" styleClass="border-left-blue" text="Active Medication" wrapText="true">
-                           <font>
-                              <Font name="☞Gilroy-Bold" size="14.0" />
-                           </font>
-                        </Label>
+                        <HBox fx:id="buttonsPrescriptionFilter" alignment="CENTER" minHeight="-Infinity" prefHeight="35.0" prefWidth="247.0" style="-fx-border-color: #0762F2; -fx-border-width: 0.2; -fx-border-radius: 6px;">
+                           <children>
+                              <Button fx:id="activePrescriptionBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" styleClass="nav-button" text="Active" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="pastPrescriptionBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="74.0" styleClass="nav-button" text="Past" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="☞Gilroy-Regular" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button fx:id="tableViewBtn" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="28.0" styleClass="view-button">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-table" iconSize="16" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            
+            <HBox fx:id="headerPrescription" alignment="CENTER_LEFT" prefHeight="32.0" spacing="12.0" style="-fx-background-color: #f5f9ff; -fx-border-color: #d1e3f8; -fx-border-width: 0 0 1 0;">
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Date" />
                      </children>
                   </VBox>
-                  <VBox fx:id="activeContainerMain" prefHeight="668.0" prefWidth="310.0" />
-                  <Pagination fx:id="activeMedicationPagination" maxPageIndicatorCount="3" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-         </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </VBox>
-      <VBox prefHeight="494.0" prefWidth="342.0">
-         <children>
-            <VBox fx:id="passMedicationContainer" prefHeight="686.0" prefWidth="329.0" spacing="12.0" styleClass="card-property" stylesheets="@../../css/styles.css">
-               <padding>
-                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <children>
-                  <VBox prefHeight="16.0" prefWidth="190.0" spacing="12.0">
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
                      <children>
-                        <Label alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="167.0" styleClass="border-left-blue" text="Pass Medication" wrapText="true">
-                           <font>
-                              <Font name="☞Gilroy-Bold" size="14.0" />
-                           </font>
-                        </Label>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Medication" />
                      </children>
                   </VBox>
-                  <VBox fx:id="pastContainerMain" prefHeight="708.0" prefWidth="310.0" />
-                  <Pagination fx:id="passMedicationPage" maxPageIndicatorCount="3" prefHeight="200.0" prefWidth="200.0" />
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Dosage" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Frequency" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" text="Duration" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="4.0">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #333333;" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
+            
+            <VBox fx:id="prescriptionRowsContainer" prefHeight="591.0" prefWidth="688.0" spacing="4.0" />
+            
+            <!-- Prescription Pagination -->
+            <Pagination fx:id="prescriptionPagination" maxPageIndicatorCount="5" prefHeight="50.0" styleClass="pagination-control" />
          </children>
       </VBox>
    </children>
-</HBox>
+</VBox>

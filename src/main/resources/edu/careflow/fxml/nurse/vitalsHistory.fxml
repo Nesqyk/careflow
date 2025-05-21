@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" spacing="16" style="-fx-background-color: white; -fx-padding: 24;">
+    <Label text="Vitals History" style="-fx-font-size: 20px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #0078D4;" />
+    <TableView fx:id="vitalsTable" prefHeight="320">
+        <columns>
+            <TableColumn fx:id="dateCol" text="Date" />
+            <TableColumn fx:id="bpCol" text="BP" />
+            <TableColumn fx:id="tempCol" text="Temp (°C)" />
+            <TableColumn fx:id="pulseCol" text="Pulse" />
+            <TableColumn fx:id="rrCol" text="RR" />
+            <TableColumn fx:id="notesCol" text="Notes" />
+        </columns>
+    </TableView>
+</VBox> 

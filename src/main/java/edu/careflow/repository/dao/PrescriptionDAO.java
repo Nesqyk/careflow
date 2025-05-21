@@ -3,6 +3,7 @@ package edu.careflow.repository.dao;
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Prescription;
 import edu.careflow.repository.entities.PrescriptionDetails;
+import edu.careflow.utils.DateTimeUtil;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -84,12 +85,13 @@ public class PrescriptionDAO {
      * @throws SQLException If a database access error occurs
      */
     public int addPrescription(Prescription prescription) throws SQLException {
-        String sql = "INSERT INTO prescriptions (patient_id, doctor_id, issue_date, valid_until) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO prescriptions (patient_id, doctor_id, issue_date, valid_until, appointment_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setInt(1, prescription.getPatientId());
             pstmt.setInt(2, prescription.getDoctorId());
             pstmt.setDate(3, Date.valueOf(prescription.getIssueDate()));
             pstmt.setDate(4, Date.valueOf(prescription.getValidUntil()));
+            pstmt.setInt(5, prescription.getAppointmentId());
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
@@ -141,7 +143,8 @@ public class PrescriptionDAO {
                             rs.getInt("doctor_id"),
                             rs.getDate("issue_date").toLocalDate(),
                             rs.getDate("valid_until") != null ? rs.getDate("valid_until").toLocalDate() : null,
-                            rs.getTimestamp("created_at").toLocalDateTime()
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                            rs.getInt("appointment_id")
                     ));
                 }
             }
@@ -168,7 +171,8 @@ public class PrescriptionDAO {
                             rs.getInt("doctor_id"),
                             rs.getDate("issue_date").toLocalDate(),
                             rs.getDate("valid_until") != null ? rs.getDate("valid_until").toLocalDate() : null,
-                            rs.getTimestamp("created_at").toLocalDateTime()
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                            rs.getInt("appointment_id")
                     ));
                 }
             }
@@ -195,7 +199,30 @@ public class PrescriptionDAO {
                             rs.getInt("doctor_id"),
                             rs.getDate("issue_date").toLocalDate(),
                             rs.getDate("valid_until") != null ? rs.getDate("valid_until").toLocalDate() : null,
-                            rs.getTimestamp("created_at").toLocalDateTime()
+                            DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                            rs.getInt("appointment_id")
+                    ));
+                }
+            }
+        }
+        return prescriptions;
+    }
+
+    public List<Prescription> getPrescriptionsByAppointmentId(int appointmentId) throws SQLException {
+        List<Prescription> prescriptions = new ArrayList<>();
+        String sql = "SELECT * FROM prescriptions WHERE appointment_id = ?";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, appointmentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    prescriptions.add(new Prescription(
+                            rs.getInt("prescription_id"),
+                            rs.getInt("patient_id"),
+                            rs.getInt("doctor_id"),
+                            rs.getDate("issue_date").toLocalDate(),
+                            rs.getDate("valid_until") != null ? rs.getDate("valid_until").toLocalDate() : null,
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getInt("appointment_id")
                     ));
                 }
             }

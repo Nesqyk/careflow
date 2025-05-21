@@ -3,6 +3,8 @@ package edu.careflow.presentation.controllers;
 import com.dlsc.gemsfx.EnhancedPasswordField;
 import edu.careflow.manager.AuthManager;
 import edu.careflow.presentation.controllers.doctor.DoctorContainerController;
+import edu.careflow.presentation.controllers.nurse.ContainerNurseController;
+import edu.careflow.presentation.controllers.receptionist.ReceptionistContainerController;
 import edu.careflow.repository.dao.UserDAO;
 import edu.careflow.repository.entities.User;
 import javafx.animation.FadeTransition;
@@ -119,6 +121,60 @@ public class LoginController  {
                             fadeIn.play();
                         } catch(IOException e) {
                             handleNavigationError(e, "Doctor Dashboard");
+                        }
+                        break;
+                    case 1: // Nurse role
+                        try {
+                            Stage stage = (Stage) usernameTextInput.getScene().getWindow();
+
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/nurse/containerNurse.fxml"));
+                            Parent nurseRoot = loader.load();
+                            Scene nurseScene = new Scene(nurseRoot, stage.getScene().getWidth(), stage.getScene().getHeight());
+
+                            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), nurseRoot);
+                            fadeIn.setFromValue(0.2);
+                            fadeIn.setToValue(1.0);
+
+                            Object controller = loader.getController();
+
+                            if(controller instanceof ContainerNurseController) {
+                                ((ContainerNurseController) controller).setNurseId(user.getUser_id());
+                            }
+
+                            stage.setScene(nurseScene);
+                            stage.setTitle("CareFlow | Nurse Dashboard");
+                            stage.centerOnScreen();
+
+                            fadeIn.play();
+                        } catch(IOException e) {
+                            handleNavigationError(e, "Nurse Dashboard");
+                        }
+                        break;
+                    case 2: // Receptionist role
+                        try {
+                            Stage stage = (Stage) usernameTextInput.getScene().getWindow();
+
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/receptionist/containerReceptionistNew.fxml"));
+                            Parent receptionistRoot = loader.load();
+                            Scene receptionistScene = new Scene(receptionistRoot, stage.getScene().getWidth(), stage.getScene().getHeight());
+
+                            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), receptionistRoot);
+                            fadeIn.setFromValue(0.2);
+                            fadeIn.setToValue(1.0);
+
+                            Object controller = loader.getController();
+
+                            if(controller instanceof ReceptionistContainerController) {
+                                ((ReceptionistContainerController) controller).initializeData(user.getFirstName() + " " + user.getLastName(), "Receptionist");
+                            }
+
+                            stage.setScene(receptionistScene);
+                            stage.setTitle("CareFlow | Receptionist Dashboard");
+                            stage.centerOnScreen();
+
+                            fadeIn.play();
+                        } catch(IOException e) {
+                            handleNavigationError(e, "Receptionist Dashboard");
                         }
                         break;
                 }

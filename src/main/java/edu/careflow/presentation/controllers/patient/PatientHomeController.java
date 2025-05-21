@@ -5,6 +5,7 @@ import edu.careflow.repository.dao.*;
 import edu.careflow.repository.entities.Appointment;
 import edu.careflow.repository.entities.Condition;
 import edu.careflow.repository.entities.Prescription;
+import edu.careflow.repository.entities.PrescriptionDetails;
 import edu.careflow.repository.entities.Vitals;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -371,7 +372,13 @@ public class PatientHomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/prescriptionCard.fxml"));
                 Parent cardContent = loader.load();
                 PrescriptionCardController controller = loader.getController();
-                controller.initializeData(medications.get(i));
+                Prescription prescription = medications.get(i);
+                try {
+                    PrescriptionDetails details = prescriptionDAO.getPrescriptionDetails(prescription.getPrescriptionId());
+                    controller.initializeData(prescription, details);
+                } catch (SQLException e) {
+                    controller.initializeData(prescription, null);
+                }
                 page.getChildren().add(cardContent);
             } catch (IOException e) {
                 handleFxmlLoadingError(e);
@@ -413,7 +420,12 @@ public class PatientHomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/patient/prescriptionCard.fxml"));
                 Parent cardContent = loader.load();
                 PrescriptionCardController controller = loader.getController();
-                controller.initializeData(prescription);
+                try {
+                    PrescriptionDetails details = prescriptionDAO.getPrescriptionDetails(prescription.getPrescriptionId());
+                    controller.initializeData(prescription, details);
+                } catch (SQLException e) {
+                    controller.initializeData(prescription, null);
+                }
                 medicationContainer.getChildren().add(cardContent);
             }
 

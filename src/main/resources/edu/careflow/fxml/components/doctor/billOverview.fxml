@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="billOverview" spacing="24.0" style="-fx-background-color: white;" styleClass="card-property" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.BillOverviewController">
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" styleClass="details-card">
+        <Label alignment="CENTER" prefHeight="22.0" prefWidth="134.0" styleClass="section-header" text="Bill Overview">
+            <font>
+                <Font name="☞Gilroy-SemiBold" size="16.0" />
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="closeButton" styleClass="icon-button">
+            <graphic>
+                <FontIcon iconLiteral="far-times-circle" iconSize="20" />
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Content -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="24.0">
+                <!-- Patient Info Section -->
+                <VBox spacing="8">
+                    <Label styleClass="section-header" text="Patient Information" />
+                    <VBox spacing="16" styleClass="info-container">
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <FontIcon iconLiteral="fas-user" styleClass="detail-icon" />
+                            <VBox spacing="2">
+                                <Label styleClass="detail-label" text="Patient Name" />
+                                <Label fx:id="patientNameLabel" styleClass="detail-value" text="John Doe" />
+                            </VBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <FontIcon iconLiteral="fas-calendar" styleClass="detail-icon" />
+                            <VBox spacing="2">
+                                <Label styleClass="detail-label" text="Appointment Date" />
+                                <Label fx:id="appointmentDateLabel" styleClass="detail-value" text="2024-03-20" />
+                            </VBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <FontIcon iconLiteral="fas-stethoscope" styleClass="detail-icon" />
+                            <VBox spacing="2">
+                                <Label styleClass="detail-label" text="Appointment Type" />
+                                <Label fx:id="appointmentTypeLabel" styleClass="detail-value" text="Regular Checkup" />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Services Section -->
+                <VBox spacing="8">
+                    <Label styleClass="section-header" text="Services Provided" />
+                    <VBox fx:id="servicesContainer" spacing="8" styleClass="info-container">
+                        <!-- Services will be added dynamically -->
+                    </VBox>
+                </VBox>
+
+                <!-- Total Section -->
+                <VBox spacing="8">
+                    <Label styleClass="section-header" text="Payment Summary" />
+                    <VBox spacing="16" styleClass="info-container">
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <FontIcon iconLiteral="fas-dollar-sign" styleClass="detail-icon" />
+                            <VBox spacing="2">
+                                <Label styleClass="detail-label" text="Total Amount" />
+                                <Label fx:id="totalAmountLabel" styleClass="detail-value" text="0.00" />
+                            </VBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <FontIcon iconLiteral="fas-calendar-alt" styleClass="detail-icon" />
+                            <VBox spacing="2">
+                                <Label styleClass="detail-label" text="Due Date" />
+                                <Label fx:id="dueDateLabel" styleClass="detail-value" text="2024-04-20" />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_RIGHT" spacing="16">
+                    <Button fx:id="cancelButton" prefHeight="34.0" prefWidth="143.0" styleClass="action-button" text="Cancel">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-times" iconSize="14" />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="confirmButton" prefHeight="34.0" prefWidth="129.0" styleClass="action-button" text="Confirm">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-check" iconSize="14" />
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+    
+    <padding>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+    </padding>
+</VBox>

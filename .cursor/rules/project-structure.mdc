@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This is a Java-based Gradle project with the following main components:
+
+## Main Application
+- The main application entry point is [Careflow.java](mdc:src/main/java/edu/careflow/Careflow.java)
+
+## Key Directories
+- `controllers/`: Contains the application's controller classes
+- `manager/`: Contains business logic and management classes
+- `utils/`: Contains utility and helper classes
+- `presentation/`: Contains UI and presentation layer components
+- `repository/`: Contains data access and persistence layer
+- `service/`: Contains service layer components
+
+## Build Configuration
+- Project build configuration is managed through [build.gradle](mdc:build.gradle)
+- Module configuration is defined in [module-info.java](mdc:src/main/java/module-info.java)
+
+## Resources
+- Application resources are located in `src/main/resources/`
+

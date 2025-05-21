@@ -1,42 +1,55 @@
 package edu.careflow.manager;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class DatabaseManager {
+    private static final String DB_URL = "jdbc:sqlite:src/main/resources/database.db";
     private static Connection connection;
     private static DatabaseManager instance;
+    private static boolean isInitialized = false;
 
     // Singleton pattern: Ensure only one instance of DatabaseManager exists
     private DatabaseManager() {
-        this.initializeDatabase();
         // Private constructor to prevent instantiation
     }
 
-    public static Connection getConnection() {
-        return connection;
+    public static synchronized Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            initializeDatabase();
+        }
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL);
+            conn.setAutoCommit(true);
+            // Set timezone to GMT+8
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("PRAGMA timezone = '+08:00'");
+            }
+            return conn;
+        } catch (SQLException e) {
+            System.out.println("Error getting database connection: " + e.getMessage());
+            throw e;
+        }
     }
 
-    public static DatabaseManager getInstance() {
+    public static synchronized DatabaseManager getInstance() {
         if (instance == null) {
             instance = new DatabaseManager();
         }
         return instance;
     }
 
-    public void initializeDatabase() {
-        if (connection == null) {
+    public static synchronized void initializeDatabase() throws SQLException {
+        if (!isInitialized) {
             try {
                 // Database URL for SQLite connection
                 String DB_URL = "jdbc:sqlite:src/main/resources/database.db";
                 connection = DriverManager.getConnection(DB_URL);
+                connection.setAutoCommit(true);
+                isInitialized = true;
                 System.out.println("Database connection established.");
             } catch (SQLException e) {
                 System.out.println("Error connecting to the database: " + e.getMessage());
+                throw e;
             }
         }
     }
@@ -54,6 +67,7 @@ public class DatabaseManager {
                     "contact_number VARCHAR(15), " +
                     "email VARCHAR(100), " +
                     "address TEXT, " +
+                    "image_avatar BLOB, " +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                     ");");
 
@@ -202,10 +216,11 @@ public class DatabaseManager {
         }
     }
 
-    public void closeConnection() {
-        if (connection != null) {
+    public synchronized void closeConnection() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
             try {
                 connection.close();
+                isInitialized = false;
                 System.out.println("Database connection closed.");
             } catch (SQLException e) {
                 System.out.println("Error closing the database connection: " + e.getMessage());
@@ -213,59 +228,42 @@ public class DatabaseManager {
         }
     }
 
-    public ResultSet executeQuery(String query) {
-        ResultSet resultSet = null;
-        if (connection != null) {
-            try (Statement stmt = connection.createStatement()) {
-                resultSet = stmt.executeQuery(query);
-            } catch (SQLException e) {
-                System.out.println("Error executing query: " + e.getMessage());
-            }
+    public ResultSet executeQuery(String query) throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            initializeDatabase();
         }
-        return resultSet;
-    }
-
-    public int executeUpdate(String query) {
-        int affectedRows = 0;
-        if (connection != null) {
-            try (Statement stmt = connection.createStatement()) {
-                affectedRows = stmt.executeUpdate(query);
-            } catch (SQLException e) {
-                System.out.println("Error executing update: " + e.getMessage());
-            }
-        }
-        return affectedRows;
-    }
-
-    public void beginTransaction() {
-        if (connection != null) {
-            try {
-                connection.setAutoCommit(false);
-            } catch (SQLException e) {
-                System.out.println("Error beginning transaction: " + e.getMessage());
-            }
+        try (Statement stmt = connection.createStatement()) {
+            return stmt.executeQuery(query);
         }
     }
 
-    public void commitTransaction() {
-        if (connection != null) {
-            try {
-                connection.commit();
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                System.out.println("Error committing transaction: " + e.getMessage());
-            }
+    public int executeUpdate(String query) throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            initializeDatabase();
+        }
+        try (Statement stmt = connection.createStatement()) {
+            return stmt.executeUpdate(query);
         }
     }
 
-    public void rollbackTransaction() {
-        if (connection != null) {
-            try {
-                connection.rollback();
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                System.out.println("Error rolling back transaction: " + e.getMessage());
-            }
+    public void beginTransaction() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            initializeDatabase();
+        }
+        connection.setAutoCommit(false);
+    }
+
+    public void commitTransaction() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.commit();
+            connection.setAutoCommit(true);
+        }
+    }
+
+    public void rollbackTransaction() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.rollback();
+            connection.setAutoCommit(true);
         }
     }
 }

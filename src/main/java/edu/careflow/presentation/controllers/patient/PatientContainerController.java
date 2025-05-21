@@ -195,6 +195,7 @@ public class PatientContainerController {
     @FXML
     private void handleSettings() {
         try {
+            resetAllBtnStyle();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/careflow/fxml/components/user/addPatientForm.fxml"));
             Parent settingsForm = loader.load();
             AddPatientForm controller = loader.getController();
@@ -245,6 +246,8 @@ public class PatientContainerController {
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
             }
+
+            animateButtonSelection(settingsBtn);
         } catch (IOException | SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load settings form").show();
@@ -253,6 +256,7 @@ public class PatientContainerController {
     @FXML
     private void handleBookForm() {
         try {
+            resetAllBtnStyle();
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/careflow/fxml/components/patient/bookAptForm.fxml")
             );
@@ -298,6 +302,10 @@ public class PatientContainerController {
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
             }
+
+
+            // set text to our blue and greyish background with border
+            animateButtonSelection(bookBtnUser);
         } catch (IOException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load booking form").show();
@@ -449,7 +457,7 @@ public class PatientContainerController {
     @FXML
     private void handleBillingNavigation() {
         resetAllBtnStyle();
-        setPageContent(Integer.parseInt(patientId.getText().replace("Careflow Id : ", "")), "patientBilling");
+        setPageContent(Integer.parseInt(patientId.getText().replace("Careflow Id : ", "")), "patientInvoices");
         animateButtonSelection(billBtnPatient);
     }
 
@@ -494,6 +502,7 @@ public class PatientContainerController {
         appointmentBtnPatient.getStyleClass().setAll("nav-button");
         medBtnPatient.getStyleClass().setAll("nav-button");
         billBtnPatient.getStyleClass().setAll("nav-button");
+        bookBtnUser.getStyleClass().setAll("cta-button");
     }
 
     private void setPageContent(int patientId, String file) {
@@ -530,6 +539,8 @@ public class PatientContainerController {
                 ((AllergyPageController) controller).initializePatient(patientId);
             } else if(controller instanceof BookAptForm) {
                 ((BookAptForm) controller). setPatientId(patientId);
+            } else if(controller instanceof PatientInvoicesController patientInvoicesController) {
+                patientInvoicesController.setPatientId(patientId);
             }
 
             // Check if the current page is already the same instance

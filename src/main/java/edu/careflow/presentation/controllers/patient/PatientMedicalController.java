@@ -32,6 +32,9 @@ public class PatientMedicalController {
     @FXML
     private Button vitalsBtn;
 
+    @FXML
+    private Button patientNotesBtn;
+
 
     private Button currentActiveButton = null;
 
@@ -39,6 +42,7 @@ public class PatientMedicalController {
         prescriptionBtn.setOnAction(event -> handlePrescriptionNavigation(patientId));
         recordsBtn.setOnAction(event -> handleRecordsNavigation(patientId));
         vitalsBtn.setOnAction(event -> handleVitalsNavigation(patientId));
+        patientNotesBtn.setOnAction(event -> {handleVisitNotesNavigation(patientId);});
 
         // look up at root of scene then lookup mainContainer then add the patientHeaderChoice
 
@@ -46,6 +50,12 @@ public class PatientMedicalController {
 
         // Load prescription page by default
         handlePrescriptionNavigation(patientId);
+    }
+
+    private void handleVisitNotesNavigation(int patientId) {
+        resetAllBtnStyle();
+        setPageContent(patientId, "notesPage");
+        animateButtonSelection(patientNotesBtn);
     }
 
     private void handlePrescriptionNavigation(int patientId) {
@@ -115,6 +125,8 @@ public class PatientMedicalController {
                 ((ConsultationController) controller).initializeData(patientId);
             } else if(controller instanceof  VitalsBioController) {
                 ((VitalsBioController) controller).initializeData(patientId);
+            } else if(controller instanceof PatientNotesPageController) {
+                ((PatientNotesPageController) controller).setPatientId(patientId);
             }
 
             if (!mainContainer.getChildren().isEmpty() && mainContainer.getChildren().get(0) == pageContent) {

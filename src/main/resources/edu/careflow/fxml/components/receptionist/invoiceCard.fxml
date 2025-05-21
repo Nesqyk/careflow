@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="invoiceCard" prefHeight="98.0" prefWidth="579.0" spacing="0" style="-fx-background-color: white; -fx-background-radius: 12;" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.receptionist.ReceptionistInvoiceCardController">
+    <HBox alignment="CENTER_LEFT" spacing="16.0">
+        <!-- Colored ID bar -->
+        <VBox alignment="CENTER" minWidth="64.0" style="-fx-background-color: #F5F8FF; -fx-background-radius: 8;">
+            <children>
+                <Label fx:id="invoiceNumberLabel" styleClass="invoice-title-label" text="INV-12345" textFill="#0762F2" />
+            </children>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+        <!-- Main info -->
+        <VBox spacing="4.0" stylesheets="@../../../css/styles.css" HBox.hgrow="ALWAYS">
+            <Label fx:id="patientNameLabel" styleClass="invoice-patient-label" text="John Doe" />
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <FontIcon iconLiteral="fas-calendar" iconSize="12" />
+                <Label fx:id="dateLabel" styleClass="invoice-date-label" stylesheets="@../../../css/styles.css" text="2024-06-01" />
+            </HBox>
+            <Label fx:id="amountLabel" styleClass="invoice-amount-label" text="120.00" />
+        </VBox>
+        <!-- Status and Actions -->
+        <VBox alignment="CENTER" spacing="8.0">
+            <Label fx:id="statusLabel" styleClass="invoice-status-label paid-status" stylesheets="@../../../css/styles.css" text="PAID" />
+            <HBox alignment="CENTER" spacing="8.0">
+                <Button fx:id="viewBtn" styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="View Invoice Details" />
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconLiteral="fas-eye" iconSize="18" />
+                    </graphic>
+                </Button>
+                <Button fx:id="editBtn" styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Edit Invoice" />
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconLiteral="fas-edit" iconSize="18" />
+                    </graphic>
+                </Button>
+                <Button fx:id="downloadBtn" styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Download Invoice" />
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconLiteral="fas-download" iconSize="18" />
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+        </padding>
+    </HBox>
+</VBox>

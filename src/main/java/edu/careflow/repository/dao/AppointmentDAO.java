@@ -2,7 +2,10 @@ package edu.careflow.repository.dao;
 
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Appointment;
+import edu.careflow.repository.entities.Patient;
+import edu.careflow.utils.DateTimeUtil;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +27,10 @@ public class AppointmentDAO {
             pstmt.setInt(1, appointment.getPatientId());
             pstmt.setInt(2, appointment.getDoctorId());
             pstmt.setInt(3, appointment.getNurseId());
-            pstmt.setTimestamp(4, Timestamp.valueOf(appointment.getAppointmentDate()));
+            pstmt.setTimestamp(4, DateTimeUtil.toTimestamp(appointment.getAppointmentDate()));
             pstmt.setString(5, appointment.getStatus());
             pstmt.setString(6, appointment.getNotes());
-            pstmt.setTimestamp(7, Timestamp.valueOf(appointment.getCreatedAt()));
+            pstmt.setTimestamp(7, DateTimeUtil.toTimestamp(appointment.getCreatedAt()));
             pstmt.setString(8, appointment.getRoom());
             pstmt.setString(9, appointment.getSymptoms());
             pstmt.setString(10, appointment.getDiagnosis());
@@ -36,7 +39,7 @@ public class AppointmentDAO {
             pstmt.setString(13, appointment.getMeetingLink());
             pstmt.setString(14, appointment.getBookedBy());
             pstmt.setString(15, appointment.getPreferredContact());
-            pstmt.setTimestamp(16, Timestamp.valueOf(appointment.getBookingTime()));
+            pstmt.setTimestamp(16, DateTimeUtil.toTimestamp(appointment.getBookingTime()));
 
             return pstmt.executeUpdate() > 0;
         }
@@ -68,7 +71,7 @@ public class AppointmentDAO {
             pstmt.setInt(1, appointment.getPatientId());
             pstmt.setInt(2, appointment.getDoctorId());
             pstmt.setInt(3, appointment.getNurseId());
-            pstmt.setTimestamp(4, Timestamp.valueOf(appointment.getAppointmentDate()));
+            pstmt.setTimestamp(4, DateTimeUtil.toTimestamp(appointment.getAppointmentDate()));
             pstmt.setString(5, appointment.getStatus());
             pstmt.setString(6, appointment.getNotes());
             pstmt.setString(7, appointment.getRoom());
@@ -79,7 +82,7 @@ public class AppointmentDAO {
             pstmt.setString(12, appointment.getMeetingLink());
             pstmt.setString(13, appointment.getBookedBy());
             pstmt.setString(14, appointment.getPreferredContact());
-            pstmt.setTimestamp(15, Timestamp.valueOf(appointment.getBookingTime()));
+            pstmt.setTimestamp(15, DateTimeUtil.toTimestamp(appointment.getBookingTime()));
             pstmt.setInt(16, appointment.getAppointmentId());
 
             return pstmt.executeUpdate() > 0;
@@ -203,16 +206,34 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    /**
+     * Get all appointments
+     * @return List of all appointments
+     * @throws SQLException If a database access error occurs
+     */
+    public List<Appointment> getAllAppointments() throws SQLException {
+        List<Appointment> appointments = new ArrayList<>();
+        String sql = "SELECT * FROM appointments";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    appointments.add(createAppointmentFromResultSet(rs));
+                }
+            }
+        }
+        return appointments;
+    }
+
     private Appointment createAppointmentFromResultSet(ResultSet rs) throws SQLException {
         return new Appointment(
                 rs.getInt("appointment_id"),
                 rs.getInt("patient_id"),
                 rs.getInt("doctor_id"),
                 rs.getInt("nurse_id"),
-                rs.getTimestamp("appointment_date").toLocalDateTime(),
+                DateTimeUtil.fromTimestamp(rs.getTimestamp("appointment_date")),
                 rs.getString("status"),
                 rs.getString("notes"),
-                rs.getTimestamp("created_at").toLocalDateTime(),
+                DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
                 rs.getString("room"),
                 rs.getString("symptoms"),
                 rs.getString("diagnosis"),
@@ -221,7 +242,139 @@ public class AppointmentDAO {
                 rs.getString("meeting_link"),
                 rs.getString("booked_by"),
                 rs.getString("preferred_contact"),
-                rs.getTimestamp("booking_time") != null ? rs.getTimestamp("booking_time").toLocalDateTime() : null
+                DateTimeUtil.fromTimestamp(rs.getTimestamp("booking_time"))
         );
+    }
+
+    public List<Patient> getPatientsByDoctorId(int doctorId) throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT DISTINCT p.* FROM patients p " +
+                    "JOIN appointments a ON p.patient_id = a.patient_id " +
+                    "WHERE a.doctor_id = ?";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, doctorId);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Patient patient = new Patient(
+                    rs.getInt("patient_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("date_of_birth").toLocalDate(),
+                    rs.getString("gender"),
+                    rs.getString("contact_number"),
+                    rs.getString("email"),
+                    rs.getString("address"),
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    null // updatedAt is not in the database schema
+                );
+                patients.add(patient);
+            }
+        }
+        return patients;
+    }
+
+    public List<Patient> getRecentPatientsByDoctorId(int doctorId, int days) throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT DISTINCT p.* FROM patients p " +
+                    "JOIN appointments a ON p.patient_id = a.patient_id " +
+                    "WHERE a.doctor_id = ? " +
+                    "AND a.appointment_date >= datetime('now', ?) " +
+                    "ORDER BY a.appointment_date DESC";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, doctorId);
+            pstmt.setString(2, "-" + days + " days");
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Patient patient = new Patient(
+                    rs.getInt("patient_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("date_of_birth").toLocalDate(),
+                    rs.getString("gender"),
+                    rs.getString("contact_number"),
+                    rs.getString("email"),
+                    rs.getString("address"),
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    null // updatedAt is not in the database schema
+                );
+                patients.add(patient);
+            }
+        }
+        return patients;
+    }
+
+    public List<Patient> getActivePatientsByDoctorId(int doctorId) throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT DISTINCT p.* FROM patients p " +
+                    "JOIN appointments a ON p.patient_id = a.patient_id " +
+                    "WHERE a.doctor_id = ? " +
+                    "AND a.status = 'Scheduled' " +
+                    "ORDER BY a.appointment_date DESC";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, doctorId);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Patient patient = new Patient(
+                    rs.getInt("patient_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("date_of_birth").toLocalDate(),
+                    rs.getString("gender"),
+                    rs.getString("contact_number"),
+                    rs.getString("email"),
+                    rs.getString("address"),
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    null // updatedAt is not in the database schema
+                );
+                patients.add(patient);
+            }
+        }
+        return patients;
+    }
+
+    public List<Patient> getScheduledPatientsByDoctorId(int doctorId) throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT DISTINCT p.* FROM patients p " +
+                    "JOIN appointments a ON p.patient_id = a.patient_id " +
+                    "WHERE a.doctor_id = ? " +
+                    "AND a.status = 'Scheduled' " +
+                    "AND a.appointment_date >= datetime('now') " +
+                    "ORDER BY a.appointment_date ASC";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, doctorId);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Patient patient = new Patient(
+                    rs.getInt("patient_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("date_of_birth").toLocalDate(),
+                    rs.getString("gender"),
+                    rs.getString("contact_number"),
+                    rs.getString("email"),
+                    rs.getString("address"),
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    null // updatedAt is not in the database schema
+                );
+                patients.add(patient);
+            }
+        }
+        return patients;
     }
 }

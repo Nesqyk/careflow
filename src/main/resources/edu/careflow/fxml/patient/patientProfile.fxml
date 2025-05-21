@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox spacing="16" styleClass="details-card" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.patient.PatientProfileController">
+    <padding>
+        <Insets bottom="24" left="24" right="24" top="24" />
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <AvatarView fx:id="patientAvatar" arcSize="12" size="80" />
+        <VBox spacing="4">
+            <Label fx:id="patientName" styleClass="card-title" />
+            <Label fx:id="patientId" styleClass="card-label" />
+            <HBox spacing="8">
+                <Label fx:id="patientAge" styleClass="card-label" />
+                <Label fx:id="patientGender" styleClass="card-label" />
+            </HBox>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="editProfileBtn" styleClass="border-button" text="Edit Profile">
+            <graphic>
+                <FontIcon iconLiteral="fas-edit" iconSize="14" />
+            </graphic>
+        </Button>
+    </HBox>
+
+    <Separator />
+
+    <!-- Contact Information -->
+    <VBox spacing="8">
+        <Label styleClass="section-header" text="Contact Information">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="14.0" />
+         </font></Label>
+        <GridPane hgap="16" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120" prefWidth="120" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label styleClass="detail-label" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="patientEmail" styleClass="detail-value" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label styleClass="detail-label" text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="patientPhone" styleClass="detail-value" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label styleClass="detail-label" text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="patientAddress" styleClass="detail-value" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </VBox>
+
+    <Separator />
+
+    <!-- Medical Information -->
+    <VBox spacing="8">
+        <Label styleClass="section-header" text="Medical Information">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="14.0" />
+         </font></Label>
+        <GridPane hgap="16" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120" prefWidth="120" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label styleClass="detail-label" text="Blood Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="bloodType" styleClass="detail-value" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label styleClass="detail-label" text="Allergies:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="allergies" styleClass="detail-value" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label styleClass="detail-label" text="Conditions:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="conditions" styleClass="detail-value" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </VBox>
+
+    <Separator />
+
+    <!-- Recent Visits -->
+    <VBox spacing="8">
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <Label styleClass="section-header" text="Recent Visits">
+            <font>
+               <Font name="☞Gilroy-SemiBold" size="12.0" />
+            </font></Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="viewAllVisitsBtn" styleClass="button-no-bg" text="View All">
+                <graphic>
+                    <FontIcon iconLiteral="fas-chevron-right" iconSize="12" />
+                </graphic>
+            </Button>
+        </HBox>
+        <VBox fx:id="recentVisitsContainer" spacing="8" />
+    </VBox>
+
+    <Separator />
+
+    <!-- Action Buttons -->
+    <HBox alignment="CENTER_RIGHT" spacing="8">
+        <Button fx:id="startVisitBtn" prefHeight="28.0" prefWidth="112.0" styleClass="cta-button" text="Start Visit">
+            <graphic>
+                <FontIcon iconLiteral="fas-play" iconSize="12" />
+            </graphic>
+        </Button>
+        <Button fx:id="backBtn" prefHeight="28.0" prefWidth="121.0" styleClass="border-button" text="Back">
+            <graphic>
+                <FontIcon iconLiteral="fas-arrow-left" iconSize="12" />
+            </graphic>
+        </Button>
+    </HBox>
+</VBox>

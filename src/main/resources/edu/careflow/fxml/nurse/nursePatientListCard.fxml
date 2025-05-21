@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.gemsfx.AvatarView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="patientCardContainer" spacing="8.0" styleClass="card-property" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.nurse.NursePatientListCardController">
+    <padding>
+        <Insets bottom="16" left="16" right="16" top="16" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <children>
+                <AvatarView fx:id="patientAvatar" arcSize="12" size="42.0" />
+                <VBox spacing="4">
+                    <children>
+                        <Label fx:id="patientNameLabel" styleClass="card-title" />
+                        <Label fx:id="patientIdLabel" styleClass="card-label" />
+                    </children>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <VBox alignment="CENTER_RIGHT" spacing="4">
+                    <children>
+                        <Label fx:id="lastVisitDateLabel" styleClass="card-label" />
+                        <HBox alignment="CENTER_RIGHT" spacing="8">
+                            <children>
+                                <Label fx:id="visitCountLabel" styleClass="card-value" />
+                                <Label styleClass="card-label" text="visits">
+                                    <font>
+                                        <Font name="☞Gilroy-Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <Separator />
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <children>
+                <Button fx:id="viewProfileBtn" mnemonicParsing="false" prefHeight="38.0" styleClass="action-button" text="View Profile" />
+                <Button fx:id="addNoteBtn" mnemonicParsing="false" prefHeight="35.0" styleClass="action-button" text="Add Note" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="historyBtn" mnemonicParsing="false" styleClass="nav-button" text="History">
+                    <graphic>
+                        <FontIcon fx:id="historyIcon" iconLiteral="fas-history" iconSize="12" />
+                    </graphic>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>

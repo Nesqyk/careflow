@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox spacing="24" style="-fx-background-color: white; -fx-padding: 24; -fx-border-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.receptionist.ReceptionistSettingsController">
+    <padding>
+        <Insets bottom="32" left="32" right="32" top="32"/>
+    </padding>
+    
+    <Label text="Settings" style="-fx-font-size: 24px; -fx-font-family: 'Gilroy-SemiBold'; -fx-text-fill: #0762F2;"/>
+    
+    <VBox spacing="16" styleClass="settings-section">
+        <Label text="Profile Information" style="-fx-font-size: 18px; -fx-font-family: 'Gilroy-SemiBold';"/>
+        <GridPane hgap="12" vgap="12">
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-family: 'Gilroy-Regular';"/>
+            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="settings-field"/>
+            
+            <Label text="Contact Number:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-family: 'Gilroy-Regular';"/>
+            <TextField fx:id="contactField" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="settings-field"/>
+            
+            <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-family: 'Gilroy-Regular';"/>
+            <TextField fx:id="emailField" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="settings-field"/>
+        </GridPane>
+    </VBox>
+    
+    <VBox spacing="16" styleClass="settings-section">
+        <Label text="Preferences" style="-fx-font-size: 18px; -fx-font-family: 'Gilroy-SemiBold';"/>
+        <GridPane hgap="12" vgap="12">
+            <Label text="Language:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-family: 'Gilroy-Regular';"/>
+            <ComboBox fx:id="languageComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="settings-field"/>
+            
+            <Label text="Theme:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-family: 'Gilroy-Regular';"/>
+            <ComboBox fx:id="themeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="settings-field"/>
+        </GridPane>
+    </VBox>
+    
+    <HBox spacing="12" alignment="CENTER_RIGHT">
+        <Button fx:id="cancelBtn" text="Cancel" styleClass="secondary-btn">
+            <graphic>
+                <FontIcon iconLiteral="fas-times" iconSize="16"/>
+            </graphic>
+        </Button>
+        <Button fx:id="saveBtn" text="Save Changes" styleClass="primary-btn">
+            <graphic>
+                <FontIcon iconLiteral="fas-save" iconSize="16"/>
+            </graphic>
+        </Button>
+    </HBox>
+</VBox> 

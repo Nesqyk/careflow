@@ -5,8 +5,10 @@ import edu.careflow.repository.dao.PatientDAO;
 import edu.careflow.repository.entities.Patient;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -50,6 +52,7 @@ public class AddPatientForm {
     private ImageView avatarImageView;
     private int patientId;
     private boolean isEditMode = false;
+    private Runnable onSuccessCallback;
 
     @FXML
     public void initialize() {
@@ -121,6 +124,10 @@ public class AddPatientForm {
         }
     }
 
+    public void setOnSuccessCallback(Runnable callback) {
+        this.onSuccessCallback = callback;
+    }
+
     private void handleAddPatient() {
         if (!validateForm()) {
             showError("Please fill in all required fields correctly.");
@@ -128,51 +135,60 @@ public class AddPatientForm {
         }
 
         try {
-            System.out.println("Current mode: " + (isEditMode ? "Edit" : "Add") + " for patient ID: " + patientId);
             Patient patient = createPatientFromForm();
+            boolean success;
             
             if (isEditMode) {
                 // Update existing patient
-                System.out.println("Attempting to update patient with ID: " + patientId);
-                boolean success = patientDAO.updatePatient(patientId, patient);
+                success = patientDAO.updatePatient(patientId, patient);
                 if (success) {
-                    // Update avatar if a new one was selected
+                    // Update avatar if changed
                     if (selectedImageFile != null) {
                         try {
-                            patientDAO.insertAvatar(patientId, selectedImageFile);
+                            patientDAO.insertAvatar(patient.getPatientId(), selectedImageFile);
                         } catch (IOException e) {
-                            showError("Error updating avatar: " + e.getMessage());
-                            return;
+                            e.printStackTrace();
+                            showFloatingMessage("Patient updated but failed to update profile picture", false);
                         }
                     }
-                    showSuccess("Patient updated successfully!");
-                    handleClose();
+                    showFloatingMessage("Patient updated successfully!", true);
                 } else {
-                    showError("Failed to update patient");
+                    showFloatingMessage("Failed to update patient", false);
                 }
             } else {
                 // Insert new patient
-                System.out.println("Attempting to insert new patient");
                 int newPatientId = patientDAO.insertPatient(patient);
                 if (newPatientId > 0) {
-                    // Insert avatar if one was selected
+                    // Save the avatar if one was selected
                     if (selectedImageFile != null) {
                         try {
                             patientDAO.insertAvatar(newPatientId, selectedImageFile);
                         } catch (IOException e) {
-                            showError("Error uploading avatar: " + e.getMessage());
-                            return;
+                            e.printStackTrace();
+                            showFloatingMessage("Patient saved but failed to save profile picture", false);
                         }
                     }
-                    showSuccess("Patient added successfully!");
-                    handleClose();
+                    showFloatingMessage("Patient registered successfully!", true);
                 } else {
-                    showError("Failed to add patient");
+                    showFloatingMessage("Failed to register patient", false);
+                    return;
                 }
             }
+            
+            // Call the success callback if set
+            if (onSuccessCallback != null) {
+                onSuccessCallback.run();
+            }
+            
+            // Close the form after a short delay
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), event -> {
+                handleClose();
+            }));
+            timeline.play();
+            
         } catch (SQLException e) {
-            showError("Error " + (isEditMode ? "updating" : "adding") + " patient: " + e.getMessage());
             e.printStackTrace();
+            showFloatingMessage("Error " + (isEditMode ? "updating" : "registering") + " patient: " + e.getMessage(), false);
         }
     }
 
@@ -269,36 +285,38 @@ public class AddPatientForm {
         }
     }
 
-    private void showSuccess(String message) {
+    private void showFloatingMessage(String message, boolean isSuccess) {
         Scene scene = scrollPaneForm.getScene();
         if (scene != null) {
             StackPane container = (StackPane) scene.lookup("#stackPaneContainer");
             if (container != null) {
-                Label successLabel = new Label(message);
-                successLabel.getStyleClass().add("success-label");
-                successLabel.setStyle(
-                    "-fx-background-color: #4CAF50;" +
+                Label messageLabel = new Label(message);
+                messageLabel.getStyleClass().add(isSuccess ? "success-label" : "error-label");
+                messageLabel.setStyle(
+                    "-fx-background-color: " + (isSuccess ? "#4CAF50" : "#f44336") + ";" +
                     "-fx-text-fill: white;" +
                     "-fx-padding: 10 20;" +
                     "-fx-background-radius: 5;" +
-                    "-fx-translate-y: 300; -fx-font-family: 'Gilroy-SemiBold'; -fx-font-size: 16px"
+                    "-fx-translate-y: 300;" +
+                    "-fx-font-family: 'Gilroy-SemiBold';" +
+                    "-fx-font-size: 16px"
                 );
 
                 // Add fade-in animation
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), successLabel);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), messageLabel);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
 
-                container.getChildren().add(successLabel);
+                container.getChildren().add(messageLabel);
                 fadeIn.play();
 
-                // Remove label after 3 seconds
+                // Remove label after 2 seconds
                 Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(2), e -> {
-                        FadeTransition fadeOut = new FadeTransition(Duration.millis(300), successLabel);
+                        FadeTransition fadeOut = new FadeTransition(Duration.millis(300), messageLabel);
                         fadeOut.setFromValue(1.0);
                         fadeOut.setToValue(0.0);
-                        fadeOut.setOnFinished(event -> container.getChildren().remove(successLabel));
+                        fadeOut.setOnFinished(event -> container.getChildren().remove(messageLabel));
                         fadeOut.play();
                     })
                 );
@@ -326,13 +344,14 @@ public class AddPatientForm {
     }
 
     private void handleClose() {
-        // Get the parent container of scrollPaneForm
         FadeTransition fadeOut = new FadeTransition(Duration.millis(150), scrollPaneForm);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(e -> {
             if (scrollPaneForm.getParent() instanceof VBox parentBox) {
                 parentBox.getChildren().remove(scrollPaneForm);
+            } else if (scrollPaneForm.getParent() != null) {
+                ((javafx.scene.layout.Pane) scrollPaneForm.getParent()).getChildren().remove(scrollPaneForm);
             }
             // Set to null to help garbage collection
             scrollPaneForm = null;

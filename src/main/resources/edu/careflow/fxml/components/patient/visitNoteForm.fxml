@@ -115,8 +115,8 @@
             <!-- Action Buttons -->
             <HBox alignment="CENTER" spacing="16.0">
                <children>
-                  <Button fx:id="discardBtn" prefHeight="40.0" prefWidth="240.0" styleClass="border-button" text="Discard" />
-                  <Button fx:id="saveCloseBtn" prefHeight="40.0" prefWidth="240.0" styleClass="cta-button" text="Save and close" />
+                  <Button fx:id="discardBtn" prefHeight="40.0" prefWidth="200.0" styleClass="border-button" text="Discard" />
+                  <Button fx:id="saveBtn" prefHeight="40.0" prefWidth="200.0" styleClass="cta-button" text="Save" />
                </children>
             </HBox>
          </children>

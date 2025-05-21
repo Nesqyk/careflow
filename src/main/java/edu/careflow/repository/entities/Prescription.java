@@ -4,44 +4,44 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Prescription {
-    private final int prescriptionId;
-    private final int patientId;
-    private final int doctorId;
-    private final LocalDate issueDate;
-    private final LocalDate validUntil;
-    private final LocalDateTime createdAt;
+    private int prescriptionId;
+    private int patientId;
+    private int doctorId;
+    private LocalDate issueDate;
+    private LocalDate validUntil;
+    private LocalDateTime createdAt;
+    private int appointmentId;
 
-    public Prescription(int prescriptionId, int patientId, int doctorId, LocalDate issueDate, LocalDate validUntil, LocalDateTime createdAt) {
+    public Prescription(int prescriptionId, int patientId, int doctorId, LocalDate issueDate, 
+                       LocalDate validUntil, LocalDateTime createdAt, int appointmentId) {
         this.prescriptionId = prescriptionId;
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.issueDate = issueDate;
         this.validUntil = validUntil;
         this.createdAt = createdAt;
+        this.appointmentId = appointmentId;
     }
 
-    // Getters
-    public int getPrescriptionId() {
-        return prescriptionId;
-    }
+    // Getters and Setters
+    public int getPrescriptionId() { return prescriptionId; }
+    public void setPrescriptionId(int prescriptionId) { this.prescriptionId = prescriptionId; }
 
-    public int getPatientId() {
-        return patientId;
-    }
+    public int getPatientId() { return patientId; }
+    public void setPatientId(int patientId) { this.patientId = patientId; }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
+    public int getDoctorId() { return doctorId; }
+    public void setDoctorId(int doctorId) { this.doctorId = doctorId; }
 
-    public LocalDate getIssueDate() {
-        return issueDate;
-    }
+    public LocalDate getIssueDate() { return issueDate; }
+    public void setIssueDate(LocalDate issueDate) { this.issueDate = issueDate; }
 
-    public LocalDate getValidUntil() {
-        return validUntil;
-    }
+    public LocalDate getValidUntil() { return validUntil; }
+    public void setValidUntil(LocalDate validUntil) { this.validUntil = validUntil; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public int getAppointmentId() { return appointmentId; }
+    public void setAppointmentId(int appointmentId) { this.appointmentId = appointmentId; }
 }

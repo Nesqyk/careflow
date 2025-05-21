@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Build Configuration Guide
+
+The project uses Gradle for build management. Key configuration details are in [build.gradle](mdc:build.gradle).
+
+## Project Details
+- Group: `edu.careflow`
+- Version: `1.0-SNAPSHOT`
+- Java Version: 21
+- Main Module: `edu.careflow`
+- Main Class: `edu.careflow.Careflow`
+
+## Key Plugins
+- JavaFX Plugin (version 21)
+- Java Modularity Plugin
+- JLink Plugin for creating custom runtime images
+
+## Main Dependencies
+- JavaFX Modules:
+  - javafx.controls
+  - javafx.fxml
+  - javafx.swing
+  - javafx.web
+
+- Database:
+  - MySQL Connector/J (8.3.0)
+  - SQLite JDBC (3.43.2.0)
+
+- UI Components:
+  - GemsFX (2.103.0)
+  - ControlsFX (11.2.0)
+  - CalendarFX (11.12.7)
+  - Ikonli FontAwesome5 Pack
+
+- Excel Support:
+  - Apache POI (5.2.5)
+  - Apache Commons Collections
+  - Apache Commons IO
+  - Apache Commons Math
+  - XMLBeans
+
+## Build Features
+- UTF-8 encoding for all Java compilations
+- JUnit 5 for testing
+- Custom JVM arguments for Apache POI
+- JLink configuration for creating optimized runtime images
+

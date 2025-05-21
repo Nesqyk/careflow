@@ -3,6 +3,7 @@ package edu.careflow.presentation.controllers.patient.forms;
 import com.dlsc.gemsfx.CalendarPicker;
 import edu.careflow.repository.dao.AppointmentDAO;
 import edu.careflow.repository.dao.DoctorDAO;
+import edu.careflow.repository.dao.PatientDAO;
 import edu.careflow.repository.entities.Appointment;
 import edu.careflow.repository.entities.Doctor;
 import javafx.animation.FadeTransition;
@@ -48,12 +49,14 @@ public class BookAptForm {
 
     private AppointmentDAO appointmentDAO;
     private DoctorDAO doctorDAO;
+    private PatientDAO patientDAO;
     private int currentPatientId;
 
     @FXML
     public void initialize() {
         appointmentDAO = new AppointmentDAO();
         doctorDAO = new DoctorDAO();
+        patientDAO = new PatientDAO();
 
         System.out.println(currentPatientId);
         setupDatePicker();
@@ -182,6 +185,16 @@ public class BookAptForm {
             RadioButton selectedType = (RadioButton) bookTypeRadio.getSelectedToggle();
             String appointmentType = selectedType.getText();
 
+            String meetingLink = "";
+            if ("Online".equalsIgnoreCase(appointmentType)) {
+                try {
+                    meetingLink = patientDAO.generateUniqueJitsiMeetingLink();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showError("Failed to generate meeting link");
+                }
+            }
+
             Appointment appointment = new Appointment(
                     0,
                     currentPatientId,
@@ -191,7 +204,7 @@ public class BookAptForm {
                     "Pending",
                     noteField.getText(),
                     LocalDateTime.now(),
-                    "",
+                    meetingLink,
                     "",
                     "",
                     typeServiceCombo.getValue(),
@@ -218,8 +231,7 @@ public class BookAptForm {
                     Label serviceTypeLabel = (Label) bookingConfirmation.lookup("#serviceType");
                     Label appointmentNoteLabel = (Label) bookingConfirmation.lookup("#appointmentNote");
                     Button closeBtn = (Button) bookingConfirmation.lookup("#closeBtn");
-
-
+                    Label meetingLinkLabel = (Label) bookingConfirmation.lookup("#meetingLinkLabel");
 
                     Doctor selectedDoctor = doctorCombo.getValue();
                     doctorNameLabel.setText("Dr. " + selectedDoctor.getFirstName() + " " + selectedDoctor.getLastName());
@@ -227,6 +239,12 @@ public class BookAptForm {
                     appointmentTimeLabel.setText(pickTimeCombo.getValue());
                     serviceTypeLabel.setText(typeServiceCombo.getValue());
                     appointmentNoteLabel.setText(noteField.getText());
+                    if (meetingLinkLabel != null && !meetingLink.isEmpty()) {
+                        meetingLinkLabel.setText("Meeting Link: " + meetingLink);
+                        meetingLinkLabel.setVisible(true);
+                    } else if (meetingLinkLabel != null) {
+                        meetingLinkLabel.setVisible(false);
+                    }
 
                     // Find stackPaneContainer from scene root and add confirmation
 

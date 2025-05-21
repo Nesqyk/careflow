@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="appointmentListRoot" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.receptionist.ReceptionistAppointmentsController" spacing="16.0" style="-fx-background-color: FBFBFE;">
+    <padding>
+        <Insets top="32.0" left="32.0" right="32.0" bottom="32.0" />
+    </padding>
+    <children>
+        <!-- Search and filter bar -->
+        <HBox alignment="CENTER_LEFT" spacing="16.0">
+            <children>
+                <TextField fx:id="searchField" promptText="Search appointments..." prefHeight="42.0" prefWidth="300.0" style="-fx-border-radius: 16px;">
+                    <padding>
+                        <Insets left="18.0" />
+                    </padding>
+                </TextField>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="addAppointmentBtn" styleClass="action-button" text="New Appointment" />
+            </children>
+        </HBox>
+        <!-- Filter buttons -->
+        <HBox fx:id="filterBar" alignment="CENTER_LEFT" spacing="8.0">
+            <children>
+                <Button fx:id="pendingAptBtn" styleClass="nav-button" text="Pending" />
+                <Button fx:id="scheduleAptBtn" styleClass="nav-button" text="Scheduled" />
+                <Button fx:id="completedAptBtn" styleClass="nav-button" text="Completed" />
+                <Button fx:id="cancelledAptBtn" styleClass="nav-button" text="Cancelled" />
+                <Button fx:id="noShowAptBtn" styleClass="nav-button" text="No-Show" />
+            </children>
+        </HBox>
+        <!-- Appointment cards list -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER">
+            <content>
+                <VBox fx:id="appointmentsContainer" spacing="12.0" />
+            </content>
+        </ScrollPane>
+        <!-- Pagination -->
+        <Pagination fx:id="pagination" maxPageIndicatorCount="5" VBox.margin="0 0 0 0" />
+    </children>
+</VBox> 

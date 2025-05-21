@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="appointmentRowContainer" alignment="CENTER_LEFT" prefWidth="725.0" spacing="12.0" styleClass="vital-card-long" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.careflow.presentation.controllers.doctor.cards.AppointmentRowController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="idLabel" text="APT-001" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="150.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="timeLabel" text="09:00" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="118.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="nameLabel" text="John Doe" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="roomLabel" text="Room 101" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefWidth="120.0" styleClass="vital-column">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="4.0">
+               <children>
+                  <Label fx:id="statusLabel" text="Scheduled" wrapText="true">
+                     <font>
+                        <Font name="☞Gilroy-Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <MenuButton fx:id="actionBtn" mnemonicParsing="false" prefHeight="22.0" prefWidth="72.0" styleClass="nav-button">
+         <font>
+            <Font name="☞Gilroy-Regular" size="12.0" />
+         </font>
+      </MenuButton>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="16.0" right="16.0" top="10.0" />
+   </padding>
+</HBox>

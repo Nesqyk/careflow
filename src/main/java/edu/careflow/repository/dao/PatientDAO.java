@@ -3,6 +3,7 @@ package edu.careflow.repository.dao;
 import edu.careflow.manager.DatabaseManager;
 import edu.careflow.repository.entities.Allergy;
 import edu.careflow.repository.entities.Patient;
+import edu.careflow.utils.DateTimeUtil;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
@@ -23,22 +24,75 @@ public class PatientDAO {
     }
 
 
+    /**
+     * Generate a random 5-digit unique allergy ID
+     * @return A unique 5-digit allergy ID
+     * @throws SQLException If a database access error occurs
+     */
+    private int generateUniqueAllergyId() throws SQLException {
+        Random random = new Random();
+        int allergyId;
+        do {
+            allergyId = 10000 + random.nextInt(90000); // Generates a random 5-digit number between 10000 and 99999
+        } while (allergyExists(allergyId)); // Ensure the ID is unique
+        return allergyId;
+    }
+
+    /**
+     * Check if an allergy ID exists in the database
+     * @param allergyId The allergy ID to check
+     * @return true if the allergy exists, false otherwise
+     * @throws SQLException If a database access error occurs
+     */
+    private boolean allergyExists(int allergyId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM allergies WHERE allergy_id = ?";
+        try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, allergyId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
     public void addAllergy(Allergy allergy) throws SQLException {
-        String sqlAllergy = "INSERT INTO allergies (allergy_id, patient_id, allergen, severity, comment) VALUES (?, ?, ?, ?, ?)";
+        // Generate a unique 5-digit allergy ID
+        int allergyId = generateUniqueAllergyId();
+        
+        // Create a new Allergy object with the generated ID
+        Allergy newAllergy = new Allergy(
+            allergyId,
+            allergy.getPatientId(),
+            allergy.getAllergen(),
+            allergy.getSeverity(),
+            allergy.getComment(),
+            allergy.getAppointmentId()
+        );
+        
+        // Copy reactions if any
+        if (allergy.getReactions() != null) {
+            for (String reaction : allergy.getReactions()) {
+                newAllergy.addReaction(reaction);
+            }
+        }
+
+        String sqlAllergy = "INSERT INTO allergies (allergy_id, patient_id, allergen, severity, comment, appointment_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sqlAllergy)) {
-            stmt.setInt(1, allergy.getAllergyId());
-            stmt.setInt(2, allergy.getPatientId());
-            stmt.setString(3, allergy.getAllergen());
-            stmt.setString(4, allergy.getSeverity());
-            stmt.setString(5, allergy.getComment());
+            stmt.setInt(1, newAllergy.getAllergyId());
+            stmt.setInt(2, newAllergy.getPatientId());
+            stmt.setString(3, newAllergy.getAllergen());
+            stmt.setString(4, newAllergy.getSeverity());
+            stmt.setString(5, newAllergy.getComment());
+            stmt.setInt(6, newAllergy.getAppointmentId());
             stmt.executeUpdate();
 
-
-            if(allergy.getReactions() != null) {
-                for (String reaction : allergy.getReactions()) {
+            if(newAllergy.getReactions() != null) {
+                for (String reaction : newAllergy.getReactions()) {
                     String sqlReaction = "INSERT INTO allergy_reactions (allergy_id, reaction_description) VALUES (?, ?)";
                     try (PreparedStatement stmtReaction = DatabaseManager.getConnection().prepareStatement(sqlReaction)) {
-                        stmtReaction.setInt(1, allergy.getAllergyId());
+                        stmtReaction.setInt(1, newAllergy.getAllergyId());
                         stmtReaction.setString(2, reaction);
                         stmtReaction.executeUpdate();
                     }
@@ -48,7 +102,7 @@ public class PatientDAO {
     }
 
     public List<Allergy> getAllergies(int patientId) throws SQLException {
-        String sql = "SELECT a.allergy_id, a.patient_id, a.allergen, a.severity, a.comment, "
+        String sql = "SELECT a.allergy_id, a.patient_id, a.allergen, a.severity, a.comment, a.appointment_id, "
                 + "ar.reaction_description FROM allergies a "
                 + "LEFT JOIN allergy_reactions ar ON a.allergy_id = ar.allergy_id "
                 + "WHERE a.patient_id = ?";
@@ -68,7 +122,44 @@ public class PatientDAO {
                             rs.getInt("patient_id"),
                             rs.getString("allergen"),
                             rs.getString("severity"),
-                            rs.getString("comment")
+                            rs.getString("comment"),
+                            rs.getInt("appointment_id")
+                    );
+                    allergyMap.put(allergyId, allergy);
+                    allergies.add(allergy);
+                }
+                String reaction = rs.getString("reaction_description");
+                if (reaction != null) {
+                    allergy.addReaction(reaction);
+                }
+            }
+        }
+        return allergies;
+    }
+
+    public List<Allergy> getAllergiesByAppointmentId(int appointmentId) throws SQLException {
+        String sql = "SELECT a.allergy_id, a.patient_id, a.allergen, a.severity, a.comment, a.appointment_id, "
+                + "ar.reaction_description FROM allergies a "
+                + "LEFT JOIN allergy_reactions ar ON a.allergy_id = ar.allergy_id "
+                + "WHERE a.appointment_id = ?";
+
+        List<Allergy> allergies = new ArrayList<>();
+        try (PreparedStatement stmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+            stmt.setInt(1, appointmentId);
+            ResultSet rs = stmt.executeQuery();
+
+            Map<Integer, Allergy> allergyMap = new HashMap<>();
+            while (rs.next()) {
+                int allergyId = rs.getInt("allergy_id");
+                Allergy allergy = allergyMap.get(allergyId);
+                if (allergy == null) {
+                    allergy = new Allergy(
+                            allergyId,
+                            rs.getInt("patient_id"),
+                            rs.getString("allergen"),
+                            rs.getString("severity"),
+                            rs.getString("comment"),
+                            rs.getInt("appointment_id")
                     );
                     allergyMap.put(allergyId, allergy);
                     allergies.add(allergy);
@@ -190,8 +281,8 @@ public class PatientDAO {
                         rs.getString("contact_number"),
                         rs.getString("email"),
                         rs.getString("address"),
-                        rs.getTimestamp("created_at").toLocalDateTime(),
-                        null // updatedAt is not in the database schema
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                        DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at"))
                     );
                 }
             }
@@ -286,10 +377,8 @@ public class PatientDAO {
     public List<Patient> getAllPatients() throws SQLException {
         List<Patient> patients = new ArrayList<>();
         String sql = "SELECT * FROM patients";
-
         try (Statement stmt = DatabaseManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
             while (rs.next()) {
                 patients.add(new Patient(
                     rs.getInt("patient_id"),
@@ -300,8 +389,8 @@ public class PatientDAO {
                     rs.getString("contact_number"),
                     rs.getString("email"),
                     rs.getString("address"),
-                    rs.getTimestamp("created_at").toLocalDateTime(),
-                    null // updatedAt is not in the database schema
+                    DateTimeUtil.fromTimestamp(rs.getTimestamp("created_at")),
+                    DateTimeUtil.fromTimestamp(rs.getTimestamp("updated_at"))
                 ));
             }
         }
@@ -362,5 +451,45 @@ public class PatientDAO {
 //            }
 //        }
 //    }
+
+    /**
+     * Generate a unique, random Jitsi meeting link
+     * @return A unique Jitsi meeting link (e.g., https://meet.jit.si/RoomName)
+     * @throws SQLException If a database access error occurs
+     */
+    public String generateUniqueJitsiMeetingLink() throws SQLException {
+        String baseUrl = "https://meet.jit.si/";
+        String roomName;
+        boolean isUnique = false;
+        do {
+            roomName = generateRandomRoomName(12);
+            // Check if this room name already exists in the database (assuming a 'meeting_link' column in 'appointments')
+            String sql = "SELECT COUNT(*) FROM appointments WHERE meeting_link = ?";
+            try (PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement(sql)) {
+                pstmt.setString(1, baseUrl + roomName);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        isUnique = rs.getInt(1) == 0;
+                    }
+                }
+            }
+        } while (!isUnique);
+        return baseUrl + roomName;
+    }
+
+    /**
+     * Generate a random alphanumeric room name for Jitsi
+     * @param length Length of the room name
+     * @return Random alphanumeric string
+     */
+    private String generateRandomRoomName(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(random.nextInt(chars.length())));
+        }
+        return sb.toString();
+    }
 
 }

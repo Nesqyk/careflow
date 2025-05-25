@@ -29,7 +29,7 @@
                            </font>
                         </Label>
                         <Region prefHeight="33.0" prefWidth="412.0" />
-                        <Button fx:id="downloadBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" styleClass="border-button" text="Download" textAlignment="CENTER">
+                        <Button fx:id="downloadBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" styleClass="border-button" text="Download" textAlignment="CENTER" onAction="#handleDownload">
                            <font>
                               <Font name="☞Gilroy-Regular" size="14.0" />
                            </font>

@@ -178,6 +178,7 @@ public class PatientListCard {
                     // Set patient ID after controller is loaded
                     topBarController.initialize();
                     topBarController.setPatientId(currentPatient.getPatientId());
+                    topBarController.setNavigationButtonsState(true);
                     topBarController.setDoctorId(getDoctorId());
 
                     if (topBoxContainer != null) {

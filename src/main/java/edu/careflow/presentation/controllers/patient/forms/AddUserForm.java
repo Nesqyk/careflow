@@ -7,7 +7,6 @@ import edu.careflow.repository.dao.UserDAO;
 import edu.careflow.repository.entities.Doctor;
 import edu.careflow.repository.entities.Nurse;
 import edu.careflow.repository.entities.User;
-import edu.careflow.repository.entities.User.Role;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -263,7 +262,7 @@ public class AddUserForm implements Initializable {
                         generatedId,
                         passwordField.getText(),
                         usernameField.getText(),
-                        Role.DOCTOR.ordinal(),
+                        0,
                         0,
                         firstNameField.getText(),
                         lastNameField.getText()
@@ -286,7 +285,7 @@ public class AddUserForm implements Initializable {
                         generatedId,
                         passwordField.getText(),
                         usernameField.getText(),
-                        Role.NURSE.ordinal(),
+                        1,
                         0,
                         firstNameField.getText(),
                         lastNameField.getText()
@@ -300,7 +299,7 @@ public class AddUserForm implements Initializable {
                         generatedId,
                         passwordField.getText(),
                         usernameField.getText(),
-                        Role.ADMIN.ordinal(),
+                        2,
                         0,
                         firstNameField.getText(),
                         lastNameField.getText()

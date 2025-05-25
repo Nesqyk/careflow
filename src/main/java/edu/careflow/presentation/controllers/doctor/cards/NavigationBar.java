@@ -91,10 +91,18 @@ public class NavigationBar {
 
             this.currentAppointment = appointmentDAO.getAppointmentById(appointmentId);
 
-            // Check if appointment is completed and disable buttons if it is
-            if (currentAppointment != null && "Completed".equalsIgnoreCase(currentAppointment.getStatus())) {
+            if(appointmentId < 0) {
                 setNavigationButtonsState(true);
             }
+
+            if (currentAppointment != null && ("Completed".equalsIgnoreCase(currentAppointment.getStatus())
+                    || "Pending".equalsIgnoreCase(currentAppointment.getStatus())
+                    || "Cancelled".equalsIgnoreCase(currentAppointment.getStatus()))) {
+                setNavigationButtonsState(true);
+            }
+
+            // Check if appointment is completed and disable buttons if it is
+
 
             prescriptionItem.setOnAction(e -> handlePrescriptionForm());
             vitalsItem.setOnAction(e -> handleVitalsForm());
